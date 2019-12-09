@@ -218,6 +218,14 @@ SELECT name, population
 FROM world
 WHERE name IN ('France', 'Germany', 'Italy');
 ```
+
+Como devuelve 1 (Si se cumple) y 0(Si no se cumple), se puede usar para ordenar campos (Ultimos los que lo cumplan por ejemplo):
+```SQL
+SELECT winner, subject
+  FROM nobel
+ WHERE yr=1984
+ ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
+```
 ## LIKE
 Nos permite filtrar por  campos que cumplen un patron determinado
 ```SQL
@@ -287,6 +295,14 @@ En el siguiente ejercicio, se cogen los países cuyo nombre y nombre de capital 
 SELECT name, capital
 FROM world
 WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital
+```
+
+## NOT
+Básicamente ignora aquellas filas que cumplan la condicion. Por ejemplo, aquellos premios que no sean de quimica y medicina:
+```SQL
+SELECT yr, subject, winner
+FROM nobel
+WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 ```
 ----------------------------
 # Welcome to StackEdit!
