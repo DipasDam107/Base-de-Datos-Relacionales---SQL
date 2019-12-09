@@ -1,3 +1,280 @@
+**La estructura de una sentencia SQL** 
+
+ 1. indicamos las tablas de las cuales vamos a sacar la información.
+ 2. Indicamos una condición.
+ 3. Indicamos si queremos un Orden
+ 4. Indicamos un limite
+
+### SELECCIONAR DE UNA TABLA
+
+Utilizamos la notación **FROM** para indicar la tabla de la cual vamos a recoger información.
+
+SELECT name, population
+
+FROM world   **SELECCIONAMOS DE LA TABLA world**
+
+WHERE name >= 'France'
+
+ORDER BY population ASC
+
+LIMIT 10
+
+### CONJUNTOS
+Utilizamos la notación **IN** para los conjuntos, estes van entre paréntesis y en comillas simples y separados por comas.
+
+SELECT name, population 
+
+FROM world
+
+WHERE name IN ('Sweden', 'Norway', 'Denmark');  **SELECCIONAMOS EL CONJUNTO DE ESTES TRES PAÍSES** 
+
+### BETWEEN
+
+Utilizamos esta notación **BETWEEN** para seleccionar un rango de valores intermedios entre dos números
+
+SELECT name, area FROM world
+
+  WHERE area BETWEEN 200000 AND 250000  **SELECCIONA LOS VALORES ENTRE 200000 Y 250000 AMBOS INCLUIDOS** 
+  
+  
+  ### LIKE ( PATTERN MATCHING STRINGS)
+  
+  Utilizamos esta notación **LIKE** para buscar un patrón / carácter / símbolo  y que coincida
+  **En SQL usar Mayúsculas y Minúsculas no es lo mismo. Es estricto el Matching de caracteres.**
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE 'B%' **SELECCIONA DE LA TABLA LOS NOMBRES QUE TENGAN UNA B, SE PUEDE PONER %B%, %GER% %Germany%**
+  
+  ### Finalicen con con un carácter se indica con %char
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE 'Y%'
+  
+   ### Contengan un carácter %char%
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE '%x%'
+    
+   ### Finalicen con varios caracteres(string)
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE '%land'
+  
+   ### Que empiecen con un carácter y terminen con un conjunto de caracteres
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE 'C%ia' 
+  
+   ### Contiene un carácter doble
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE '%ee%'
+  
+   ### Varios caracteres repetidos pero separados 
+  
+  SELECT name FROM world
+  
+  WHERE name LIKE '%a%a%a%' **en una lista de países encontraría Bahamas** 
+  
+ ### Segundo carácter Se utiliza un guion bajo como sustituto de un carácter y solo un carácter 
+  
+SELECT name 
+
+FROM world
+
+WHERE name LIKE '_t%'  **En una lista de países solo nos mostraría los países que como segundo carácter tienen una t** 
+
+ORDER BY name
+  
+ ### mismo carácter separado por dos caracteres 
+  
+SELECT name FROM world
+
+WHERE name LIKE '%o__o%'  **UTILIZAMOS DOS GUIONES BAJOS ENTRE LAS DOS o's PARA BUSCAR PAISES QUE TENGAN DOS SEPARADAS POR DOS CARACTERES** 
+
+ ### Exactamente x números de caracteres
+
+SELECT name FROM world
+
+WHERE name LIKE '____' /* SE UTILIZA UN NUMERO DE GUIONES BAJOS IGUAL AL NUMERO DE CARACTERES PEDIDOS */
+
+ ### NOTA -> si piden como mínimos x letras usamos guiones bajos y un porcentaje '____%' y si solo pide x numero (ej: 4) '____'
+ 
+ ### Exacto mismo nombre en una tabla y en otra
+
+SELECT capital
+
+FROM world
+
+WHERE name LIKE capital  **SE SELECCIONA UN PAÍS DONDE EL NOMBRE DE LA CAPITAL ES EL MISMO QUE EL DEL PAÍS EN VEZ DEL LIKE TAMBIÉN VALE CON =** 
+
+ ### CONCAT 
+Usamos la función concat para machear pero añadiendo algún string )
+En este ejemplo queremos los países que su capital sea el nombre del país + City 
+
+SELECT name /* SELECCIONAR NOMBRE*/
+
+FROM world /* DESDE LA TABLA world */
+
+WHERE capital LIKE concat(name, ' city')  **DONDE LA CAPITAL ES IGUAL A LA CONCATENACIÓN DEL NOMBRE MAS CITY** 
+ 
+  ### CONCAT Cuando incluye 
+ 
+SELECT capital, name  **FIJARSE EN EL ENUNCIADO POR QUE PIDE CAPITAL Y NAME** 
+
+FROM world
+
+WHERE capital LIKE CONCAT ( '%', name, '%') **CUALQUIER COSA + NOMBRE DE PAÍS + CUALQUIER COSA** 
+
+ ### CONCAT concatenando extensiones a un atributo
+
+SELECT capital, name
+
+FROM world
+
+WHERE capital LIKE CONCAT ( name, '_%')  **ES ASÍ AUN NO SE MUY BIEN POR QUE , CREO QUE ES POR QUE EL GUION BAJO INDICA QUE TIENE QUE HABER ALGO SI O SI ENTRE EL NOMBRE DEL PAÍS Y CUALQUIER COSA** 
+
+
+----------------------------
+## SELECT
+### AS
+Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
+
+	SELECT name, continent as 'Continente', population FROM world
+	
+### Operaciones en Select
+Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
+
+PIB por persona:
+
+```SQL
+Select name, gdp/population as 'GDP Per Capita'
+		  FROM world
+			WHERE population >= 200000000
+```
+Continente Sudamerica, con población en Millones:
+
+```SQL
+SELECT name, population/1000000 as "Millones de Personas"
+	FROM world
+	WHERE continent = 'South America'
+```
+
+## Condiciones con WHERE
+Nos permite filtrar el contenido de una consulta, obteniendo solo los que cumplen ciertos valores. 
+```SQL
+	SELECT name FROM world
+	WHERE population>=200000000
+```
+	
+## AND 
+
+## OR
+Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
+
+```SQL
+SELECT name, population, area
+FROM world
+WHERE area > 3000000 OR population > 250000000
+```
+
+## XOR
+Nos permite obtener las filas que cumplen una condicion, la otra, pero no las dos.
+
+```SQL
+SELECT name, population, area
+FROM world
+WHERE area > 3000000 XOR population > 250000000
+```
+Seria el equivalente a la siguiente consulta:
+```SQL
+SELECT name, population, area
+FROM world
+WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
+```
+
+## IN
+Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula.
+```SQL
+SELECT name, population
+FROM world
+WHERE name IN ('France', 'Germany', 'Italy');
+```
+## LIKE
+Nos permite filtrar por  campos que cumplen un patron determinado
+```SQL
+SELECT name
+FROM world
+WHERE name LIKE '%United%'
+```
+Los paises que tienen todas las vocales, sin espacios:
+
+```SQL
+SELECT name
+   FROM world
+WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%'
+  AND name NOT LIKE '% %';
+```
+### Caracteres de LIKE
+**_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
+**%** - Cualquier cosa
+## CONCAT
+	Select capital, name
+	FROM world
+	WHERE capital LIKE CONCAT(name,'_%');
+
+Basicamente muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas...
+
+## REPLACE
+Reemplaza caracteres por otro indicado.
+
+Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') - En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
+
+
+	*Select name, REPLACE (Capital, name, '') AS Extension
+	FROM world
+	WHERE capital LIKE CONCAT(name,'_%');*
+
+## ROUND
+Nos permite redondear un numero a X decimales.
+
+```SQL
+SELECT name, ROUND(population/1000000, 2) as 'Poblacion Millones', ROUND(gdp/1000000000,2) as 'Billones PB'
+FROM world
+WHERE continent = 'South America'
+```
+Lo podemos usar para redondear el resultado a unidades, decenas, centenas...
+ ```SQL
+ SELECT name, ROUND(gdp/population, -3) as 'PIB per Capita'
+FROM world
+WHERE gdp>1000000000000
+```
+
+
+## LENGTH
+Nos permite obtener la longitud de un campo
+```SQL
+SELECT name, capital
+  FROM world
+ WHERE LENGTH(name) = LENGTH(capital);
+```
+## LEFT
+Permite extraer x caracteres de un String.
+
+En el siguiente ejercicio, se cogen los países cuyo nombre y nombre de capital empiezan por la misma letra, siendo sus nombres distintos (<> Operador de desigualdad)
+
+```SQL
+SELECT name, capital
+FROM world
+WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital
+```
+----------------------------
 # Welcome to StackEdit!
 
 Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
