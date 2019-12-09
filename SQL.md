@@ -174,7 +174,12 @@ Nos permite filtrar el contenido de una consulta, obteniendo solo los que cumple
 ```
 	
 ## AND 
-
+Nos permite obtener filas que cumplen dos condiciones
+```SQL
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE yr = 1950
+```
 ## OR
 Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
 
