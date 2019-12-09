@@ -203,6 +203,13 @@ SELECT name, population, area
 FROM world
 WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
 ```
+## Combinacion de Condiciones
+Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
+```SQL
+SELECT yr, subject, winner
+FROM nobel
+WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
+```
 
 ## IN
 Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula.
