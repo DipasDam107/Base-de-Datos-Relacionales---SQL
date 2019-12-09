@@ -304,6 +304,16 @@ SELECT yr, subject, winner
 FROM nobel
 WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 ```
+## Curiosidades
+### Problemas con los caracteres especiales
+
+ - La comilla simple se referencia como comilla doble
+
+```SQL
+SELECT *
+FROM nobel
+WHERE winner like 'Eugene O''Neill';
+```
 ----------------------------
 # Welcome to StackEdit!
 
