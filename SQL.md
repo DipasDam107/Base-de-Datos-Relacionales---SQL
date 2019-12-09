@@ -145,9 +145,9 @@ WHERE capital LIKE CONCAT ( name, '_%')  **ES ASÍ AUN NO SE MUY BIEN POR QUE , 
 ## SELECT
 ### AS
 Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
-
+```SQL
 	SELECT name, continent as 'Continente', population FROM world
-	
+```	
 ### Operaciones en Select
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
 
@@ -225,10 +225,11 @@ WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%
 **_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
 **%** - Cualquier cosa
 ## CONCAT
+```SQL
 	Select capital, name
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');
-
+```
 Basicamente muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas...
 
 ## REPLACE
@@ -236,10 +237,11 @@ Reemplaza caracteres por otro indicado.
 
 Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') - En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
 
-
-	*Select name, REPLACE (Capital, name, '') AS Extension
+```SQL
+	Select name, REPLACE (Capital, name, '') AS Extension
 	FROM world
-	WHERE capital LIKE CONCAT(name,'_%');*
+	WHERE capital LIKE CONCAT(name,'_%');
+```
 
 ## ROUND
 Nos permite redondear un numero a X decimales.
