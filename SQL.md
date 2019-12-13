@@ -161,6 +161,96 @@ SELECT yr, subject, winner
 FROM nobel
 WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 ```
+## SELECTS Anidados
+Nos permiten filtrar una consulta usando resultados de otras consultas internas.
+
+```SQL
+SELECT name 
+FROM world
+WHERE continent = 'europe' AND gdp/population >(        SELECT gdp/population 
+         FROM world 
+         WHERE name = 'United Kingdom')
+```
+```SQL
+SELECT name, continent
+FROM world
+WHERE continent in (
+	SELECT continent FROM world 
+	WHERE name = 'Argentina' 
+	OR name ='Australia')
+ORDER BY name;
+```
+
+```SQL
+SELECT name, population FROM world
+WHERE population > (
+	SELECT population 
+	FROM world 
+	WHERE name='Canada') 
+AND population < (
+		SELECT population 
+		FROM world 
+		WHERE name='Poland')
+```
+```SQL
+SELECT name, CONCAT (
+	ROUND (population/(
+		SELECT population 
+		FROM world 
+		WHERE name='Germany') 
+	*100)
+	,'%')
+FROM world
+WHERE continent = 'Europe'
+```
+```SQL
+SELECT name
+FROM world
+WHERE gdp > ALL(
+	SELECT gdp FROM world WHERE continent = 	
+	'Europe' AND gdp IS NOT NULL) ;
+```
+```SQL
+SELECT continent, name
+FROM world x
+WHERE name <= ALL(
+	SELECT name FROM world y 
+	WHERE x.continent=y.continent)
+```
+
+```SQL
+SELECT continent, name, area FROM world x
+  WHERE area>= ALL
+    (SELECT area FROM world y
+     WHERE y.continent=x.continent
+     AND area>0)
+```
+
+```SQL
+SELECT continent, name
+FROM world x
+WHERE name <= ALL(SELECT name FROM world y 
+WHERE x.continent=y.continent)
+```
+```SQL
+SELECT name, continent, population
+FROM world WHERE continent IN
+	(SELECT continent
+	FROM world x
+	WHERE 25000000 >= ALL(SELECT population 
+	from world y WHERE 	
+	x.continent=y.continent)) 
+```
+
+```SQL
+SELECT name, continent
+FROM world x
+WHERE population >= ALL(
+	SELECT (population*3) FROM world y
+	WHERE x.continent=y.continent AND 
+	y.name!=x.name)
+```
+
 ## Curiosidades
 ### Problemas con los caracteres especiales
 
