@@ -171,6 +171,8 @@ WHERE continent = 'europe' AND gdp/population >(        SELECT gdp/population
          FROM world 
          WHERE name = 'United Kingdom')
 ```
+### Combinado con IN, AND, CONCAT....
+Si el select interno devuelve mas de una fila, podemos usar in para comprobar que está dentro
 ```SQL
 SELECT name, continent
 FROM world
@@ -180,7 +182,7 @@ WHERE continent in (
 	OR name ='Australia')
 ORDER BY name;
 ```
-
+Podemos utilizar ANDs y utilizar otro select adicional
 ```SQL
 SELECT name, population FROM world
 WHERE population > (
@@ -192,6 +194,7 @@ AND population < (
 		FROM world 
 		WHERE name='Poland')
 ```
+Podemos usar un select en el propio select (Combinado con concat y redondeo)
 ```SQL
 SELECT name, CONCAT (
 	ROUND (population/(
@@ -203,6 +206,8 @@ SELECT name, CONCAT (
 FROM world
 WHERE continent = 'Europe'
 ```
+
+Es importante la clausula is not null, ya que a veces petardea.
 ```SQL
 SELECT name
 FROM world
@@ -210,6 +215,7 @@ WHERE gdp > ALL(
 	SELECT gdp FROM world WHERE continent = 	
 	'Europe' AND gdp IS NOT NULL) ;
 ```
+Podemos comparar las tablas de dos selects usando alias para cada consulta
 ```SQL
 SELECT continent, name
 FROM world x
@@ -242,6 +248,7 @@ FROM world WHERE continent IN
 	x.continent=y.continent)) 
 ```
 
+Podemos realizar operaciones en los select anidados.
 ```SQL
 SELECT name, continent
 FROM world x
