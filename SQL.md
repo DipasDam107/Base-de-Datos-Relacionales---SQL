@@ -345,6 +345,13 @@ WHERE y.continent=x.continent)
 GROUP BY continent;
 ```
 ## HAVING
+Nos sirve como filtro para el agrupado Group By.
+```SQL
+SELECT continent, SUM(population)
+  FROM world
+ GROUP BY continent
+HAVING SUM(population)>500000000
+```
 ## Curiosidades
 ### Problemas con los caracteres especiales
 
