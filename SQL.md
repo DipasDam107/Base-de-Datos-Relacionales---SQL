@@ -4,7 +4,7 @@
 Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
 ```SQL
 	SELECT name, continent as 'Continente', population FROM world
-```	
+```
 ### Operaciones en Select
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
 
@@ -60,6 +60,7 @@ SELECT name, population, area
 FROM world
 WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
 ```
+
 ## Combinacion de Condiciones
 Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
 ```SQL
@@ -67,7 +68,6 @@ SELECT yr, subject, winner
 FROM nobel
 WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
 ```
-
 ## IN
 Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula.
 ```SQL
@@ -102,11 +102,10 @@ WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%
 **_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
 **%** - Cualquier cosa
 ## CONCAT
-```SQL
 	Select capital, name
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');
-```
+
 Basicamente muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas...
 
 ## REPLACE
@@ -114,11 +113,10 @@ Reemplaza caracteres por otro indicado.
 
 Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') - En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
 
-```SQL
-	Select name, REPLACE (Capital, name, '') AS Extension
+
+	*Select name, REPLACE (Capital, name, '') AS Extension
 	FROM world
-	WHERE capital LIKE CONCAT(name,'_%');
-```
+	WHERE capital LIKE CONCAT(name,'_%');*
 
 ## ROUND
 Nos permite redondear un numero a X decimales.
@@ -206,6 +204,8 @@ SELECT name, CONCAT (
 FROM world
 WHERE continent = 'Europe'
 ```
+## ALL
+Es una clasula que comprueba si una condición se cumple en todas las filas. (En este caso, busca el nombre del pais cuyo gdp es mayor a todos los de Europa).
 
 Es importante la clausula is not null, ya que a veces petardea.
 ```SQL
@@ -215,6 +215,7 @@ WHERE gdp > ALL(
 	SELECT gdp FROM world WHERE continent = 	
 	'Europe' AND gdp IS NOT NULL) ;
 ```
+## Alias para las Tablas
 Podemos comparar las tablas de dos selects usando alias para cada consulta
 ```SQL
 SELECT continent, name
@@ -223,13 +224,14 @@ WHERE name <= ALL(
 	SELECT name FROM world y 
 	WHERE x.continent=y.continent)
 ```
+Si no usaramos alias, comparariamos el continente con el de la misma consulta , y la consulta haría cualquier cosa...
 
 ```SQL
 SELECT continent, name, area FROM world x
   WHERE area>= ALL
     (SELECT area FROM world y
-     WHERE y.continent=x.continent
-     AND area>0)
+        WHERE y.continent=x.continent
+          AND area IS NOT NULL);
 ```
 
 ```SQL
@@ -238,6 +240,27 @@ FROM world x
 WHERE name <= ALL(SELECT name FROM world y 
 WHERE x.continent=y.continent)
 ```
+Esto sería lo mismo que la anterior:
+```SQL
+SELECT continent, name
+FROM world x
+WHERE name < ALL(SELECT name FROM world y 
+WHERE x.continent=y.continent
+AND x.name <> y.name)
+```
+En la primera ponemos >= que nombre para incluir que el pais alfabéticamente menor también cumpla la función. Una manera de hacer lo mismo solo con >, es excluyendo al pais de mismo nombre en la propia consulta interna.
+
+Tenemos que sacar los paises de los continentes donde todos los países tienen mas de 25000000: 
+
+```SQL
+SELECT name, continent, population
+FROM world x
+WHERE 25000000 >= ALL(SELECT population 
+from world y WHERE x.continent=y.continent)
+```
+
+Ahora probamos con dos subconsultas. 
+
 ```SQL
 SELECT name, continent, population
 FROM world WHERE continent IN
@@ -247,26 +270,99 @@ FROM world WHERE continent IN
 	from world y WHERE 	
 	x.continent=y.continent)) 
 ```
+La subconsulta mas interna obtiene todos los países del continente a comparar, la posterior filtra solo los continentes donde se cumple la condición, y la tercera muestra todos los países de esos continentes.
 
-Podemos realizar operaciones en los select anidados.
+Podemos realizar operaciones en los SELECT anidados y condiciones adicionales excluyentes.
+
 ```SQL
 SELECT name, continent
 FROM world x
-WHERE population >= ALL(
-	SELECT (population*3) FROM world y
-	WHERE x.continent=y.continent AND 
-	y.name!=x.name)
+WHERE population > ALL(
+SELECT (population*3) FROM world y
+WHERE x.continent=y.continent AND y.name<>x.name)
+```
+## AGREGADOS
+### SUM
+Función que suma todos los numeros que le pasamos
+```SQL
+SELECT SUM(population), SUM(gdp)
+  FROM bbc
+  WHERE region = 'Europe'
 ```
 
+```SQL
+SELECT SUM(population)
+FROM world
+WHERE name IN ('Estonia', 'Latvia', 'Lithuania');
+```
+### COUNT
+Función que cuenta el numero de resultados
+```SQL
+SELECT count(name)
+FROM world
+WHERE area>1000000;
+```
+### MAX
+Función que devuelve el maximo de un conjunto de resultados
+```SQL
+SELECT MAX(population)
+FROM world;
+```
+### AVG
+Calcula el promedio de un conjunto de resultado
+```SQL
+SELECT AVG(population)
+FROM world
+```
+## DISTINCT
+Devuelve los resultados sin repetidos en un campo concreto
+```SQL
+SELECT DISTINCT region FROM bbc
+```
+## GROUP BY
+Nos permite agrupar los resultados por un campo concreto.
+
+Numero de paises por cada continente:
+```SQL
+SELECT continent, count(name)
+FROM world
+GROUP BY continent;
+```
+
+Numero de paises mayores de 10.000.000 de población en cada continente:
+```SQL
+SELECT continent, count(name)
+FROM world
+WHERE population>=10000000
+GROUP BY continent;
+```
+Nombre de cada continente que tiene mas de 10.000.000 de habitantes en total:
+```SQL
+SELECT DISTINCT(continent)
+FROM world x
+WHERE 100000000<=(SELECT SUM(population) FROM world y 
+WHERE y.continent=x.continent)
+GROUP BY continent;
+```
+## HAVING
 ## Curiosidades
 ### Problemas con los caracteres especiales
 
- - La comilla simple se referencia como comilla doble
+ - La comilla simple se referencia como dos comillas simples
 
 ```SQL
 SELECT *
 FROM nobel
 WHERE winner like 'Eugene O''Neill';
+```
+### Consultas Anidadas
+ - Las subconsultas han de ir siempre a la derecha de la condición.
+
+### Desigualdades y NOT
+Las desigualdades se expresan como <>.
+```SQL
+WHERE a<>b -- Es lo mismo que
+WHERE NOT a = b
 ```
 ----------------------------
 # Welcome to StackEdit!
