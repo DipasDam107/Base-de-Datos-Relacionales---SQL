@@ -320,7 +320,7 @@ Devuelve los resultados sin repetidos en un campo concreto
 SELECT DISTINCT region FROM bbc
 ```
 ## GROUP BY
-Nos permite agrupar los resultados por un campo concreto.
+Nos permite agrupar los resultados por un campo concreto. De esta manera se generan subtablas para cada valor del campo agrupado.
 
 Numero de paises por cada continente:
 ```SQL
@@ -338,7 +338,7 @@ GROUP BY continent;
 ```
 Nombre de cada continente que tiene mas de 10.000.000 de habitantes en total:
 ```SQL
-SELECT DISTINCT(continent)
+SELECT continent
 FROM world x
 WHERE 100000000<=(SELECT SUM(population) FROM world y 
 WHERE y.continent=x.continent)
@@ -346,12 +346,34 @@ GROUP BY continent;
 ```
 ## HAVING
 Nos sirve como filtro para el agrupado Group By.
+
+Continentes que tienen una poblacion total de al menos 100 Millones. En este caso usamos el having para filtrar los continentes 
+sobre los que agrupamos.
 ```SQL
-SELECT continent, SUM(population)
-  FROM world
- GROUP BY continent
-HAVING SUM(population)>500000000
+SELECT continent
+FROM world 
+GROUP BY continent
+HAVING SUM(population)>=100000000;
 ```
+
+## JOIN
+Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella.
+
+Ejemplo. Supongamos que queremos los goles de un equipo. Tendriamos algo como esto.
+```SQL
+SELECT matchid, player
+FROM goal
+WHERE teamid='GER';
+```
+
+```SQL
+SELECT matchid, player
+FROM goal
+JOIN eteam on teamid=id
+WHERE teamname='Germany';
+
+```
+
 ## Curiosidades
 ### Problemas con los caracteres especiales
 
@@ -371,6 +393,9 @@ Las desigualdades se expresan como <>.
 WHERE a<>b -- Es lo mismo que
 WHERE NOT a = b
 ```
+
+### WHERE y HAVING
+El WHERE se ejecuta sobre la consulta, es decir, la totalidad de las filas obtenidas. El having se aplica sobre las subtablas agrupadas posteriormente.
 ----------------------------
 # Welcome to StackEdit!
 
