@@ -377,6 +377,80 @@ WHERE teamname='Germany';
 
 ```
 
+Ahora supongamos que queremos mostrar todos los goles de alemania en el torneo, mostrando la fecha del partido. Para ello necesitamos unir tablas, de manera que acotando datos podamos mostrar detalles de la tabla gol y la tabla partido.
+
+```SQL
+SELECT player, teamid, stadium, mdate
+  FROM game JOIN goal ON (id=matchid)
+WHERE teamid='GER'
+```
+
+Mostrar equipos y jugador para cada gol marcado por alguien llamado mario.
+```SQL
+SELECT team1, team2, player
+  FROM game JOIN goal ON (id=matchid)
+WHERE player LIKE 'Mario%'
+```
+
+Goles marcados los primeros 10 minutos, mostrando jugador, equipo, entrenador y tiempo:
+```SQL
+SELECT player, teamid, coach, gtime
+  FROM goal JOIN eteam on teamid=id
+ WHERE gtime<=10
+```
+
+Lista de partidos y nombre de equipo entrenado por fernando santos. Cabe destacar que ambas tablas del join cuentan con un campo ID, con lo cual debemos indicar la tabla a la que estamos referenciando (tabla.campo):
+
+```SQL
+SELECT mdate, teamname
+FROM game JOIN eteam ON (team1=eteam.id)
+WHERE coach='Fernando Santos'
+```
+
+Jugadores que han marcado en el estadio de varsovia:
+```SQL
+SELECT player 
+FROM goal JOIN game on matchid=id
+WHERE stadium='National Stadium, Warsaw'
+```
+
+Mostrar nombre de los jugadores que marcaron a alemania:
+```SQL
+SELECT DISTINCT(player)
+  FROM game JOIN goal ON matchid = id 
+    WHERE (team1='GER' OR team2='GER') AND teamid<>'GER'
+```
+
+Mostrar equipo y goles metidos por cada uno. Necesitamos agrupar:
+```SQL
+SELECT teamname, count(*)
+FROM eteam JOIN goal ON id=teamid
+GROUP BY teamname
+ORDER BY teamname
+```
+
+Numero de goles marcados en cada estadio:
+```SQL
+SELECT stadium, count(*) AS 'Goles'
+FROM goal JOIN game on matchid=id
+GROUP BY stadium
+```
+
+Goles marcados en cada partido donde polonia jugo, mostrando id de partido y fecha:
+```SQL
+SELECT matchid, mdate, COUNT(*) AS 'Goles'
+  FROM game JOIN goal ON matchid = id 
+ WHERE (team1 = 'POL' OR team2 = 'POL')
+GROUP BY matchid, mdate
+```
+
+En cada partido con goles de Alemania, mostrar id de partido, fecha y numero de goles alemanes:
+```SQL
+SELECT matchid, mdate, count(*)
+FROM goal JOIN game on matchid=id
+WHERE teamid='GER'
+GROUP BY matchid, mdate
+```
 ## Curiosidades
 ### Problemas con los caracteres especiales
 
