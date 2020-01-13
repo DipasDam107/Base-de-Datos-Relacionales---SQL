@@ -359,6 +359,7 @@ HAVING SUM(population)>=100000000;
 ## JOIN
 Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella.
 
+Tenemos la siguiente base de datos. Necesitamos saber las claves y las claves ajenas a las que referencian, para poder usar los joins:
 
 ![image](./img/tablaJoin.png "Logo Title Text 1")
 
@@ -369,12 +370,13 @@ FROM goal
 WHERE teamid='GER';
 ```
 
+Sin embargo, si en vez de usar la id del equipo queremos filtrar por el nombre, necesitamos un JOIN con la tabla eteam:
+
 ```SQL
 SELECT matchid, player
 FROM goal
 JOIN eteam on teamid=id
 WHERE teamname='Germany';
-
 ```
 
 Ahora supongamos que queremos mostrar todos los goles de alemania en el torneo, mostrando la fecha del partido. Para ello necesitamos unir tablas, de manera que acotando datos podamos mostrar detalles de la tabla gol y la tabla partido.
