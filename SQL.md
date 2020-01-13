@@ -359,6 +359,9 @@ HAVING SUM(population)>=100000000;
 ## JOIN
 Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella.
 
+
+![alt text](./img/tablaJoin.png" Logo Title Text 1")
+
 Ejemplo. Supongamos que queremos los goles de un equipo. Tendriamos algo como esto.
 ```SQL
 SELECT matchid, player
