@@ -1,3 +1,4 @@
+Enlace Apuntes David: https://github.com/davidgchaves/first-steps-with-git-and-github-wirtz-asir1-and-dam1/blob/master/bd-notes/funciones-de-agregado.md
 ----------------------------
 ## SELECT
 ### AS
