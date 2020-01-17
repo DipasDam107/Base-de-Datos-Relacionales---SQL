@@ -402,6 +402,8 @@ SELECT player, teamid, coach, gtime
  WHERE gtime<=10
 ```
 
+> Podemos referenciar tanto atribrutos como las claves de join especificando la tabla a la que pertenecen, usando la estructura  (tabla.campo)
+
 Lista de partidos y nombre de equipo entrenado por fernando santos. Cabe destacar que ambas tablas del join cuentan con un campo ID, con lo cual debemos indicar la tabla a la que estamos referenciando (tabla.campo):
 
 ```SQL
