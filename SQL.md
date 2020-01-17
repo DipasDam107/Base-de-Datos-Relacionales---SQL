@@ -456,7 +456,7 @@ FROM goal JOIN game on matchid=id
 WHERE teamid='GER'
 GROUP BY matchid, mdate
 ```
-## Curiosidades
+## Curiosidades (O GOTCHAs)
 ### Problemas con los caracteres especiales
 
  - La comilla simple se referencia como dos comillas simples
@@ -478,6 +478,7 @@ WHERE NOT a = b
 
 ### WHERE y HAVING
 El WHERE se ejecuta sobre la consulta, es decir, la totalidad de las filas obtenidas. El having se aplica sobre las subtablas agrupadas posteriormente.
+
 ----------------------------
 # Welcome to StackEdit!
 
