@@ -503,6 +503,15 @@ FROM casting JOIN actor ON casting.actorid=actor.id
 JOIN movie ON casting.movieid=movie.id
 WHERE movie.title='Casablanca';
 ```
+Alternativa con subconsulta:
+```SQL
+SELECT actor.name
+FROM casting JOIN actor ON casting.actorid=actor.id
+WHERE casting.movieid=(
+             SELECT movie.id 
+             FROM movie 
+             WHERE movie.title='Casablanca');
+```
 
 ```SQL
 SELECT actor.name
@@ -511,6 +520,76 @@ JOIN movie ON casting.movieid=movie.id
 WHERE movie.title='Alien';
 ```
 
+Alternativa cambiando el predicado de ON a WHERE para SQL Server:
+```SQL
+SELECT actor.name
+FROM casting, actor, movie
+WHERE movie.title='Alien' 
+      AND casting.actorid=actor.id 
+      AND casting.movieid=movie.id;
+```
+
+Alternativa cambiando el predicado de ON a WHERE para MySQL:
+```SQL
+SELECT actor.name
+FROM casting JOIN actor JOIN movie
+WHERE movie.title='Alien' 
+      AND casting.actorid=actor.id 
+      AND casting.movieid=movie.id;
+
+```
+
+Peliculas donde aparece Harrison Ford:
+
+```SQL
+SELECT movie.title 
+FROM casting JOIN actor on casting.actorid=actor.id
+JOIN movie on casting.movieid=movie.id
+WHERE actor.name='Harrison Ford';
+```
+
+Peliculas donde Harrison Ford es actor de reparto (ord es 1 cuando es prota):
+```SQL
+SELECT movie.title 
+FROM casting JOIN actor on casting.actorid=actor.id
+JOIN movie on casting.movieid=movie.id
+WHERE actor.name='Harrison Ford' AND casting.ord<>1;
+```
+
+Años en los que Rock Hundson hizo mas de dos pelis:
+```SQL
+SELECT yr,COUNT(title) FROM
+  movie JOIN casting ON movie.id=movieid
+        JOIN actor   ON actorid=actor.id
+WHERE name='Rock Hudson'
+GROUP BY yr
+HAVING COUNT(title) > 2
+```
+
+Actor principal y nombre de las pelis donde participa Julie Andrews:
+```SQL
+SELECT movie.title, actor.name FROM casting
+JOIN movie on movie.id=casting.movieid AND ord=1
+JOIN actor on actor.id=casting.actorid 
+WHERE movie.id IN (
+       SELECT movieid 
+       FROM casting 
+       WHERE actorid IN 
+             (SELECT id 
+              FROM actor 
+              WHERE name = 'Julie Andrews' )
+);
+```
+
+Actores con 30 protagonismos:
+```SQL
+SELECT actor.name
+FROM actor 
+JOIN casting ON casting.actorid=actor.id AND casting.ord=1
+GROUP BY actor.name
+HAVING count(casting.movieid)>=30
+ORDER BY name ASC;
+```
 ## Curiosidades (O GOTCHAs)
 ### Problemas con los caracteres especiales
 
@@ -537,6 +616,11 @@ El WHERE se ejecuta sobre la consulta, es decir, la totalidad de las filas obten
 ### LIKE y =
 Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen por Star
 = 'Star%' es una cadena, busca las palabras Star%, donde % es un caracter normal a buscar
+
+### Predicados
+	-Lo que esta despues del WHERE
+	-Lo que esta despues del JOIN ON
+	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs)
 ----------------------------
 # Welcome to StackEdit!
 
