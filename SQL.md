@@ -495,6 +495,22 @@ SELECT movie.id
 FROM movie
 WHERE title='Casablanca';
 ```
+
+Actores de la pelicula casablanca, y otra para actores de Alien:
+```SQL
+SELECT actor.name
+FROM casting JOIN actor ON casting.actorid=actor.id
+JOIN movie ON casting.movieid=movie.id
+WHERE movie.title='Casablanca';
+```
+
+```SQL
+SELECT actor.name
+FROM casting JOIN actor ON casting.actorid=actor.id
+JOIN movie ON casting.movieid=movie.id
+WHERE movie.title='Alien';
+```
+
 ## Curiosidades (O GOTCHAs)
 ### Problemas con los caracteres especiales
 
