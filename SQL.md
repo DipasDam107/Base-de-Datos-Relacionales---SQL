@@ -456,6 +456,45 @@ FROM goal JOIN game on matchid=id
 WHERE teamid='GER'
 GROUP BY matchid, mdate
 ```
+
+### Cambiamos de tabla
+![image](./img/pelis.png "Logo Title Text 1")
+
+Peliculas de 1962:
+```SQL
+SELECT id, title
+ FROM movie
+ WHERE yr=1962
+```
+
+Año en el que se hace Ciudadano Kane:
+```SQL
+select movie.yr
+from movie
+where title='Citizen Kane';
+```
+
+Mostrar todas las pelis de Star Trek:
+```SQL
+SELECT movie.id, movie.title, movie.yr
+FROM movie
+WHERE title LIKE 'Star Trek%'
+ORDER BY yr;
+```
+
+Mostrar el id del actor Glenn Close:
+```SQL
+SELECT actor.id 
+FROM actor
+WHERE name = 'Glenn Close';
+```
+
+Id de la pelicula Casablanca:
+```SQL
+SELECT movie.id
+FROM movie
+WHERE title='Casablanca';
+```
 ## Curiosidades (O GOTCHAs)
 ### Problemas con los caracteres especiales
 
@@ -479,6 +518,9 @@ WHERE NOT a = b
 ### WHERE y HAVING
 El WHERE se ejecuta sobre la consulta, es decir, la totalidad de las filas obtenidas. El having se aplica sobre las subtablas agrupadas posteriormente.
 
+### LIKE y =
+Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen por Star
+= 'Star%' es una cadena, busca las palabras Star%, donde % es un caracter normal a buscar
 ----------------------------
 # Welcome to StackEdit!
 
