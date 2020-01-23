@@ -457,7 +457,7 @@ WHERE teamid='GER'
 GROUP BY matchid, mdate
 ```
 
-### Cambiamos de tabla
+### Cambiamos de BD
 ![image](./img/pelis.png "Logo Title Text 1")
 
 Peliculas de 1962:
@@ -569,27 +569,53 @@ HAVING COUNT(title) > 2
 Actor principal y nombre de las pelis donde participa Julie Andrews:
 ```SQL
 SELECT movie.title, actor.name FROM casting
-JOIN movie on movie.id=casting.movieid AND ord=1
+JOIN movie on movie.id=casting.movieid 
 JOIN actor on actor.id=casting.actorid 
 WHERE movie.id IN (
-       SELECT movieid 
-       FROM casting 
-       WHERE actorid IN 
-             (SELECT id 
-              FROM actor 
-              WHERE name = 'Julie Andrews' )
-);
+  SELECT movieid 
+  FROM casting 
+  WHERE actorid IN 
+              (SELECT id 
+               FROM actor 
+               WHERE name = 'Julie Andrews' )) 
+  AND ord=1;
 ```
 
 Actores con 30 protagonismos:
 ```SQL
 SELECT actor.name
 FROM actor 
-JOIN casting ON casting.actorid=actor.id AND casting.ord=1
+JOIN casting ON casting.actorid=actor.id 
+WHERE casting.ord=1
 GROUP BY actor.name
 HAVING count(casting.movieid)>=30
-ORDER BY name ASC;
+ORDER BY actor.name ASC
 ```
+
+Peliculas de 1978 ordenadas por numero de actores:
+```SQL
+SELECT movie.title, count(casting.actorid) AS "Actores"
+FROM movie
+JOIN casting on movie.id=casting.movieid
+WHERE yr=1978
+GROUP BY movie.title
+ORDER BY count(casting.actorid) DESC, movie.title 
+```
+
+Actores que han trabajado con Art Garfunkel:
+```SQL
+SELECT DISTINCT actor.name
+FROM actor
+JOIN casting x ON actor.id=x.actorid
+WHERE actor.name<>'Art Garfunkel' 
+      AND 'Art Garfunkel' IN(
+                             SELECT name 
+                             FROM actor 
+                             JOIN casting y 
+                             ON actor.id=y.actorid 
+                             WHERE x.movieid=y.movieid)
+```
+
 ## Curiosidades (O GOTCHAs)
 ### Problemas con los caracteres especiales
 
@@ -621,6 +647,7 @@ Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen po
 	-Lo que esta despues del WHERE
 	-Lo que esta despues del JOIN ON
 	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs)
+### El SELECT COUNT se ejecuta una vez por cada SUBTABLA
 ----------------------------
 # Welcome to StackEdit!
 
