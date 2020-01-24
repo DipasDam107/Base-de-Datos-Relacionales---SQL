@@ -1,6 +1,6 @@
 Enlace Apuntes David: https://github.com/davidgchaves/first-steps-with-git-and-github-wirtz-asir1-and-dam1/blob/master/bd-notes/funciones-de-agregado.md
 ----------------------------
-# Tabla
+# Tabla world
 Para empezar trabajaremos con una tabla de paises llamada "world":
 
 ![image](./img/tabla1.png "Logo Title Text 1")
