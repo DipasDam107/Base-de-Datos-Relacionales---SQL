@@ -1,11 +1,20 @@
 Enlace Apuntes David: https://github.com/davidgchaves/first-steps-with-git-and-github-wirtz-asir1-and-dam1/blob/master/bd-notes/funciones-de-agregado.md
 ----------------------------
+# Tabla
+Para empezar trabajaremos con una tabla de paises 
+![image](./img/tabla1.png "Logo Title Text 1")
+
 ## SELECT
 ### AS
 Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
 ```SQL
 	SELECT name, continent as 'Continente', population FROM world
 ```
+
+De esta manera, la tabla resultante contendrá una columna llamada "Continente". Es especialmente útil a la hora de usar funciones de agregado o campos calculados, donde el nombre generado automáticamente por el motor SQL puede ser algo menos representativo.
+
+Así mismo, AS puede ser utilizado para renombrar tablas, y trabajar directamente con dicho alias. Sin embargo, me parece una tonteria detallar esto aquí, ya que aún falta un trecho para trabajar con esta variante. Lo vemos mas adelante  (Apartado de JOINs especialmente).
+
 ### Operaciones en Select
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
 
@@ -14,8 +23,9 @@ PIB por persona:
 ```SQL
 Select name, gdp/population as 'GDP Per Capita'
 		  FROM world
-			WHERE population >= 200000000
+	          WHERE population >= 200000000
 ```
+
 Continente Sudamerica, con población en Millones:
 
 ```SQL
@@ -30,15 +40,17 @@ Nos permite filtrar el contenido de una consulta, obteniendo solo los que cumple
 	SELECT name FROM world
 	WHERE population>=200000000
 ```
-	
-## AND 
+
+Podemos agrupar condiciones con las cláusulas AND, OR o XOR:
+
+### AND 
 Nos permite obtener filas que cumplen dos condiciones
 ```SQL
 SELECT yr, subject, winner
   FROM nobel
  WHERE yr = 1950
 ```
-## OR
+### OR
 Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
 
 ```SQL
@@ -47,7 +59,7 @@ FROM world
 WHERE area > 3000000 OR population > 250000000
 ```
 
-## XOR
+### XOR
 Nos permite obtener las filas que cumplen una condicion, la otra, pero no las dos.
 
 ```SQL
@@ -56,26 +68,38 @@ FROM world
 WHERE area > 3000000 XOR population > 250000000
 ```
 Seria el equivalente a la siguiente consulta:
+
 ```SQL
 SELECT name, population, area
 FROM world
 WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
 ```
 
-## Combinacion de Condiciones
+### Combinacion de Condiciones
 Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
 WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
 ```
+
 ## IN
-Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula.
+Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula. Similar al operador '=', con la particularidad de que sirve para comparar contra múltiples valores o resultados sin utilizar clausulas de condición.
+
 ```SQL
 SELECT name, population
 FROM world
 WHERE name IN ('France', 'Germany', 'Italy');
 ```
+
+Utilizando la cláusula OR en combinación con el operador '=' podríamos llegar a la misma jugada:
+```SQL
+SELECT name, population
+FROM world
+WHERE name = 'France' OR name = 'Germany' OR name = 'Italy';
+```
+
+Si bien en este caso no es que sea mucho lío, mas adelante se verán casos donde no es nada práctica esta variante.
 
 Como devuelve 1 (Si se cumple) y 0(Si no se cumple), se puede usar para ordenar campos (Ultimos los que lo cumplan por ejemplo):
 ```SQL
@@ -84,31 +108,41 @@ SELECT winner, subject
  WHERE yr=1984
  ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
 ```
+
 ## LIKE
-Nos permite filtrar por  campos que cumplen un patron determinado
+Nos permite filtrar por campos que cumplen un patron determinado. 
+
+### Caracteres de filtrado de LIKE
+**_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
+
+**%** - Cualquier cosa, da igual el num de caracteres y el tipo.
+
+Por ejemplo, en este caso, nombres de paises que contengan United en el nombre, sin importar donde:
 ```SQL
 SELECT name
 FROM world
 WHERE name LIKE '%United%'
 ```
-Los paises que tienen todas las vocales, sin espacios:
 
+Los paises que tienen todas las vocales, sin espacios:
 ```SQL
 SELECT name
    FROM world
 WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%'
   AND name NOT LIKE '% %';
 ```
-### Caracteres de LIKE
-**_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
-**%** - Cualquier cosa
+
 ## CONCAT
+Concatena valores. No hay mucho mas que decir.
+
+
+Ejemplo que muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas:
 ```SQL
 	Select capital, name
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');
 ```
-Basicamente muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas...
+
 
 ## REPLACE
 Reemplaza caracteres por otro indicado.
@@ -120,15 +154,19 @@ Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') - En la capital
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');*
 ```
-## ROUND
-Nos permite redondear un numero a X decimales.
 
+## ROUND
+Nos permite redondear un numero a X decimales. La estructura vendría a ser algo como Round(Valor, precisión), donde precisión puede referirse a decimales o a unidades, decenas, centenas....
+
+Redondeo con dos decimales:
 ```SQL
 SELECT name, ROUND(population/1000000, 2) as 'Poblacion Millones', ROUND(gdp/1000000000,2) as 'Billones PB'
 FROM world
 WHERE continent = 'South America'
 ```
-Lo podemos usar para redondear el resultado a unidades, decenas, centenas...
+
+Redondeo a millares (Podemos ver que se usa un valor negativo... La vida es dura):
+
  ```SQL
  SELECT name, ROUND(gdp/population, -3) as 'PIB per Capita'
 FROM world
@@ -137,14 +175,17 @@ WHERE gdp>1000000000000
 
 
 ## LENGTH
-Nos permite obtener la longitud de un campo
+Nos permite obtener la longitud de un campo o valor. En el siguiente ejercicio imprimimos nombre y capital con la misma longitud de caracteres:
+
 ```SQL
 SELECT name, capital
   FROM world
  WHERE LENGTH(name) = LENGTH(capital);
 ```
 ## LEFT
-Permite extraer x caracteres de un String.
+Permite extraer x caracteres de un String. 
+
+>Estructura LEFT(valor, caracter)
 
 En el siguiente ejercicio, se cogen los países cuyo nombre y nombre de capital empiezan por la misma letra, siendo sus nombres distintos (<> Operador de desigualdad)
 
@@ -161,6 +202,9 @@ SELECT yr, subject, winner
 FROM nobel
 WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 ```
+
+Actua de la misma manera que el operador de negación de Java (!);
+
 ## SELECTS Anidados
 Nos permiten filtrar una consulta usando resultados de otras consultas internas.
 
@@ -347,7 +391,7 @@ WHERE y.continent=x.continent)
 GROUP BY continent;
 ```
 ## HAVING
-Nos sirve como filtro para el agrupado Group By.
+Nos sirve como filtro para el agrupado Group By. Normalmente actua sobre funciones reductoras, tales como COUNT, SUM..., o sobre los mismos campos agrupados.
 
 Continentes que tienen una poblacion total de al menos 100 Millones. En este caso usamos el having para filtrar los continentes 
 sobre los que agrupamos.
@@ -359,8 +403,14 @@ HAVING SUM(population)>=100000000;
 ```
 
 ## JOIN
-Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella.
+Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella, con la suma de las columnas de ambas (Si una tabla tiene 3 columnas y la otra dos, la tabla unida resultante tendrá 5 columnas). 
 
+Antes de empezar, hay que destacar que al hacer JOIN se produce un producto cartesiano, conformando todas las combinaciones posibles entre las tuplas de una tabla y otra. Para acotar este resultado, debemos usar la cláusula ON, que nos permite especificar en que campo coincidente se produce la union entre tablas, y a partir de ahi trabajar con WHEREs o HAVINGs para filtrar el resultado.
+
+### ON 
+Nos permite especificar en que campo se produce la unión entre dos tablas que DEBEN ESTAR RELACIONADAS.
+
+### Empezamos a trabajar
 Tenemos la siguiente base de datos. Necesitamos saber las claves y las claves ajenas a las que referencian, para poder usar los joins:
 
 ![image](./img/tablaJoin.png "Logo Title Text 1")
