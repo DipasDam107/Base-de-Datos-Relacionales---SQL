@@ -103,10 +103,11 @@ WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%
 **_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
 **%** - Cualquier cosa
 ## CONCAT
+```SQL
 	Select capital, name
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');
-
+```
 Basicamente muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas...
 
 ## REPLACE
@@ -114,11 +115,11 @@ Reemplaza caracteres por otro indicado.
 
 Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') - En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
 
-
+```SQL
 	*Select name, REPLACE (Capital, name, '') AS Extension
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');*
-
+```
 ## ROUND
 Nos permite redondear un numero a X decimales.
 
@@ -615,6 +616,30 @@ WHERE actor.name<>'Art Garfunkel'
                              ON actor.id=y.actorid 
                              WHERE x.movieid=y.movieid)
 ```
+
+Otra manera: 
+```SQL
+SELECT actor.name
+FROM actor JOIN casting ON actor.id = casting.actorid
+	WHERE actor.name <> 'Art Garfunkel'
+	AND casting.movieid IN (
+		SELECT casting.movieid
+		FROM actor 
+		JOIN casting ON actor.id=casting.actorid
+		WHERE actor.name='Art Garfunkel')
+```
+
+Alternativa con JOINs:
+
+```SQL
+SELECT DISTINCT a1.name
+FROM actor AS a1 
+          JOIN casting AS c1 ON a1.id=c1.actorid
+          JOIN casting AS c2 ON c1.movieid=c2.movieid 
+          JOIN actor AS a2 ON a2.id=c2.actorid
+WHERE a2.name='Art Garfunkel' AND a1.id<>a2.id;
+```
+
 
 ## Curiosidades (O GOTCHAs)
 ### Problemas con los caracteres especiales
