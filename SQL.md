@@ -5,6 +5,8 @@ Para empezar trabajaremos con una tabla de paises llamada "world":
 
 ![image](./img/tabla1.png "Logo Title Text 1")
 
+Sería bueno familiarizarse con la estructura de la misma o al menos tener un esquema en todo momento, para tener menos problemas a la hora de hacer los ejercicios.
+
 ## SELECT
 ### AS
 Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
