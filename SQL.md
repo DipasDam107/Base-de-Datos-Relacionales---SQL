@@ -8,15 +8,6 @@ Para empezar trabajaremos con una tabla de paises llamada "world":
 Sería bueno familiarizarse con la estructura de la misma o al menos tener un esquema en todo momento, para tener menos problemas a la hora de hacer los ejercicios.
 
 ## SELECT
-### AS
-Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
-```SQL
-	SELECT name, continent as 'Continente', population FROM world
-```
-
-De esta manera, la tabla resultante contendrá una columna llamada "Continente". Es especialmente útil a la hora de usar funciones de agregado o campos calculados, donde el nombre generado automáticamente por el motor SQL puede ser algo menos representativo.
-
-Así mismo, AS puede ser utilizado para renombrar tablas, y trabajar directamente con dicho alias. Sin embargo, me parece una tonteria detallar esto aquí, ya que aún falta un trecho para trabajar con esta variante. Lo vemos mas adelante  (Apartado de JOINs especialmente).
 
 ### Operaciones en Select
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
@@ -36,6 +27,16 @@ SELECT name, population/1000000 as "Millones de Personas"
 	FROM world
 	WHERE continent = 'South America'
 ```
+
+### AS
+Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
+```SQL
+	SELECT name, continent as 'Continente', population FROM world
+```
+
+De esta manera, la tabla resultante contendrá una columna llamada "Continente". Es especialmente útil a la hora de usar funciones de agregado o campos calculados, donde el nombre generado automáticamente por el motor SQL puede ser algo menos representativo.
+
+Así mismo, AS puede ser utilizado para renombrar tablas, y trabajar directamente con dicho alias. Sin embargo, me parece una tonteria detallar esto aquí, ya que aún falta un trecho para trabajar con esta variante. Lo vemos mas adelante  (Apartado de JOINs especialmente).
 
 ## Condiciones con WHERE
 Nos permite filtrar el contenido de una consulta, obteniendo solo los que cumplen ciertos valores. 
