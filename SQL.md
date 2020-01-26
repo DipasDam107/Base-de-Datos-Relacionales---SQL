@@ -31,7 +31,7 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 	- [LENGTH](#length)
 	- [LEFT](#left)
 	- [NOT](#not)
- - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
+  - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
 
 
 - [Tabla nobel](#tabla-nobel)
