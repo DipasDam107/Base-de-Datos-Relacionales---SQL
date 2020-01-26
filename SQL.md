@@ -10,8 +10,83 @@ Para empezar trabajaremos con una tabla de paises llamada "world":
 Sería bueno familiarizarse con la estructura de la misma o al menos tener un esquema en todo momento, para tener menos problemas a la hora de hacer los ejercicios.
 
 ## SELECT
+Evidentemente, además de almacenar la información relevante, las bases de datos nos permiten recuperar la información con el fin de consultarla y/o tratarla para los fines que creamos convenientes. Es SELECT la sentencia que nos permite recuperar dicha info, seguido de los campos que queremos que se muestren y la base de datos a la que queremos acceder.
 
-### Operaciones en Select
+> SELECT campo1, campo2.... FROM Base_Datos;
+
+Cabe destacar que, si bien en SQL Zoo no hace falta, las sentencias SQL deben acabar SIEMPRE con punto y coma ';'.
+
+### Primeras Consultas
+Vamos a empezar a trabajar con la tabla World. Una primera consulta facilita sería obtener todos los paises de la base de datos:
+```SQL
+SELECT name FROM world;
+```
+
+Aun en base de datos mas avanzadas y con múltiples tablas, puede ser siempre útil echar mano de consultas de este estilo para conocer bien como están compuestas las bases de datos y los tipos de datos de cada columna de las tablas.
+
+Probemos ahora con múltiples campos. Nombre y población de los paises:
+```SQL
+SELECT name, population FROM world;
+```
+
+### Condiciones con WHERE
+Al recuperar información de una base de datos o una tabla, rara vez nos interesará recuperar todas las tuplas que formen parte de ella. Es aquí donde entra la cláusula WHERE, la cual permite filtrar el contenido de una consulta, obteniendo solo los que cumplen ciertos valores. 
+
+Obtener población de Alemania:
+```SQL
+	SELECT population FROM world
+  	WHERE name = 'Germany'
+```
+
+Paises con población superior a 20 Millones:
+
+```SQL
+	SELECT name FROM world
+	WHERE population>=200000000
+```
+Podemos agrupar condiciones con las cláusulas AND, OR o XOR:
+
+#### AND 
+Nos permite obtener filas que cumplen dos condiciones
+```SQL
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE yr = 1950
+```
+#### OR
+Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
+
+```SQL
+SELECT name, population, area
+FROM world
+WHERE area > 3000000 OR population > 250000000
+```
+
+#### XOR
+Nos permite obtener las filas que cumplen una condicion, la otra, pero no las dos.
+
+```SQL
+SELECT name, population, area
+FROM world
+WHERE area > 3000000 XOR population > 250000000
+```
+Seria el equivalente a la siguiente consulta:
+
+```SQL
+SELECT name, population, area
+FROM world
+WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
+```
+
+#### Combinacion de Condiciones
+Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
+```SQL
+SELECT yr, subject, winner
+FROM nobel
+WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
+```
+
+### Operaciones en SELECT
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
 
 PIB por persona:
@@ -39,55 +114,6 @@ Sirve para poner alias en los campos, de manera que sea mas facil identificar el
 De esta manera, la tabla resultante contendrá una columna llamada "Continente". Es especialmente útil a la hora de usar funciones de agregado o campos calculados, donde el nombre generado automáticamente por el motor SQL puede ser algo menos representativo.
 
 Así mismo, AS puede ser utilizado para renombrar tablas, y trabajar directamente con dicho alias. Sin embargo, me parece una tonteria detallar esto aquí, ya que aún falta un trecho para trabajar con esta variante. Lo vemos mas adelante  (Apartado de JOINs especialmente).
-
-## Condiciones con WHERE
-Nos permite filtrar el contenido de una consulta, obteniendo solo los que cumplen ciertos valores. 
-```SQL
-	SELECT name FROM world
-	WHERE population>=200000000
-```
-
-Podemos agrupar condiciones con las cláusulas AND, OR o XOR:
-
-### AND 
-Nos permite obtener filas que cumplen dos condiciones
-```SQL
-SELECT yr, subject, winner
-  FROM nobel
- WHERE yr = 1950
-```
-### OR
-Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
-
-```SQL
-SELECT name, population, area
-FROM world
-WHERE area > 3000000 OR population > 250000000
-```
-
-### XOR
-Nos permite obtener las filas que cumplen una condicion, la otra, pero no las dos.
-
-```SQL
-SELECT name, population, area
-FROM world
-WHERE area > 3000000 XOR population > 250000000
-```
-Seria el equivalente a la siguiente consulta:
-
-```SQL
-SELECT name, population, area
-FROM world
-WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
-```
-
-### Combinacion de Condiciones
-Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
-```SQL
-SELECT yr, subject, winner
-FROM nobel
-WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
-```
 
 ## IN
 Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula. Similar al operador '=', con la particularidad de que sirve para comparar contra múltiples valores o resultados sin utilizar clausulas de condición.
