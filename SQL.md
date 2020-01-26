@@ -25,6 +25,14 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 		- [MAX](#max)
 		- [AVG](#avg)
 		- [MIN](#min)
+	- [CONCAT](#concat)
+	- [REPLACE](#replace)
+	- [ROUND](#round)
+	- [LENGTH](#length)
+	- [LEFT](#left)
+	- [NOT](#not)
+ - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
+
 
 - [Tabla nobel](#tabla-nobel)
 	
@@ -133,7 +141,7 @@ WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
 ### BETWEEN
 Nos permite obtener las tuplas cuyo campo esté dentro de un rango de valores especificado, incluyendo los valores limite como válidos.
 
->BEETWEEN valor1 AND valor2
+>BETWEEN valor1 AND valor2
 
 Nombre y Area de paises con un area entre 200.000 y 250.000:
 
@@ -291,8 +299,10 @@ FROM world;
 ```
 
 
-## CONCAT
+### CONCAT
 Concatena valores. No hay mucho mas que decir.
+
+>CONCAT(campo, 'Valor a Concatenar')
 
 Ejemplo que muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas:
 ```SQL
@@ -302,7 +312,7 @@ Ejemplo que muestra capital y nombre de aquellos paises cuya capital es el nombr
 ```
 
 
-## REPLACE
+### REPLACE
 Reemplaza caracteres por otro indicado.
 
 >Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') 
@@ -315,7 +325,7 @@ En la capital sustituye el nombre del pais por cadena vacia (De manera que solo 
 	WHERE capital LIKE CONCAT(name,'_%');*
 ```
 
-## ROUND
+### ROUND
 Nos permite redondear un numero a X decimales. La estructura vendría a ser algo como Round(Valor, precisión), donde precisión puede referirse a decimales o a unidades, decenas, centenas....
 
 Redondeo con dos decimales:
@@ -334,7 +344,7 @@ WHERE gdp>1000000000000
 ```
 
 
-## LENGTH
+### LENGTH
 Nos permite obtener la longitud de un campo o valor. 
 
 >Estructura LENGTH(campo)
@@ -346,7 +356,7 @@ SELECT name, capital
   FROM world
  WHERE LENGTH(name) = LENGTH(capital);
 ```
-## LEFT
+### LEFT
 Permite extraer x caracteres de un String. 
 
 >Estructura LEFT(valor, caracter)
@@ -359,7 +369,7 @@ FROM world
 WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital
 ```
 
-## NOT
+### NOT
 Básicamente ignora aquellas filas que cumplan la condicion. Por ejemplo, aquellos premios que no sean de quimica y medicina:
 ```SQL
 SELECT yr, subject, winner
@@ -369,7 +379,7 @@ WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 
 Actua de la misma manera que el operador de negación de Java (!);
 
-## SELECTS Anidados
+## SELECTS Anidados y subconsultas
 Nos permiten filtrar una consulta usando resultados de otras consultas internas.
 
 ```SQL
