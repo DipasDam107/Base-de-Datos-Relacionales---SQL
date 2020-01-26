@@ -2,6 +2,31 @@ Enlace Apuntes David: https://github.com/davidgchaves/first-steps-with-git-and-g
 
 SQLZOO: https://sqlzoo.net/
 ----------------------------
+#Indice
+
+- [Tabla world](#tabla-world)
+  - [SELECT basics](#select-basics)
+  	- [Primeras Consultas](#primeras-consultas)
+  - [¿Sobre qué se ejecutan?](#sobre-qué-se-ejecutan)
+  - [¿Y WHERE qué?](#y-where-qué)
+  - [Gotchas](#gotchas)
+    - [Gotcha 1: NULL](#gotcha-1-null)
+    - [Gotcha 2: List(a) is empty](#gotcha-2-lista-is-empty)
+- [Agrupamientos de tuplas con GROUP BY](#agrupamientos-de-tuplas-con-group-by)
+  - [Criterio de agrupamiento](#criterio-de-agrupamiento)
+  - [¿Y el SELECT?](#y-el-select)
+  - [Gotchas](#gotchas-1)
+    - [Gotcha 1: NULL](#gotcha-1-null-1)
+    - [Gotcha 2: Columnas, reductores y SELECT](#gotcha-2-columnas-reductores-y-select)
+      - [Solución 1](#solución-1)
+      - [Solución 2](#solución-2)
+      - [Ambas soluciones](#ambas-soluciones)
+      - [Corolario](#corolario)
+- [HAVING](#having)
+  - [WHERE, GROUP BY, HAVING, SELECT](#where-group-by-having-select)
+
+----------------------------
+
 # Tabla world
 Para empezar trabajaremos con una tabla de paises llamada "world":
 
@@ -9,7 +34,7 @@ Para empezar trabajaremos con una tabla de paises llamada "world":
 
 Sería bueno familiarizarse con la estructura de la misma o al menos tener un esquema en todo momento, para tener menos problemas a la hora de hacer los ejercicios.
 
-## SELECT
+## SELECT basics
 Evidentemente, además de almacenar la información relevante, las bases de datos nos permiten recuperar la información con el fin de consultarla y/o tratarla para los fines que creamos convenientes. Es SELECT la sentencia que nos permite recuperar dicha info, seguido de los campos que queremos que se muestren y la base de datos a la que queremos acceder.
 
 > SELECT campo1, campo2.... FROM Base_Datos;
