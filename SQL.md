@@ -1,29 +1,19 @@
 Enlace Apuntes David: https://github.com/davidgchaves/first-steps-with-git-and-github-wirtz-asir1-and-dam1/blob/master/bd-notes/funciones-de-agregado.md
 
-SQLZOO: https://sqlzoo.net/
+Vamos a trabajar utilizando los ejercicios de SQLZoo:
+>SQLZOO: https://sqlzoo.net/
+
 ----------------------------
-#Indice
+# Indice
 
 - [Tabla world](#tabla-world)
-  - [SELECT basics](#select-basics)
+  - [SELECTs](#selects)
   	- [Primeras Consultas](#primeras-consultas)
-  - [¿Sobre qué se ejecutan?](#sobre-qué-se-ejecutan)
-  - [¿Y WHERE qué?](#y-where-qué)
-  - [Gotchas](#gotchas)
-    - [Gotcha 1: NULL](#gotcha-1-null)
-    - [Gotcha 2: List(a) is empty](#gotcha-2-lista-is-empty)
-- [Agrupamientos de tuplas con GROUP BY](#agrupamientos-de-tuplas-con-group-by)
-  - [Criterio de agrupamiento](#criterio-de-agrupamiento)
-  - [¿Y el SELECT?](#y-el-select)
-  - [Gotchas](#gotchas-1)
-    - [Gotcha 1: NULL](#gotcha-1-null-1)
-    - [Gotcha 2: Columnas, reductores y SELECT](#gotcha-2-columnas-reductores-y-select)
-      - [Solución 1](#solución-1)
-      - [Solución 2](#solución-2)
-      - [Ambas soluciones](#ambas-soluciones)
-      - [Corolario](#corolario)
-- [HAVING](#having)
-  - [WHERE, GROUP BY, HAVING, SELECT](#where-group-by-having-select)
+ 	- [Condiciones con WHERE](#condiciones-con-where)
+		- [AND](#and)
+		- [OR](#or)
+		- [XOR](#xor)
+		- [Combinacion de Condiciones](#combinacion-de-condiciones)
 
 ----------------------------
 
@@ -46,7 +36,11 @@ Vamos a empezar a trabajar con la tabla World. Una primera consulta facilita ser
 ```SQL
 SELECT name FROM world;
 ```
+Con el asterisco '*', podemos obtener todos los campos de una tabla:
 
+```SQL
+SELECT * FROM world;
+```
 Aun en base de datos mas avanzadas y con múltiples tablas, puede ser siempre útil echar mano de consultas de este estilo para conocer bien como están compuestas las bases de datos y los tipos de datos de cada columna de las tablas.
 
 Probemos ahora con múltiples campos. Nombre y población de los paises:
@@ -109,6 +103,18 @@ Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resul
 SELECT yr, subject, winner
 FROM nobel
 WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
+```
+
+### BETWEEN
+Nos permite obtener las tuplas cuyo campo esté dentro de un rango de valores especificado, incluyendo los valores limite como válidos.
+
+>BEETWEEN valor1 AND valor2
+
+Nombre y Area de paises con un area entre 200.000 y 250.000:
+
+```SQL
+	SELECT name, area FROM world
+  	WHERE area BETWEEN 200000 AND 250000;
 ```
 
 ### Operaciones en SELECT
