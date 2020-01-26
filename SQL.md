@@ -13,8 +13,21 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 		- [AND](#and)
 		- [OR](#or)
 		- [XOR](#xor)
-		- [Combinacion de Condiciones](#combinacion-de-condiciones)
+		- [BETWEEN](#between)
+	- [Combinacion de Condiciones](#combinacion-de-condiciones)
+	- [Operaciones en SELECT](#operaciones-en-select)
+	- [AS](#as)
+	- [IN](#in)
+	- [LIKE](#like)
+	- [AGREGADOS](#agregados)
+		- [SUM](#sum)
+		- [COUNT](#count)
+		- [MAX](#max)
+		- [AVG](#avg)
+		- [MIN](#min)
 
+- [Tabla nobel](#tabla-nobel)
+	
 ----------------------------
 
 # Tabla world
@@ -66,12 +79,14 @@ Paises con población superior a 20 Millones:
 Podemos agrupar condiciones con las cláusulas AND, OR o XOR:
 
 #### AND 
-Nos permite obtener filas que cumplen dos condiciones
+Nos permite obtener filas que cumplen dos condiciones. Si no cumple una, al carrer. Paises con una area superior a 3 Millones y una población de mas de 250 millones de personas:
+
 ```SQL
-SELECT yr, subject, winner
-  FROM nobel
- WHERE yr = 1950
+SELECT name, population, area
+FROM world
+WHERE area > 3000000 AND population > 250000000
 ```
+
 #### OR
 Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
 
@@ -98,7 +113,17 @@ WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND po
 ```
 
 #### Combinacion de Condiciones
-Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
+Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. 
+
+Paises con un area de 6000000o con una población de 250 millones y un area de 3 millones minimo:
+
+```SQL
+SELECT name, population, area
+FROM world
+WHERE area > 6000000 OR (population > 250000000 AND area > 3000000)
+```
+
+En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
@@ -146,8 +171,10 @@ De esta manera, la tabla resultante contendrá una columna llamada "Continente".
 
 Así mismo, AS puede ser utilizado para renombrar tablas, y trabajar directamente con dicho alias. Sin embargo, me parece una tonteria detallar esto aquí, ya que aún falta un trecho para trabajar con esta variante. Lo vemos mas adelante  (Apartado de JOINs especialmente).
 
-## IN
+### IN
 Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula. Similar al operador '=', con la particularidad de que sirve para comparar contra múltiples valores o resultados sin utilizar clausulas de condición.
+
+Paises cuyo nombre está dentro de los valores Alemania, Francia e Italia:
 
 ```SQL
 SELECT name, population
@@ -156,26 +183,26 @@ WHERE name IN ('France', 'Germany', 'Italy');
 ```
 
 Utilizando la cláusula OR en combinación con el operador '=' podríamos llegar a la misma jugada:
+
 ```SQL
 SELECT name, population
 FROM world
 WHERE name = 'France' OR name = 'Germany' OR name = 'Italy';
 ```
 
-Si bien en este caso no es que sea mucho lío, mas adelante se verán casos donde no es nada práctica esta variante.
+Si bien en este caso no es que sea mucho lío, mas adelante se verán casos donde no es nada práctica esta variante, especialmente cuando dentro del IN hay una subconsulta.
 
-Como devuelve 1 (Si se cumple) y 0(Si no se cumple), se puede usar para ordenar campos (Ultimos los que lo cumplan por ejemplo):
+IN devuelve 1 (Si se cumple) y 0(Si no se cumple), se puede usar para ordenar campos (Ultimos los que lo cumplan por ejemplo):
 ```SQL
 SELECT winner, subject
   FROM nobel
  WHERE yr=1984
  ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
 ```
-
-## LIKE
+### LIKE
 Nos permite filtrar por campos que cumplen un patron determinado. 
 
-### Caracteres de filtrado de LIKE
+#### Caracteres de filtrado de LIKE
 **_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
 
 **%** - Cualquier cosa, da igual el num de caracteres y el tipo.
@@ -195,9 +222,77 @@ WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%
   AND name NOT LIKE '% %';
 ```
 
+### AGREGADOS
+Las funciones reductoras nos permiten obtener un valor en base a una operación que se va a realizar utilizando multiples tuplas, dando solo una tupla como resultante. Podemos Sumar, contar, coger el valor máximo, el mínimo, la media... Son especialmente útiles en combinación con las funciones de agrupado.
+
+#### SUM
+Función que devuelve la suma de todas del tuplas del campo especifico que le pasamos.
+
+> Estructura SUM(campo)
+
+Suma de habitantes en Asia:
+```SQL
+SELECT sum(population) AS 'Habitantes de asia'
+FROM world
+WHERE continent = 'Asia';
+```
+
+Suma de habitantes entre Estonia, Letonia y Lituania:
+
+```SQL
+SELECT SUM(population)
+FROM world
+WHERE name IN ('Estonia', 'Latvia', 'Lithuania');
+```
+
+#### COUNT
+Función que cuenta el numero de tuplas resultantes de una consulta. Si la consulta devuelve 3 filas, el resultado será 3:
+
+> Estructura COUNT(campo)
+
+Cuantos paises tienen mas de 1 millon de area:
+
+```SQL
+SELECT count(name)
+FROM world
+WHERE area>1000000;
+```
+#### MAX
+Función que devuelve el mínimo de un conjunto de resultados.
+
+> Estructura MAX(campo)
+
+Pais con mayor población:
+```SQL
+SELECT MAX(population)
+FROM world;
+```
+#### AVG
+Calcula el promedio de un conjunto de resultado.
+
+> Estructura AVG(campo)
+
+Población media:
+```SQL
+SELECT AVG(population)
+FROM world
+```
+
+#### MIN
+Función que devuelve el maximo de un conjunto de resultados
+
+> Estructura MIN(campo)
+
+Pais con menor población:
+
+```SQL
+SELECT MIN(population)
+FROM world;
+```
+
+
 ## CONCAT
 Concatena valores. No hay mucho mas que decir.
-
 
 Ejemplo que muestra capital y nombre de aquellos paises cuya capital es el nombre mas algo mas:
 ```SQL
@@ -210,7 +305,9 @@ Ejemplo que muestra capital y nombre de aquellos paises cuya capital es el nombr
 ## REPLACE
 Reemplaza caracteres por otro indicado.
 
-Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') - En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
+>Replace (Campo, 'Caracter_a_Remplazar', 'Caracter_Sustituyente') 
+
+En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
 
 ```SQL
 	*Select name, REPLACE (Capital, name, '') AS Extension
@@ -238,7 +335,11 @@ WHERE gdp>1000000000000
 
 
 ## LENGTH
-Nos permite obtener la longitud de un campo o valor. En el siguiente ejercicio imprimimos nombre y capital con la misma longitud de caracteres:
+Nos permite obtener la longitud de un campo o valor. 
+
+>Estructura LENGTH(campo)
+
+En el siguiente ejercicio imprimimos nombre y capital con la misma longitud de caracteres:
 
 ```SQL
 SELECT name, capital
@@ -390,39 +491,9 @@ WHERE population > ALL(
 SELECT (population*3) FROM world y
 WHERE x.continent=y.continent AND y.name<>x.name)
 ```
-## AGREGADOS
-### SUM
-Función que suma todos los numeros que le pasamos
-```SQL
-SELECT SUM(population), SUM(gdp)
-  FROM bbc
-  WHERE region = 'Europe'
-```
 
-```SQL
-SELECT SUM(population)
-FROM world
-WHERE name IN ('Estonia', 'Latvia', 'Lithuania');
-```
-### COUNT
-Función que cuenta el numero de resultados
-```SQL
-SELECT count(name)
-FROM world
-WHERE area>1000000;
-```
-### MAX
-Función que devuelve el maximo de un conjunto de resultados
-```SQL
-SELECT MAX(population)
-FROM world;
-```
-### AVG
-Calcula el promedio de un conjunto de resultado
-```SQL
-SELECT AVG(population)
-FROM world
-```
+
+
 ## DISTINCT
 Devuelve los resultados sin repetidos en un campo concreto
 ```SQL
