@@ -34,9 +34,14 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 	- [NOT](#not)
   - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
 
-
 - [Tabla nobel](#tabla-nobel)
-	
+- [JOINs](#join)
+ - [ON](#on)
+ - [BD Eurocopa](#bd-eurocopa)
+ 	- [Ejercicios BD Eurocopa con JOIN](#ejercicios-bd-eurocopa-con-join)
+ - [BD Pelis](#bd-pelis)
+ 	- [Ejercicios BD Pelis con JOIN](#ejercicios-bd-pelis-con-join)
+ 
 ----------------------------
 
 # Tabla world
@@ -551,19 +556,22 @@ GROUP BY continent
 HAVING SUM(population)>=100000000;
 ```
 
-## JOIN
+# JOIN
 Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella, con la suma de las columnas de ambas (Si una tabla tiene 3 columnas y la otra dos, la tabla unida resultante tendrá 5 columnas). 
 
 Antes de empezar, hay que destacar que al hacer JOIN se produce un producto cartesiano, conformando todas las combinaciones posibles entre las tuplas de una tabla y otra. Para acotar este resultado, debemos usar la cláusula ON, que nos permite especificar en que campo coincidente se produce la union entre tablas, y a partir de ahi trabajar con WHEREs o HAVINGs para filtrar el resultado.
 
-### ON 
+## ON 
 Nos permite especificar en que campo se produce la unión entre dos tablas que DEBEN ESTAR RELACIONADAS.
 
-### Empezamos a trabajar
+>Estructura SELECT * FROM Tabla1 JOIN tabla2 ON clavePrincipal=claveAjena; 
+
+## BD Eurocopa
 Tenemos la siguiente base de datos. Necesitamos saber las claves y las claves ajenas a las que referencian, para poder usar los joins:
 
 ![image](./img/tablaJoin.png "Logo Title Text 1")
 
+### Ejercicios BD Eurocopa con JOIN
 Ejemplo. Supongamos que queremos los goles de un equipo. Tendriamos algo como esto.
 ```SQL
 SELECT matchid, player
@@ -657,7 +665,10 @@ WHERE teamid='GER'
 GROUP BY matchid, mdate
 ```
 
-### Cambiamos de BD
+## BD Pelis
+Volvemos a cambiar de base de datos para seguir trabajando con JOINS. La base de datos es sobre peliculas y castings.
+
+### Ejercicios BD Pelis con JOIN
 ![image](./img/pelis.png "Logo Title Text 1")
 
 Peliculas de 1962:
@@ -872,290 +883,4 @@ Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen po
 	-Lo que esta despues del JOIN ON
 	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs)
 ### El SELECT COUNT se ejecuta una vez por cada SUBTABLA
-----------------------------
-# Welcome to StackEdit!
 
-Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
-
-
-# Files
-
-StackEdit stores your files in your browser, which means all your files are automatically saved locally and are accessible **offline!**
-
-## Create files and folders
-
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
-
-## Switch to another file
-
-All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
-
-## Rename a file
-
-You can rename the current file by clicking the file name in the navigation bar or by clicking the **Rename** button in the file explorer.
-
-## Delete a file
-
-You can delete the current file by clicking the **Remove** button in the file explorer. The file will be moved into the **Trash** folder and automatically deleted after 7 days of inactivity.
-
-## Export a file
-
-You can export the current file by clicking **Export to disk** in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.
-
-
-# Synchronization
-
-Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your **Google Drive**, your **Dropbox** and your **GitHub** accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow... The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.
-
-There are two types of synchronization and they can complement each other:
-
-- The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
-	> To start syncing your workspace, just sign in with Google in the menu.
-
-- The file synchronization will keep one file of the workspace synced with one or multiple files in **Google Drive**, **Dropbox** or **GitHub**.
-	> Before starting to sync files, you must link an account in the **Synchronize** sub-menu.
-
-## Open a file
-
-You can open a file from **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Open from**. Once opened in the workspace, any modification in the file will be automatically synced.
-
-## Save a file
-
-You can save any file of the workspace to **Google Drive**, **Dropbox** or **GitHub** by opening the **Synchronize** sub-menu and clicking **Save on**. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.
-
-## Synchronize a file
-
-Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.
-
-If you just have modified your file and you want to force syncing, click the **Synchronize now** button in the navigation bar.
-
-> **Note:** The **Synchronize now** button is disabled if you have no file to synchronize.
-
-## Manage file synchronization
-
-Since one file can be synced with multiple locations, you can list and manage synchronized locations by clicking **File synchronization** in the **Synchronize** sub-menu. This allows you to list and remove synchronized locations that are linked to your file.
-
-
-# Publication
-
-Publishing in StackEdit makes it simple for you to publish online your files. Once you're happy with a file, you can publish it to different hosting platforms like **Blogger**, **Dropbox**, **Gist**, **GitHub**, **Google Drive**, **WordPress** and **Zendesk**. With [Handlebars templates](http://handlebarsjs.com/), you have full control over what you export.
-
-> Before starting to publish, you must link an account in the **Publish** sub-menu.
-
-## Publish a File
-
-You can publish your file by opening the **Publish** sub-menu and by clicking **Publish to**. For some locations, you can choose between the following formats:
-
-- Markdown: publish the Markdown text on a website that can interpret it (**GitHub** for instance),
-- HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).
-
-## Update a publication
-
-After publishing, StackEdit keeps your file linked to that publication which makes it easy for you to re-publish it. Once you have modified your file and you want to update your publication, click on the **Publish now** button in the navigation bar.
-
-> **Note:** The **Publish now** button is disabled if your file has not been published yet.
-
-## Manage file publication
-
-Since one file can be published to multiple locations, you can list and manage publish locations by clicking **File publication** in the **Publish** sub-menu. This allows you to list and remove publication locations that are linked to your file.
-
-
-# Markdown extensions
-
-StackEdit extends the standard Markdown syntax by adding extra **Markdown extensions**, providing you with some nice features.
-
-> **ProTip:** You can disable any **Markdown extension** in the **File properties** dialog.
-
-
-## SmartyPants
-
-SmartyPants converts ASCII punctuation characters into "smart" typographic punctuation HTML entities. For example:
-
-|                |ASCII                          |HTML                         |
-|----------------|-------------------------------|-----------------------------|
-|Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |
-|Quotes          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Dashes          |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
-
-
-## KaTeX
-
-You can render LaTeX mathematical expressions using [KaTeX](https://khan.github.io/KaTeX/):
-
-The *Gamma function* satisfying $\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$ is via the Euler integral
-
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
-
-> You can find more information about **LaTeX** mathematical expressions [here](http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
-
-
-## UML diagrams
-
-You can render UML diagrams using [Mermaid](https://mermaidjs.github.io/). For example, this will produce a sequence diagram:
-
-```mermaid
-sequenceDiagram
-Alice ->> Bob: Hello Bob, how are you?
-Bob-->>John: How about you John?
-Bob--x Alice: I am good thanks!
-Bob-x John: I am good thanks!
-Note right of John: Bob thinks a long<br/>long time, so long<br/>that the text does<br/>not fit on a row.
-
-Bob-->Alice: Checking with John...
-Alice->John: Yes... John, how are you?
-```
-
-And this will produce a flow chart:
-
-```mermaid
-graph LR
-A[Square Rect] -- Link text --> B((Circle))
-A --> C(Round Rect)
-B --> D{Rhombus}
-C --> D
-```
-
----------------------------------
-**La estructura de una sentencia SQL** 
-
- 1. indicamos las tablas de las cuales vamos a sacar la información.
- 2. Indicamos una condición.
- 3. Indicamos si queremos un Orden
- 4. Indicamos un limite
-
-### SELECCIONAR DE UNA TABLA
-
-Utilizamos la notación **FROM** para indicar la tabla de la cual vamos a recoger información.
-
-SELECT name, population
-
-FROM world   **SELECCIONAMOS DE LA TABLA world**
-
-WHERE name >= 'France'
-
-ORDER BY population ASC
-
-LIMIT 10
-
-### CONJUNTOS
-Utilizamos la notación **IN** para los conjuntos, estes van entre paréntesis y en comillas simples y separados por comas.
-
-SELECT name, population 
-
-FROM world
-
-WHERE name IN ('Sweden', 'Norway', 'Denmark');  **SELECCIONAMOS EL CONJUNTO DE ESTES TRES PAÍSES** 
-
-### BETWEEN
-
-Utilizamos esta notación **BETWEEN** para seleccionar un rango de valores intermedios entre dos números
-
-SELECT name, area FROM world
-
-  WHERE area BETWEEN 200000 AND 250000  **SELECCIONA LOS VALORES ENTRE 200000 Y 250000 AMBOS INCLUIDOS** 
-  
-  
-  ### LIKE ( PATTERN MATCHING STRINGS)
-  
-  Utilizamos esta notación **LIKE** para buscar un patrón / carácter / símbolo  y que coincida
-  **En SQL usar Mayúsculas y Minúsculas no es lo mismo. Es estricto el Matching de caracteres.**
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE 'B%' **SELECCIONA DE LA TABLA LOS NOMBRES QUE TENGAN UNA B, SE PUEDE PONER %B%, %GER% %Germany%**
-  
-  ### Finalicen con con un carácter se indica con %char
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE 'Y%'
-  
-   ### Contengan un carácter %char%
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE '%x%'
-    
-   ### Finalicen con varios caracteres(string)
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE '%land'
-  
-   ### Que empiecen con un carácter y terminen con un conjunto de caracteres
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE 'C%ia' 
-  
-   ### Contiene un carácter doble
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE '%ee%'
-  
-   ### Varios caracteres repetidos pero separados 
-  
-  SELECT name FROM world
-  
-  WHERE name LIKE '%a%a%a%' **en una lista de países encontraría Bahamas** 
-  
- ### Segundo carácter Se utiliza un guion bajo como sustituto de un carácter y solo un carácter 
-  
-SELECT name 
-
-FROM world
-
-WHERE name LIKE '_t%'  **En una lista de países solo nos mostraría los países que como segundo carácter tienen una t** 
-
-ORDER BY name
-  
- ### mismo carácter separado por dos caracteres 
-  
-SELECT name FROM world
-
-WHERE name LIKE '%o__o%'  **UTILIZAMOS DOS GUIONES BAJOS ENTRE LAS DOS o's PARA BUSCAR PAISES QUE TENGAN DOS SEPARADAS POR DOS CARACTERES** 
-
- ### Exactamente x números de caracteres
-
-SELECT name FROM world
-
-WHERE name LIKE '____' /* SE UTILIZA UN NUMERO DE GUIONES BAJOS IGUAL AL NUMERO DE CARACTERES PEDIDOS */
-
- ### NOTA -> si piden como mínimos x letras usamos guiones bajos y un porcentaje '____%' y si solo pide x numero (ej: 4) '____'
- 
- ### Exacto mismo nombre en una tabla y en otra
-
-SELECT capital
-
-FROM world
-
-WHERE name LIKE capital  **SE SELECCIONA UN PAÍS DONDE EL NOMBRE DE LA CAPITAL ES EL MISMO QUE EL DEL PAÍS EN VEZ DEL LIKE TAMBIÉN VALE CON =** 
-
- ### CONCAT 
-Usamos la función concat para machear pero añadiendo algún string )
-En este ejemplo queremos los países que su capital sea el nombre del país + City 
-
-SELECT name /* SELECCIONAR NOMBRE*/
-
-FROM world /* DESDE LA TABLA world */
-
-WHERE capital LIKE concat(name, ' city')  **DONDE LA CAPITAL ES IGUAL A LA CONCATENACIÓN DEL NOMBRE MAS CITY** 
- 
-  ### CONCAT Cuando incluye 
- 
-SELECT capital, name  **FIJARSE EN EL ENUNCIADO POR QUE PIDE CAPITAL Y NAME** 
-
-FROM world
-
-WHERE capital LIKE CONCAT ( '%', name, '%') **CUALQUIER COSA + NOMBRE DE PAÍS + CUALQUIER COSA** 
-
- ### CONCAT concatenando extensiones a un atributo
-
-SELECT capital, name
-
-FROM world
-
-WHERE capital LIKE CONCAT ( name, '_%')  **ES ASÍ AUN NO SE MUY BIEN POR QUE , CREO QUE ES POR QUE EL GUION BAJO INDICA QUE TIENE QUE HABER ALGO SI O SI ENTRE EL NOMBRE DEL PAÍS Y CUALQUIER COSA** 
