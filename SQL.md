@@ -41,7 +41,9 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
  		- [Ejercicios BD Eurocopa con JOIN](#ejercicios-bd-eurocopa-con-join)
  	- [BD Pelis](#bd-pelis)
  		- [Ejercicios BD Pelis con JOIN](#ejercicios-bd-pelis-con-join)
- 
+	- [BD Profes](#bd-profes)
+		- [Ejercicios BD Pelis con NULL](#ejercicios-bd-pelis-con-null)
+ - [GOTCHAs](#gotchas)
 ----------------------------
 
 # Tabla world
@@ -851,9 +853,16 @@ FROM actor AS a1
           JOIN actor AS a2 ON a2.id=c2.actorid
 WHERE a2.name='Art Garfunkel' AND a1.id<>a2.id;
 ```
+## BD Profes
+Cambiamos a otra base de datos, de profesores y departamentos donde la relación puede no existir (0:N).
+
+![image](./img/profes.png "Logo Title Text 1")
+
+### Ejercicios BD Profes con NULL
 
 
-## Curiosidades (O GOTCHAs)
+
+# GOTCHAs
 ### Problemas con los caracteres especiales
 
  - La comilla simple se referencia como dos comillas simples
