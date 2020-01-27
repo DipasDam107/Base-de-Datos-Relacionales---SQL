@@ -33,7 +33,8 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 	- [LEFT](#left)
 	- [NOT](#not)
   - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
-- [Tabla nobel](#tabla-nobel)
+- [Ejercicios de repaso](#ejercicio-repaso)
+	- [Tabla nobel](#tabla-nobel)
 - [JOINs](#join)
 	- [ON](#on)
 	- [BD Eurocopa](#bd-eurocopa)
@@ -50,7 +51,7 @@ Para empezar trabajaremos con una tabla de paises llamada "world":
 
 Sería bueno familiarizarse con la estructura de la misma o al menos tener un esquema en todo momento, para tener menos problemas a la hora de hacer los ejercicios.
 
-## SELECT basics
+## SELECTs
 Evidentemente, además de almacenar la información relevante, las bases de datos nos permiten recuperar la información con el fin de consultarla y/o tratarla para los fines que creamos convenientes. Es SELECT la sentencia que nos permite recuperar dicha info, seguido de los campos que queremos que se muestren y la base de datos a la que queremos acceder.
 
 > SELECT campo1, campo2.... FROM Base_Datos;
@@ -554,6 +555,8 @@ FROM world
 GROUP BY continent
 HAVING SUM(population)>=100000000;
 ```
+# Ejercicios de repaso
+## Tabla nobel
 
 # JOIN
 Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella, con la suma de las columnas de ambas (Si una tabla tiene 3 columnas y la otra dos, la tabla unida resultante tendrá 5 columnas). 
