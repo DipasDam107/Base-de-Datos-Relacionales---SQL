@@ -559,6 +559,97 @@ HAVING SUM(population)>=100000000;
 ```
 # Ejercicios de repaso
 ## Tabla nobel
+## Ejercicios
+
+```SQL
+SELECT yr, subject, winner
+  FROM nobel
+ WHERE yr = 1950
+```
+
+
+```SQL
+SELECT winner
+  FROM nobel
+ WHERE yr = 1962
+   AND subject = 'Literature'
+```
+
+```SQL
+SELECT yr, subject
+FROM nobel
+WHERE winner = 'Albert Einstein';
+```
+
+```SQL
+SELECT winner
+FROM nobel
+WHERE yr>=2000 AND subject='Peace';
+```
+
+```SQL
+SELECT *
+FROM nobel
+WHERE subject = 'Literature' AND yr BETWEEN 1980 AND 1989;
+```
+
+
+```SQL
+SELECT * FROM nobel
+ WHERE winner IN ('Theodore Roosevelt','Woodrow Wilson','Jimmy Carter','Barack Obama');
+```
+
+
+```SQL
+SELECT winner
+FROM nobel
+WHERE winner LIKE 'John%';
+```
+
+```SQL
+SELECT yr, subject, winner
+FROM nobel
+WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984);
+```
+
+```SQL
+SELECT yr, subject, winner
+FROM nobel
+WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine');
+```
+
+```SQL
+SELECT yr, subject, winner
+FROM nobel
+WHERE (subject = 'Medicine' AND yr<1910) OR (subject = 'Literature' AND yr>=2004);
+```
+
+
+```SQL
+SELECT *
+FROM nobel
+WHERE winner like 'Peter GrÃ¼nberg'
+```
+
+```SQL
+SELECT *
+FROM nobel
+WHERE winner like 'Eugene O''Neill';
+```
+
+```SQL
+SELECT winner, yr, subject
+FROM nobel
+WHERE winner LIKE 'Sir%'
+ORDER BY yr DESC;
+```
+
+```SQL
+SELECT winner, subject
+  FROM nobel
+ WHERE yr=1984
+ ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
+```
 
 # JOIN
 Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella, con la suma de las columnas de ambas (Si una tabla tiene 3 columnas y la otra dos, la tabla unida resultante tendrá 5 columnas). 
