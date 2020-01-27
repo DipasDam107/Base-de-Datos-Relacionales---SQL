@@ -1042,7 +1042,28 @@ Por ejemplo, sustituimos el movil del usuario por el telefono del centro, cuando
 SELECT name, COALESCE(mobile, '07986 444 2266')
 FROM teacher;
 ```
+### CASE WHEN
+Nos permite especificar imprimir en la tabla distintos resultados segun la condicional que cumpla el campo que comprobamos. Similar al Case de JAVA:
 
+ > Estructura 
+ > CASE campo
+ >     WHEN valor1 THEN 'valor reprensetado'
+ >     WHEN valor2 THEN 'valor reprensetado'
+ >     ELSE 'Valor para el resto'
+ > END
+
+Profesores y departamento, poniendo Sci para dep 1 y 2, y Art para el resto:
+
+```SQL
+SELECT name,  
+CASE dept
+     WHEN 1 THEN 'Sci'
+     WHEN 2 THEN 'Sci'
+     ELse 'Art'
+END 
+AS 'type'
+FROM teacher;
+```
 ### Ejercicios BD Profes con NULL
 
 Lista de profesores con departamento nulo:
@@ -1075,6 +1096,18 @@ FROM dept LEFT JOIN teacher ON dept.id=teacher.dept
 GROUP BY dept.name;
 ```
 
+Profesores y departamento, poniendo Sci para dep 1 y 2, Art para el dep 3, 'None' para el resto:
+```SQL
+SELECT name,  
+CASE dept
+     WHEN 1 THEN 'Sci'
+     WHEN 2 THEN 'Sci'
+     WHEN 3 THEN 'Art'
+     ELse 'None'
+END 
+AS 'type'
+FROM teacher;
+```
 # GOTCHAs
 ### Problemas con los caracteres especiales
 
