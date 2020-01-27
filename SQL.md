@@ -45,8 +45,9 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 		- [INNER JOIN](#inner-join)
 		- [LEFT JOIN](#left-join)
 		- [RIGHT JOIN](#right-join)
+		- [Sentido de los JOINs](#sentido-de-los-joins)
+		- [COALESCE](#coalesce)
 		- [Ejercicios BD Pelis con NULL](#ejercicios-bd-pelis-con-null)
-			- [COALESCE](#coalesce)
  - [GOTCHAs](#gotchas)
 ----------------------------
 
@@ -1029,9 +1030,8 @@ FROM dept RIGHT JOIN teacher
 
 > Lo que si podemos intercambiar es el orden de los atributos en la igualdad, ya que no es relevante.
 
-### Ejercicios BD Profes con NULL
 
-#### COALESCE
+### COALESCE
 Nos permite sustituir NULL por un valor que nos permita tratar el campo, como por ejemplo en concatenaciones o funciones de suma.
 
 > Estructura COALESCE(campo, valor_para_NULL);
@@ -1042,6 +1042,8 @@ Por ejemplo, sustituimos el movil del usuario por el telefono del centro, cuando
 SELECT name, COALESCE(mobile, '07986 444 2266')
 FROM teacher;
 ```
+
+### Ejercicios BD Profes con NULL
 
 Lista de profesores con departamento nulo:
 
@@ -1068,7 +1070,7 @@ FROM teacher;
 
 Contar profesores por departamento, incluyendo aquellos que departamentos que no tienen profes:
 ```SQL
-SELECT dept.name, count(teacher.name)
+SELECT dept.name, count(teacher.name) AS 'Numm Profes'
 FROM dept LEFT JOIN teacher ON dept.id=teacher.dept
 GROUP BY dept.name;
 ```
