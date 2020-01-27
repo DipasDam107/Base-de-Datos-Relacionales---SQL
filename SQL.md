@@ -35,11 +35,11 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
   - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
 - [Tabla nobel](#tabla-nobel)
 - [JOINs](#join)
- - [ON](#on)
- - [BD Eurocopa](#bd-eurocopa)
- 	- [Ejercicios BD Eurocopa con JOIN](#ejercicios-bd-eurocopa-con-join)
- - [BD Pelis](#bd-pelis)
- 	- [Ejercicios BD Pelis con JOIN](#ejercicios-bd-pelis-con-join)
+	- [ON](#on)
+	- [BD Eurocopa](#bd-eurocopa)
+ 		- [Ejercicios BD Eurocopa con JOIN](#ejercicios-bd-eurocopa-con-join)
+ 	- [BD Pelis](#bd-pelis)
+ 		- [Ejercicios BD Pelis con JOIN](#ejercicios-bd-pelis-con-join)
  
 ----------------------------
 
