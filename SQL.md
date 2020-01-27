@@ -953,9 +953,68 @@ Cambiamos a otra base de datos, de profesores y departamentos donde la relación
 
 ![image](./img/profes.png "Logo Title Text 1")
 
+### INNER JOIN
+Este tipo de JOIN ignora los nulos de ambos lados, y solo incluye tuplas donde haya valores de los dos lados.
+
+```SQL
+SELECT teacher.name, dept.name
+FROM teacher INNER JOIN dept
+           ON (teacher.dept=dept.id);
+```
+
+Resultado:
+| Name      | Name      |
+|-----------|-----------|
+| Shrivell  | Computing |
+| Throd     | Computing |
+| Splint    | Computing |
+| Cutflower | Design    |
+
+### LEFT JOIN
+Solo ignora los nulos del lado derecho, incluyendo todas las tuplas donde el izquierdo tiene un valor no nulo:
+```SQL
+SELECT teacher.name, dept.name
+FROM teacher LEFT JOIN dept
+           ON (teacher.dept=dept.id);
+```
+Resultado:
+
+| Name       | Name      |
+|------------|-----------|
+| Shrivell   | Computing |
+| Throd      | Computing |
+| Splint     | Computing |
+| Spiregrain |           |
+| Cutflower  | Design    |
+| Deadyawn   | Design    |
+
+### RIGHT JOIN
+Solo ignora los nulos del lado izquierdo, incluyendo todas las tuplas donde el derecho tiene un valor no nulo:
+```SQL
+SELECT teacher.name, dept.name
+FROM teacher RIGHT JOIN dept
+           ON (teacher.dept=dept.id);
+```
+
+Resultado:
+
+| Name      | Name        |
+|-----------|-------------|
+| Shrivell  | Computing   |
+| Throd     | Computing   |
+| Splint    | Computing   |
+| Cutflower | Design      |
+|           | Engineering |
+
 ### Ejercicios BD Profes con NULL
 
+Lista de profesores con departamento nulo:
 
+```SQL
+SELECT teacher.name
+FROM teacher
+WHERE teacher.dept IS NULL;
+```
 
 # GOTCHAs
 ### Problemas con los caracteres especiales
@@ -986,7 +1045,12 @@ Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen po
 
 ### Predicados
 	-Lo que esta despues del WHERE
-	-Lo que esta despues del JOIN ON
-	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs)
+	-Lo que esta despues del ON en los JOINs
+	-Lo que está despues del HAVING
+	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs). El HAVING suelen ejecutarse junto a funcioens de agregado.
+	
 ### El SELECT COUNT se ejecuta una vez por cada SUBTABLA
+
+### NULL
+Para buscar nulos en una tabla debe usarse siempre IS NULL o IS NOT NULL. Con el = no funciona.
 
