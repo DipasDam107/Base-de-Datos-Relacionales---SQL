@@ -995,8 +995,8 @@ Solo ignora los nulos del lado izquierdo, incluyendo todas las tuplas donde el d
 SELECT teacher.name, dept.name
 FROM teacher RIGHT JOIN dept
            ON (teacher.dept=dept.id);
+	  
 ```
-
 Resultado:
 
 | Name      | Name        |
@@ -1006,6 +1006,24 @@ Resultado:
 | Splint    | Computing   |
 | Cutflower | Design      |
 |           | Engineering |
+
+### Sentido de los JOINs
+En el Inner Join, salvo en casos muy especificos, en orden de las tablas no afecta a la operación. Sin embargo, tanto LEFT JOIN como RIGHT JOIN dependen del orden en el que presentamos la tabla. Por ejemplo, la consulta de antes:
+
+```SQL
+SELECT teacher.name, dept.name
+FROM teacher LEFT JOIN dept
+           ON (teacher.dept=dept.id);
+```
+
+Podría obtenerse lo mismo usando un RIGHT JOIN cambiando el orden de las tablas:
+```SQL
+SELECT teacher.name, dept.name
+FROM dept RIGHT JOIN teacher
+           ON (teacher.dept=dept.id);
+```
+
+> Lo que si podemos intercambiar es el orden de los atributos en la igualdad, ya que no es relevante.
 
 ### Ejercicios BD Profes con NULL
 
@@ -1054,4 +1072,7 @@ Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen po
 
 ### NULL
 Para buscar nulos en una tabla debe usarse siempre IS NULL o IS NOT NULL. Con el = no funciona.
+
+### JOIN sin ON
+En cualquier tipo de JOIN, si quitamos el ON, se produce un producto cartesiano con tantas tuplas como combinaciones posibles.
 
