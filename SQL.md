@@ -1058,6 +1058,21 @@ FROM teacher
 LEFT JOIN dept ON teacher.dept=dept.id;
 ```
 
+Contar profesores y moviles (Comprobación de que los agregados ignoran NULL):
+```SQL
+SELECT 
+          count(*) AS 'Num Profes', 
+          count(mobile) AS 'Num Moviles'
+FROM teacher;
+```
+
+Contar profesores por departamento, incluyendo aquellos que departamentos que no tienen profes:
+```SQL
+SELECT dept.name, count(teacher.name)
+FROM dept LEFT JOIN teacher ON dept.id=teacher.dept
+GROUP BY dept.name;
+```
+
 # GOTCHAs
 ### Problemas con los caracteres especiales
 
