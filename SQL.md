@@ -19,6 +19,7 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 	- [AS](#as)
 	- [IN](#in)
 	- [LIKE](#like)
+	- [DISTINCT](#distinct)
 	- [AGREGADOS](#agregados)
 		- [SUM](#sum)
 		- [COUNT](#count)
@@ -228,6 +229,16 @@ SELECT name
    FROM world
 WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%'
   AND name NOT LIKE '% %';
+```
+### DISTINCT
+Devuelve los resultados sin repetidos en un campo concreto
+
+> Estructura SELECT DISTINCT campo FROM BD;
+
+Muestra los continentes que hay en la tabla world, sin repetidos:
+
+```SQL
+SELECT DISTINCT continent FROM world;
 ```
 
 ### AGREGADOS
@@ -503,12 +514,6 @@ WHERE x.continent=y.continent AND y.name<>x.name)
 ```
 
 
-
-## DISTINCT
-Devuelve los resultados sin repetidos en un campo concreto
-```SQL
-SELECT DISTINCT region FROM bbc
-```
 ## GROUP BY
 Nos permite agrupar los resultados por un campo concreto. De esta manera se generan subtablas para cada valor del campo agrupado.
 
