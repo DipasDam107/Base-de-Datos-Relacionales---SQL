@@ -1051,6 +1051,13 @@ FROM teacher
 WHERE teacher.dept IS NULL;
 ```
 
+Nombre de todos los profesores y departamento (Aunque no lo tengan), sustituyendo nulos por 'None':
+```SQL
+SELECT teacher.name, COALESCE(dept.name, 'None') AS 'Dept'
+FROM teacher 
+LEFT JOIN dept ON teacher.dept=dept.id;
+```
+
 # GOTCHAs
 ### Problemas con los caracteres especiales
 
