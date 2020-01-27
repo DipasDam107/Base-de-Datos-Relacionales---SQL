@@ -33,7 +33,6 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 	- [LEFT](#left)
 	- [NOT](#not)
   - [SELECTS Anidados y subconsultas](#selects-anidados-y-subconsultas)
-
 - [Tabla nobel](#tabla-nobel)
 - [JOINs](#join)
  - [ON](#on)
