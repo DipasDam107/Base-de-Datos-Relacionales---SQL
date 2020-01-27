@@ -46,6 +46,7 @@ Vamos a trabajar utilizando los ejercicios de SQLZoo:
 		- [LEFT JOIN](#left-join)
 		- [RIGHT JOIN](#right-join)
 		- [Ejercicios BD Pelis con NULL](#ejercicios-bd-pelis-con-null)
+			- [COALESCE](#coalesce)
  - [GOTCHAs](#gotchas)
 ----------------------------
 
