@@ -963,6 +963,7 @@ FROM teacher INNER JOIN dept
 ```
 
 Resultado:
+
 | Name      | Name      |
 |-----------|-----------|
 | Shrivell  | Computing |
