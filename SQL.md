@@ -1030,6 +1030,18 @@ FROM dept RIGHT JOIN teacher
 
 ### Ejercicios BD Profes con NULL
 
+#### COALESCE
+Nos permite sustituir NULL por un valor que nos permita tratar el campo, como por ejemplo en concatenaciones o funciones de suma.
+
+> Estructura COALESCE(campo, valor_para_NULL);
+
+Por ejemplo, sustituimos el movil del usuario por el telefono del centro, cuando este no lo tenga. Para el resto muestra su propio teléfono:
+
+```SQL
+SELECT name, COALESCE(mobile, '07986 444 2266')
+FROM teacher;
+```
+
 Lista de profesores con departamento nulo:
 
 ```SQL
@@ -1079,3 +1091,5 @@ Para buscar nulos en una tabla debe usarse siempre IS NULL o IS NOT NULL. Con el
 ### JOIN sin ON
 En cualquier tipo de JOIN, si quitamos el ON, se produce un producto cartesiano con tantas tuplas como combinaciones posibles.
 
+### Agregados y NULL
+Las funciones de agregado ignoran por completo los campos que tomas valor nulo en una tupla.
