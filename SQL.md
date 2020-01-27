@@ -559,6 +559,10 @@ HAVING SUM(population)>=100000000;
 ```
 # Ejercicios de repaso
 ## Tabla nobel
+Cambiamos la tabla activa por una sobre premios nobel con la siguiente estructura: 
+
+![image](./img/nobel.png "Logo Title Text 1")
+
 ## Ejercicios
 
 ```SQL
