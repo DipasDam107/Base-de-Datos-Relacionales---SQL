@@ -928,7 +928,7 @@ WHERE actor.name<>'Art Garfunkel'
                              FROM actor 
                              JOIN casting y 
                              ON actor.id=y.actorid 
-                             WHERE x.movieid=y.movieid)
+                             WHERE x.movieid=y.movieid);
 ```
 
 Otra manera: 
@@ -937,10 +937,7 @@ SELECT actor.name
 FROM actor JOIN casting ON actor.id = casting.actorid
 	WHERE actor.name <> 'Art Garfunkel'
 	AND casting.movieid IN (
-		SELECT casting.movieid
-		FROM actor 
-		JOIN casting ON actor.id=casting.actorid
-		WHERE actor.name='Art Garfunkel')
+		 
 ```
 
 Alternativa con JOINs:
@@ -1151,3 +1148,30 @@ En cualquier tipo de JOIN, si quitamos el ON, se produce un producto cartesiano 
 
 ### Agregados y NULL
 Las funciones de agregado ignoran por completo los campos que tomas valor nulo en una tupla.
+
+
+# Sublenguajes SQL
+-DDL Data Definition Lenguage
+	-CREATE
+	-ALTER
+	-DROP
+
+-DML Data Manipulation Language
+	-UPDATE
+	-INSERT
+	-DELETE
+
+-DCL Data Control Language (Permisos)
+	-GRANT
+	-REVOKE
+	
+-SCL Session Control Language (Manejar dinamicamente propiedades de sesión de usuario)
+	-ALTER SESSION
+	-SET ROLE
+	
+-TCL Transaction Control Language 
+	-Commit
+	-Rollback
+
+-DQL Data Query Language
+	-SELECT
