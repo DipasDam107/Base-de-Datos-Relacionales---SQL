@@ -228,9 +228,9 @@ SELECT winner, subject
 Nos permite filtrar por campos que cumplen un patron determinado. Utilizado para tipo String, normalmente viene seguido de expresiones regulares (A diferencia del signo =, que solo realiza comparaciones con cadenas fijas).
 
 #### Caracteres de filtrado de LIKE
-**_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
+*_* - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
 
-**%** - Cualquier cosa, da igual el num de caracteres y el tipo.
+*%* - Cualquier cosa, da igual el num de caracteres y el tipo. De 0 a n caracteres. Cuidado con el 0!.
 
 Por ejemplo, en este caso, nombres de paises que contengan United en el nombre, sin importar donde:
 ```SQL
