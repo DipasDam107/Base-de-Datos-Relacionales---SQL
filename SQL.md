@@ -254,7 +254,7 @@ WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%
   AND name NOT LIKE '% %';
 ```
 ### DISTINCT
-Devuelve los resultados sin repetidos en un campo concreto
+Devuelve los resultados sin repetidos en un campo concreto (Ejecuta algo similar a un GROUP BY por debajo)
 
 > Estructura SELECT DISTINCT campo FROM tabla;
 
@@ -1209,6 +1209,18 @@ SQL transforma las consultas a álgebra relacional y, por tanto, no cambia la ve
 
 ### Comillas para Strings
 Si bien muchas SGBD permiten comillas dobles, pero mejor usar siempre comillas simples ''.
+
+### Consulta mínima
+La consulta minima debe especificar que datos queremos y de donde provienen, es decir un SELECT loquesea FROM tabla;
+
+## ORDEN de Ejecucion
+Este es precísamente el orden de ejecución.
+
+1. Ejecutamos el FROM, obteniendo todas las tuplas
+2. Ejecutamos el predicado del `WHERE` **en cada una de las tuplas**, filtrando aquellas que no lo cumplan.
+3. Ejecutamos el `GROUP BY` **en cada una de las tuplas**, haciendo grupos/subtablas según el criterio especificado.
+4. Ejecutamos el `HAVING` **una vez por cada grupo/subtabla**.
+5. Finalmente ejecutamos el `SELECT` **una vez por cada grupo/subtabla**.
 --------------------------------------------
 
 # Sublenguajes SQL
