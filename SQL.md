@@ -85,6 +85,10 @@ SELECT name, population FROM world;
 ### Condiciones con WHERE
 Al recuperar información de una base de datos o una tabla, rara vez nos interesará recuperar todas las tuplas que formen parte de ella. Es aquí donde entra la cláusula WHERE, la cual permite filtrar el contenido de una consulta, obteniendo solo los que cumplen ciertos valores. 
 
+> SELECT campos FROM tabla WHERE predicado;
+
+El predicado devuelve true o false dependiendo de si cada tupla cumple o no con los requisitos especificados. Aquellas que devuelven true se incluyen en el resultado de la consulta, el resto no.
+
 Obtener población de Alemania:
 ```SQL
 	SELECT population FROM world
@@ -154,7 +158,7 @@ WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
 ### BETWEEN
 Nos permite obtener las tuplas cuyo campo esté dentro de un rango de valores especificado, incluyendo los valores limite como válidos.
 
->BETWEEN valor1 AND valor2
+>BETWEEN valor1 AND valor2;
 
 Nombre y Area de paises con un area entre 200.000 y 250.000:
 
@@ -221,7 +225,7 @@ SELECT winner, subject
  ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
 ```
 ### LIKE
-Nos permite filtrar por campos que cumplen un patron determinado. 
+Nos permite filtrar por campos que cumplen un patron determinado. Utilizado para tipo String, normalmente viene seguido de expresiones regulares (A diferencia del signo =, que solo realiza comparaciones con cadenas fijas).
 
 #### Caracteres de filtrado de LIKE
 **_** - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
@@ -245,7 +249,25 @@ WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%
 ### DISTINCT
 Devuelve los resultados sin repetidos en un campo concreto
 
-> Estructura SELECT DISTINCT campo FROM BD;
+> Estructura SELECT DISTINCT campo FROM tabla;
+
+Ejemplo: Supongamos que tenemos la siguiente salida en una consulta:
+
+| Columna |
+|---------|
+| uno     |
+| uno     |
+| dos     |
+| tres    |
+| dos     |
+
+Muchas veces no nos interesará tener los valores repetidos (Por ejemplo mostrar los continentes de una tabla de paises, no queremos mostrar el continentes 30 veces). Para estos casos usamos DISTINCT, obteniendo un resultado como este:
+
+| Columna |
+|---------|
+| uno     |
+| dos     |
+| tres    |
 
 Muestra los continentes que hay en la tabla world, sin repetidos:
 
@@ -255,6 +277,8 @@ SELECT DISTINCT continent FROM world;
 
 ### AGREGADOS
 Las funciones reductoras nos permiten obtener un valor en base a una operación que se va a realizar utilizando multiples tuplas, dando solo una tupla como resultante. Podemos Sumar, contar, coger el valor máximo, el mínimo, la media... Son especialmente útiles en combinación con las funciones de agrupado.
+
+> Al devolver solo una tupla, debemos ser cautelosos y no combinarlo con campos que devuelvan mas de uno, ya que da error (SQL no puede trabajar con distinto numero de resultados en la misma consulta).
 
 #### SUM
 Función que devuelve la suma de todas del tuplas del campo especifico que le pasamos.
@@ -393,7 +417,8 @@ WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital
 ```
 
 ### NOT
-Básicamente ignora aquellas filas que cumplan la condicion. Por ejemplo, aquellos premios que no sean de quimica y medicina:
+Básicamente ignora aquellas filas que cumplan la condicion que la sigue, solo le valen aquellas que no lo cumple. Por ejemplo, aquellos premios que no sean de quimica y medicina:
+
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
@@ -408,7 +433,8 @@ Nos permiten filtrar una consulta usando resultados de otras consultas internas.
 ```SQL
 SELECT name 
 FROM world
-WHERE continent = 'europe' AND gdp/population >(        SELECT gdp/population 
+WHERE continent = 'europe' AND gdp/population >(        
+         SELECT gdp/population 
          FROM world 
          WHERE name = 'United Kingdom')
 ```
