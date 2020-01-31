@@ -1190,7 +1190,7 @@ Funcion que devuelve True o False. Incluye:
 Para buscar nulos en una tabla debe usarse siempre IS NULL o IS NOT NULL. Con el = no funciona.
 
 ### JOIN sin ON
-En cualquier tipo de JOIN, si quitamos el ON, se produce un producto cartesiano con tantas tuplas como combinaciones posibles.
+En cualquier tipo de JOIN, si quitamos el ON, se produce un producto cartesiano con tantas tuplas como combinaciones posibles. Incluyendo el ON y utilizando PK y FK, solo mostramos aquellas tuplas donde existe relación.
 
 ### Agregados y NULL
 Las funciones de agregado ignoran por completo los campos que tomas valor nulo en una tupla.
@@ -1201,6 +1201,14 @@ No es una asignación, es una funcion equals que devuelve true o false
 ### JOIN
 Usar JOIN a secas es lo mismo que usar INNER JOIN, ignorando los nulos de ambos lados.
 
+### Declarativo vs Imperativo
+En declarativo no sabemos que hace cada funcion, simplemente llamamos y sabemos lo que devuelve (SQL es declarativo, se centra en el que). En imperativo tenemos que detallar los pasos uno a uno (Java, se centra en el como). 
+
+### WHERE Y ON
+SQL transforma las consultas a álgebra relacional y, por tanto, no cambia la velocidad de las consultas si ponemos el predicado del ON en el WHERE o viceversa.
+
+### Comillas para Strings
+Si bien muchas SGBD permiten comillas dobles, pero mejor usar siempre comillas simples ''.
 --------------------------------------------
 
 # Sublenguajes SQL
