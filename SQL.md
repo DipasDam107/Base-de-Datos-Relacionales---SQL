@@ -167,6 +167,13 @@ Nombre y Area de paises con un area entre 200.000 y 250.000:
   	WHERE area BETWEEN 200000 AND 250000;
 ```
 
+Podríamos obtener un equivalente utilizando >=, <= y AND:
+
+```SQL
+	SELECT name, area FROM world
+  	WHERE area>=200000 AND area<=250000;
+```
+
 ### Operaciones en SELECT
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
 
@@ -1171,10 +1178,11 @@ Like 'Star%' es una expresion regular, que busca aquellas frases que empiecen po
 = 'Star%' es una cadena, busca las palabras Star%, donde % es un caracter normal a buscar
 
 ### Predicados
+Funcion que devuelve True o False. Incluye:
 	-Lo que esta despues del WHERE
 	-Lo que esta despues del ON en los JOINs
 	-Lo que está despues del HAVING
-	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs). El HAVING suelen ejecutarse junto a funcioens de agregado.
+	-Los predicados pueden ejecutarse en el ON o en el WHERE (Usando ANDs). El HAVING suelen ejecutarse junto a funciones de agregado.
 	
 ### El SELECT COUNT se ejecuta una vez por cada SUBTABLA
 
@@ -1187,6 +1195,11 @@ En cualquier tipo de JOIN, si quitamos el ON, se produce un producto cartesiano 
 ### Agregados y NULL
 Las funciones de agregado ignoran por completo los campos que tomas valor nulo en una tupla.
 
+### =
+No es una asignación, es una funcion equals que devuelve true o false
+
+### JOIN
+Usar JOIN a secas es lo mismo que usar INNER JOIN, ignorando los nulos de ambos lados.
 
 # Sublenguajes SQL
 -DDL Data Definition Lenguage
