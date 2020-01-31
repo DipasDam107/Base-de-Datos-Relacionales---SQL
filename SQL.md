@@ -367,10 +367,19 @@ Reemplaza caracteres por otro indicado.
 En la capital sustituye el nombre del pais por cadena vacia (De manera que solo nos queda la extension).
 
 ```SQL
-	*Select name, REPLACE (Capital, name, '') AS Extension
+	Select name, REPLACE (Capital, name, '') AS Extension
 	FROM world
-	WHERE capital LIKE CONCAT(name,'_%');*
+	WHERE capital LIKE CONCAT(name,'_%');
 ```
+
+| name      | Extension |
+|-----------|-----------|
+| Andorra   | la Vella  |
+| Guatemala | City      |
+| Kuwait    | City      |
+| Mexico    | City      |
+| Monaco    | -Ville    |
+| Panama    | City      |
 
 ### ROUND
 Nos permite redondear un numero a X decimales. La estructura vendría a ser algo como Round(Valor, precisión), donde precisión puede referirse a decimales o a unidades, decenas, centenas....
@@ -428,7 +437,7 @@ WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 Actua de la misma manera que el operador de negación de Java (!);
 
 ## SELECTS Anidados y subconsultas
-Nos permiten filtrar una consulta usando resultados de otras consultas internas.
+Nos permiten filtrar una consulta usando resultados de otras consultas internas. Se utilizan en el predicado cuando queremos comparar las tuplas del FROM contra los resultados de otra consulta.
 
 ```SQL
 SELECT name 
@@ -438,6 +447,7 @@ WHERE continent = 'europe' AND gdp/population >(
          FROM world 
          WHERE name = 'United Kingdom')
 ```
+
 ### Combinado con IN, AND, CONCAT....
 Si el select interno devuelve mas de una fila, podemos usar in para comprobar que está dentro
 ```SQL
@@ -449,7 +459,7 @@ WHERE continent in (
 	OR name ='Australia')
 ORDER BY name;
 ```
-Podemos utilizar ANDs y utilizar otro select adicional
+Podemos utilizar ANDs y utilizar otro select anidado adicional.
 ```SQL
 SELECT name, population FROM world
 WHERE population > (
@@ -461,7 +471,9 @@ AND population < (
 		FROM world 
 		WHERE name='Poland')
 ```
-Podemos usar un select en el propio select (Combinado con concat y redondeo)
+
+Podemos usar un select en el propio select (Combinado con concat y redondeo):
+
 ```SQL
 SELECT name, CONCAT (
 	ROUND (population/(
