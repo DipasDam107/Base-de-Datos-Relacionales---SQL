@@ -1201,6 +1201,8 @@ No es una asignación, es una funcion equals que devuelve true o false
 ### JOIN
 Usar JOIN a secas es lo mismo que usar INNER JOIN, ignorando los nulos de ambos lados.
 
+--------------------------------------------
+
 # Sublenguajes SQL
 -DDL Data Definition Lenguage
 	-CREATE
