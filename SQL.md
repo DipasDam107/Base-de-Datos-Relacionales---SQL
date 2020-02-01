@@ -553,7 +553,7 @@ AND x.name <> y.name)
 ```
 En la primera ponemos >= que nombre para incluir que el pais alfabéticamente menor también cumpla la función. Una manera de hacer lo mismo solo con >, es excluyendo al pais de mismo nombre en la propia consulta interna.
 
-Tenemos que sacar los paises de los continentes donde todos los países tienen mas de 25000000: 
+Tenemos que sacar los paises de los continentes donde todos los países tienen menos de 25000000: 
 
 ```SQL
 SELECT name, continent, population
@@ -561,7 +561,15 @@ FROM world x
 WHERE 25000000 >= ALL(SELECT population 
 from world y WHERE x.continent=y.continent)
 ```
-
+Podemos simplemente usar la poblacion maxima de cada continente:
+```SQL
+SELECT name,continent, population
+FROM world as w1
+WHERE 25000000 >= (
+	SELECT max(population) 
+	FROM world as w2 
+	WHERE w1.continent=w2.continent );
+```
 Ahora probamos con dos subconsultas. 
 
 ```SQL
@@ -572,6 +580,17 @@ FROM world WHERE continent IN
 	WHERE 25000000 >= ALL(SELECT population 
 	from world y WHERE 	
 	x.continent=y.continent)) 
+```
+
+Alternativa con Group BY:
+```SQL
+SELECT name,continent, population
+FROM world
+	WHERE continent IN(
+		SELECT continent 
+		FROM world 
+		GROUP BY continent 
+		HAVING max(population)<=25000000);
 ```
 La subconsulta mas interna obtiene todos los países del continente a comparar, la posterior filtra solo los continentes donde se cumple la condición, y la tercera muestra todos los países de esos continentes.
 
