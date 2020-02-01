@@ -1247,7 +1247,7 @@ Si bien muchas SGBD permiten comillas dobles, pero mejor usar siempre comillas s
 ### Consulta mínima
 La consulta minima debe especificar que datos queremos y de donde provienen, es decir un SELECT loquesea FROM tabla;
 
-## ORDEN de Ejecucion
+### ORDEN de Ejecucion
 Este es precísamente el orden de ejecución.
 
 1. Ejecutamos el FROM, obteniendo todas las tuplas
@@ -1255,6 +1255,20 @@ Este es precísamente el orden de ejecución.
 3. Ejecutamos el `GROUP BY` **en cada una de las tuplas**, haciendo grupos/subtablas según el criterio especificado.
 4. Ejecutamos el `HAVING` **una vez por cada grupo/subtabla**.
 5. Finalmente ejecutamos el `SELECT` **una vez por cada grupo/subtabla**.
+
+### Repasar
+1. XOR y variante
+2. Between variante
+3. LENGTH
+4. LEFT
+5. COALESCE
+
+•	Para cadenas usar comillas simples
+•	Acordarse de checkear punto y coma
+•	Tener muchísimo cuidado con los valores nulos, a veces hay que excluirlos de la consulta para que vaya bien
+•	Cuidado cuando hacemos cálculos de excluir a las filas que deberían salir (En el ejercicio de continentes por ejemplo, no tenemos que multiplicar por 3 a la misma fila que debería salir, ya que nunca se cumpliría)
+•	Renombrar campos en campos calculados o funciones reductoras
+
 --------------------------------------------
 
 # Sublenguajes SQL
