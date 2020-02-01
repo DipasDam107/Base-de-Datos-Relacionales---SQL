@@ -479,6 +479,21 @@ AND population < (
 		WHERE name='Poland')
 ```
 
+Alternativa con BETWEEN (Notese que debemos omitir los valores de canada y polonia):
+```SQL
+SELECT name, population
+FROM world
+WHERE population BETWEEN (
+	SELECT population 
+	FROM world 
+	WHERE name='Canada') 
+	AND (
+	SELECT population 
+	FROM world 
+	WHERE name = 'Poland') 
+	AND name NOT IN ('Canada','Poland');
+```
+
 Podemos usar un select en el propio select (Combinado con concat y redondeo):
 
 ```SQL
