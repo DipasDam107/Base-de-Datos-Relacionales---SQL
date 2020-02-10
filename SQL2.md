@@ -1,5 +1,5 @@
 # Sublenguajes SQL
--[DDL Data Definition Lenguage]
+-DDL Data Definition Lenguage
 
 	-CREATE
 	-ALTER
