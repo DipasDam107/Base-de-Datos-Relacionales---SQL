@@ -46,7 +46,7 @@ En teoria entre ambos existen diferencias relacionadas con los permisos.
 
 Sintaxis Final:
 
-> CREATE (SCHEMA|DATABASE) [IF NOT EXISTS] [CHARACTER SET <Nombre Charset>] <NombreBD>;
+> CREATE (SCHEMA|DATABASE) [IF NOT EXISTS] [CHARACTER SET <Nombre Charset>] << NombreBD >>;
 
 ###
 	```SQL
