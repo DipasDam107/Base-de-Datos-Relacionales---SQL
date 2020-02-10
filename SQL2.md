@@ -91,3 +91,6 @@ El nucleo central de SQL está compuesto de DQL, DML y DDL
 
 ## Nomenclatura de tablas
 Se suele utilizar nombres en singular con la primera letra mayúscula
+
+# Enlaces
+- Elephant SQL: https://www.elephantsql.com/
