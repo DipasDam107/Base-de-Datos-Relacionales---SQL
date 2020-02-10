@@ -55,8 +55,25 @@ Comprueba si la base de datos que vamos a crear ya existe en el SGBD.
 #### CHARACTER SET y COLLATE
 CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1), y COLLATE nos ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
 
-###
+### TABLE
+Para crear Tablas, utilizamos la siguiente sintaxis:
+
+> CREATE TABLE <NombreTabla> (
+	id INTEGER NOT NULL,
+	nome NCHAR(50),
+	apelidos NCHAR(200),
+	nacido DATE
+	); <
 	
+#### Tipos de datos
+CHAR 
+NCHAR
+VARCHAR
+TEXT
+INTEGER
+DATE - Fecha
+TIME - Hora
+TIMESTAMP - Incluye Date y Time
 
 # GOTCHAs
 
@@ -65,3 +82,6 @@ Una. Hay seis sublenguajes.
 
 ## Importancia
 El nucleo central de SQL está compuesto de DQL, DML y DDL
+
+## Nomenclatura de tablas
+Se suele utilizar nombres en singular con la primera letra mayúscula
