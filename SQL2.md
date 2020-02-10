@@ -1,11 +1,11 @@
 # Sublenguajes SQL
-- DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
+-DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
 
 	-CREATE
 	-ALTER
 	-DROP
 
-- DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
+-DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
 
 	-UPDATE 
 	-INSERT
@@ -66,33 +66,20 @@ Para crear Tablas, utilizamos la siguiente sintaxis:
 	); <
 	
 #### Tipos de datos
-CHAR - Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
-
-NCHAR
-
-NCHAR VARYING
-
-VARCHAR
-
-TEXT
-
-SERIAL
-
-INTEGER
-
-SMALLINT - Entero Pequeño
-
-FLOAT
-
-NUMERIC
-
-DATE - Fecha
-
-TIME - Hora
-
-TIMESTAMP - Incluye Date y Time
-
-BOOLEAN
+- CHAR: Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
+- NCHAR
+- NCHAR VARYING
+- VARCHAR
+- TEXT
+- SERIAL
+- INTEGER
+- SMALLINT - Entero Pequeño
+- FLOAT
+- NUMERIC
+- DATE: Fecha
+- TIME: Hora
+- TIMESTAMP: Incluye Date y Time
+- BOOLEAN
 
 # GOTCHAs
 
