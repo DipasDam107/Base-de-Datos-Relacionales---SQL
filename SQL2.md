@@ -67,18 +67,31 @@ Para crear Tablas, utilizamos la siguiente sintaxis:
 	
 #### Tipos de datos
 CHAR - Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
+
 NCHAR
+
 NCHAR VARYING
+
 VARCHAR
+
 TEXT
+
 SERIAL
+
 INTEGER
+
 SMALLINT - Entero Pequeño
+
 FLOAT
+
 NUMERIC
+
 DATE - Fecha
+
 TIME - Hora
+
 TIMESTAMP - Incluye Date y Time
+
 BOOLEAN
 
 # GOTCHAs
