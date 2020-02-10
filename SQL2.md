@@ -73,7 +73,7 @@ Para crear Tablas, utilizamos la siguiente sintaxis:
 - TEXT
 - SERIAL
 - INTEGER
-- SMALLINT - Entero Pequeño
+- SMALLINT: Entero Pequeño
 - FLOAT
 - NUMERIC
 - DATE: Fecha
