@@ -1,11 +1,11 @@
 # Sublenguajes SQL
--DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
+- DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
 
 	-CREATE
 	-ALTER
 	-DROP
 
--DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
+- DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
 
 	-UPDATE 
 	-INSERT
