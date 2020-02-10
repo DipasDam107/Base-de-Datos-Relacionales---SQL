@@ -59,21 +59,27 @@ CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo
 Para crear Tablas, utilizamos la siguiente sintaxis:
 
 > CREATE TABLE <NombreTabla> (
-	id INTEGER NOT NULL,
-	nome NCHAR(50),
+	id INTEGER PRIMARY KEY,
+	nome NCHAR(50) NOT NULL,
 	apelidos NCHAR(200),
 	nacido DATE
 	); <
 	
 #### Tipos de datos
-CHAR 
+CHAR - Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
 NCHAR
+NCHAR VARYING
 VARCHAR
 TEXT
+SERIAL
 INTEGER
+SMALLINT - Entero Pequeño
+FLOAT
+NUMERIC
 DATE - Fecha
 TIME - Hora
 TIMESTAMP - Incluye Date y Time
+BOOLEAN
 
 # GOTCHAs
 
