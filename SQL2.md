@@ -1,8 +1,8 @@
 # Sublenguajes SQL
--DDL Data Definition Lenguage
-	-CREATE
-	-ALTER
-	-DROP
+-[DDL Data Definition Lenguage]
+	-[CREATE]
+	-[ALTER]
+	-[DROP]
 
 -DML Data Manipulation Language
 	-UPDATE
