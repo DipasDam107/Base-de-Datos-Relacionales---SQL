@@ -36,21 +36,27 @@
 Podemos crear Bases de datos, tablas y usuarios.
 	
 ### DATABASE
+Para crear base de datos, utilizamos la siguiente sintaxis:
+
+> CREATE (SCHEMA|DATABASE) [IF NOT EXISTS] [CHARACTER SET <Nombre Charset> [COLLATE <Nombre_Variante>]] << NombreBD >>;
+
+#### SCHEMA o DATABASE
+En general se comportan de la misma manera, habiendo algunas diferencias en el tratamiento de permisos.
+
 Estructura:
 > CREATE DATABASE nombreBD;
 
 Alternativa:
 > CREATE SCHEMA nombreBD;
 
-En teoria entre ambos existen diferencias relacionadas con los permisos.
+#### IF NOT EXISTS
+Comprueba si la base de datos que vamos a crear ya existe en el SGBD.
 
-Sintaxis Final:
-
-> CREATE (SCHEMA|DATABASE) [IF NOT EXISTS] [CHARACTER SET <Nombre Charset>] << NombreBD >>;
+#### CHARACTER SET y COLLATE
+CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1), y COLLATE nos ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
 
 ###
-	```SQL
-	```
+	
 
 # GOTCHAs
 
