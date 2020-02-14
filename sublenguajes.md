@@ -57,14 +57,15 @@ CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo
 
 ### TABLE
 Para crear Tablas, utilizamos la siguiente sintaxis:
-
-> CREATE TABLE <NombreTabla> (
+```sql
+ CREATE TABLE <NombreTabla> (
 	id INTEGER PRIMARY KEY,
 	nome NCHAR(50) NOT NULL,
 	apelidos NCHAR(200),
 	nacido DATE
 	); <
 	
+```	
 #### Tipos de datos
 - CHAR: Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
 - NCHAR
