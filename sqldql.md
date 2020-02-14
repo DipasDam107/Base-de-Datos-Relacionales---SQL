@@ -42,7 +42,7 @@
 		- [RIGHT JOIN](#right-join)
 		- [Sentido de los JOINs](#sentido-de-los-joins)
 		- [COALESCE](#coalesce)
-		- [Ejercicios BD Pelis con NULL](#ejercicios-bd-pelis-con-null)
+		- [Ejercicios BD Profes con NULL](#ejercicios-bd-profes-con-null)
  - [GOTCHAs](#gotchas)
 ----------------------------
 
