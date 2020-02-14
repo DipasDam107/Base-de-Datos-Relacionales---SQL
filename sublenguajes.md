@@ -62,10 +62,65 @@ Para crear Tablas, utilizamos la siguiente sintaxis:
 	id INTEGER PRIMARY KEY,
 	nome NCHAR(50) NOT NULL,
 	apelidos NCHAR(200),
-	nacido DATE
+	nacido DATE,
+	[CONSTRAINT <NombrePK>] PRIMARY KEY (atributo1, atributo2....)
+	[CONSTRAINT <nombreRestriccion>] FOREIGN KEY (<Atributos>) REFERENCES <Nombre_tabla_referenciada>[(<Atributos_referenciados>)]
+	[ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
+	[ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
+	[MATCH FULL| MATCH PARTIAL]
 	); <
 	
-```	
+```
+
+#### CONSTRAINT PK
+La constraint PRIMARY KEY indica que campo/s forman parte de la clave principal, que indica el campo que actúa como diferenciador a nivel tupla. Hay varias maneras de utilizarlo. 
+
+En primer lugar podemos definir la clave principal en la misma definicion del atributo:
+
+```sql
+ CREATE TABLE <NombreTabla> (
+	id INTEGER ** PRIMARY KEY **,
+	...
+	); <
+```
+
+Se puede definir al final, especialmente cuando la clave es compuesta:
+```sql
+ CREATE TABLE <NombreTabla> (
+	id INTEGER ,
+	nome NCHAR(50) NOT NULL,
+	apelidos NCHAR(200),
+	nacido DATE,
+	PRIMARY KEY (id)
+	);
+```
+
+Podemos darle nombre al constraint, útil especificamente para DBAs:
+```sql
+ CREATE TABLE <NombreTabla> (
+	id INTEGER ,
+	nome NCHAR(50) NOT NULL,
+	apelidos NCHAR(200),
+	nacido DATE,
+	CONSTRAINT nombre PRIMARY KEY (id)
+	);
+```
+
+
+#### CONSTRAINT FK
+Nos permite establecer la relación entre varias tablas, especificando los campos que tienen en común.
+
+Podemos especificar que operaciones se van a realizar si en la misma tabla se producen modificaciones, indicando como va a afectar a las que están enlazadas a través de clave ajena:
+
+> Borrado: ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT
+> Actualizaciones: ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT
+
+Tipos de Accion de modificacion y borrado:
+	- [CASCADE]: El borrado de un registro, borra todos los registros de la otra tabla que referencien a esa tupla
+	- [NO ACTION]  (Por defecto) : No hace nada
+	- [SET DEFAULT]: Cambia el valor en la tabla ajena a un valor por defecto
+	- [SET NULL]: Cambia el valor en la tabla ajena a un valor nulo
+
 #### Tipos de datos
 - CHAR: Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
 - NCHAR
