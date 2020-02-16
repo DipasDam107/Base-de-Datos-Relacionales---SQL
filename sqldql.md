@@ -822,6 +822,8 @@ Nos permite especificar en que campo se produce la unión entre dos tablas que D
 
 >Estructura SELECT * FROM Tabla1 JOIN tabla2 ON clavePrincipal=claveAjena; 
 
+[Volver al Indice](#Indice)
+
 ## BD Eurocopa
 Tenemos la siguiente base de datos. Necesitamos saber las claves y las claves ajenas a las que referencian, para poder usar los joins:
 
