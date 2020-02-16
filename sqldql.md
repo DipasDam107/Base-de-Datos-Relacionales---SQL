@@ -1,6 +1,5 @@
 # SQL DQL - CONSULTAS
 # Indice
-
 - [Tabla world](#tabla-world)
   - [SELECTs](#selects)
   	- [Primeras Consultas](#primeras-consultas)
@@ -52,6 +51,8 @@ Para empezar trabajaremos con una tabla de paises llamada "world":
 ![image](./img/tabla1.png "Logo Title Text 1")
 
 Sería bueno familiarizarse con la estructura de la misma o al menos tener un esquema en todo momento, para tener menos problemas a la hora de hacer los ejercicios.
+
+[Volver al Indice](#Indice)
 
 ## SELECTs
 Evidentemente, además de almacenar la información relevante, las bases de datos nos permiten recuperar la información con el fin de consultarla y/o tratarla para los fines que creamos convenientes. Es SELECT la sentencia que nos permite recuperar dicha info, seguido de los campos que queremos que se muestren y la base de datos a la que queremos acceder.
