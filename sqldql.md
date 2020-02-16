@@ -60,6 +60,7 @@ Evidentemente, además de almacenar la información relevante, las bases de dato
 > SELECT campo1, campo2.... FROM Base_Datos;
 
 Cabe destacar que, si bien en SQL Zoo no hace falta, las sentencias SQL deben acabar SIEMPRE con punto y coma ';'.
+[Volver al Indice](#Indice)
 
 ### Primeras Consultas
 Vamos a empezar a trabajar con la tabla World. Una primera consulta facilita sería obtener todos los paises de la base de datos:
@@ -77,6 +78,7 @@ Probemos ahora con múltiples campos. Nombre y población de los paises:
 ```SQL
 SELECT name, population FROM world;
 ```
+[Volver al Indice](#Indice)
 
 ### Condiciones con WHERE
 Al recuperar información de una base de datos o una tabla, rara vez nos interesará recuperar todas las tuplas que formen parte de ella. Es aquí donde entra la cláusula WHERE, la cual permite filtrar el contenido de una consulta, obteniendo solo los que cumplen ciertos valores. 
@@ -99,6 +101,8 @@ Paises con población superior a 20 Millones:
 ```
 Podemos agrupar condiciones con las cláusulas AND, OR o XOR:
 
+[Volver al Indice](#Indice)
+
 #### AND 
 Nos permite obtener filas que cumplen dos condiciones. Si no cumple una, al carrer. Paises con una area superior a 3 Millones y una población de mas de 250 millones de personas:
 
@@ -107,6 +111,7 @@ SELECT name, population, area
 FROM world
 WHERE area > 3000000 AND population > 250000000
 ```
+[Volver al Indice](#Indice)
 
 #### OR
 Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
@@ -116,6 +121,8 @@ SELECT name, population, area
 FROM world
 WHERE area > 3000000 OR population > 250000000
 ```
+
+[Volver al Indice](#Indice)
 
 #### XOR
 Nos permite obtener las filas que cumplen una condicion, la otra, pero no las dos.
@@ -132,6 +139,7 @@ SELECT name, population, area
 FROM world
 WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
 ```
+[Volver al Indice](#Indice)
 
 #### Combinacion de Condiciones
 Evidentemente se pueden combinar un conjunto de ANDs y ORs para obtener el resultado deseado. 
@@ -150,6 +158,7 @@ SELECT yr, subject, winner
 FROM nobel
 WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
 ```
+[Volver al Indice](#Indice)
 
 ### BETWEEN
 Nos permite obtener las tuplas cuyo campo esté dentro de un rango de valores especificado, incluyendo los valores limite como válidos.
@@ -169,6 +178,7 @@ Podríamos obtener un equivalente utilizando >=, <= y AND:
 	SELECT name, area FROM world
   	WHERE area>=200000 AND area<=250000;
 ```
+[Volver al Indice](#Indice)
 
 ### Operaciones en SELECT
 Se pueden realizar operaciones en el propio select (Recomendable usar Alias para que quede claro que hace).
@@ -188,6 +198,7 @@ SELECT name, population/1000000 as "Millones de Personas"
 	FROM world
 	WHERE continent = 'South America'
 ```
+[Volver al Indice](#Indice)
 
 ### AS
 Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
@@ -198,6 +209,9 @@ Sirve para poner alias en los campos, de manera que sea mas facil identificar el
 De esta manera, la tabla resultante contendrá una columna llamada "Continente". Es especialmente útil a la hora de usar funciones de agregado o campos calculados, donde el nombre generado automáticamente por el motor SQL puede ser algo menos representativo.
 
 Así mismo, AS puede ser utilizado para renombrar tablas, y trabajar directamente con dicho alias. Sin embargo, me parece una tonteria detallar esto aquí, ya que aún falta un trecho para trabajar con esta variante. Lo vemos mas adelante  (Apartado de JOINs especialmente).
+
+[Volver al Indice](#Indice)
+
 
 ### IN
 Permite filtrar filas cuyo campo esté en uno de los valores contenidos dentro de la clausula. Similar al operador '=', con la particularidad de que sirve para comparar contra múltiples valores o resultados sin utilizar clausulas de condición.
@@ -227,8 +241,13 @@ SELECT winner, subject
  WHERE yr=1984
  ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
 ```
+
+[Volver al Indice](#Indice)
+
 ### LIKE
 Nos permite filtrar por campos que cumplen un patron determinado. Utilizado para tipo String, normalmente viene seguido de expresiones regulares (A diferencia del signo =, que solo realiza comparaciones con cadenas fijas).
+
+[Volver al Indice](#Indice)
 
 #### Caracteres de filtrado de LIKE
 *_* - Caracter único (Si necesitamos 4, pues 4 guiones bajos)
@@ -249,6 +268,9 @@ SELECT name
 WHERE name LIKE '%a%' AND name LIKE '%e%' AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%'
   AND name NOT LIKE '% %';
 ```
+
+[Volver al Indice](#Indice)
+
 ### DISTINCT
 Devuelve los resultados sin repetidos en un campo concreto (Ejecuta algo similar a un GROUP BY por debajo)
 
@@ -278,10 +300,14 @@ Muestra los continentes que hay en la tabla world, sin repetidos:
 SELECT DISTINCT continent FROM world;
 ```
 
+[Volver al Indice](#Indice)
+
 ### AGREGADOS
 Las funciones reductoras nos permiten obtener un valor en base a una operación que se va a realizar utilizando multiples tuplas, dando solo una tupla como resultante. Podemos Sumar, contar, coger el valor máximo, el mínimo, la media... Son especialmente útiles en combinación con las funciones de agrupado.
 
 > Al devolver solo una tupla, debemos ser cautelosos y no combinarlo con campos que devuelvan mas de uno, ya que da error (SQL no puede trabajar con distinto numero de resultados en la misma consulta).
+
+[Volver al Indice](#Indice)
 
 #### SUM
 Función que devuelve la suma de todas del tuplas del campo especifico que le pasamos.
@@ -303,6 +329,8 @@ FROM world
 WHERE name IN ('Estonia', 'Latvia', 'Lithuania');
 ```
 
+[Volver al Indice](#Indice)
+
 #### COUNT
 Función que cuenta el numero de tuplas resultantes de una consulta. Si la consulta devuelve 3 filas, el resultado será 3:
 
@@ -315,6 +343,9 @@ SELECT count(name)
 FROM world
 WHERE area>1000000;
 ```
+
+[Volver al Indice](#Indice)
+
 #### MAX
 Función que devuelve el mínimo de un conjunto de resultados.
 
@@ -325,6 +356,9 @@ Pais con mayor población:
 SELECT MAX(population)
 FROM world;
 ```
+
+[Volver al Indice](#Indice)
+
 #### AVG
 Calcula el promedio de un conjunto de resultado.
 
@@ -335,6 +369,8 @@ Población media:
 SELECT AVG(population)
 FROM world
 ```
+
+[Volver al Indice](#Indice)
 
 #### MIN
 Función que devuelve el maximo de un conjunto de resultados
@@ -347,7 +383,7 @@ Pais con menor población:
 SELECT MIN(population)
 FROM world;
 ```
-
+[Volver al Indice](#Indice)
 
 ### CONCAT
 Concatena valores. No hay mucho mas que decir.
@@ -360,7 +396,7 @@ Ejemplo que muestra capital y nombre de aquellos paises cuya capital es el nombr
 	FROM world
 	WHERE capital LIKE CONCAT(name,'_%');
 ```
-
+[Volver al Indice](#Indice)
 
 ### REPLACE
 Reemplaza caracteres por otro indicado.
@@ -384,6 +420,8 @@ En la capital sustituye el nombre del pais por cadena vacia (De manera que solo 
 | Monaco    | -Ville    |
 | Panama    | City      |
 
+[Volver al Indice](#Indice)
+
 ### ROUND
 Nos permite redondear un numero a X decimales. La estructura vendría a ser algo como Round(Valor, precisión), donde precisión puede referirse a decimales o a unidades, decenas, centenas....
 
@@ -402,6 +440,7 @@ FROM world
 WHERE gdp>1000000000000
 ```
 
+[Volver al Indice](#Indice)
 
 ### LENGTH
 Nos permite obtener la longitud de un campo o valor. 
@@ -415,6 +454,9 @@ SELECT name, capital
   FROM world
  WHERE LENGTH(name) = LENGTH(capital);
 ```
+
+[Volver al Indice](#Indice)
+
 ### LEFT
 Permite extraer x caracteres de un String. 
 
@@ -428,6 +470,8 @@ FROM world
 WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital
 ```
 
+[Volver al Indice](#Indice)
+
 ### NOT
 Básicamente ignora aquellas filas que cumplan la condicion que la sigue, solo le valen aquellas que no lo cumple. Por ejemplo, aquellos premios que no sean de quimica y medicina:
 
@@ -438,6 +482,8 @@ WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
 ```
 
 Actua de la misma manera que el operador de negación de Java (!);
+
+[Volver al Indice](#Indice)
 
 ## SELECTS Anidados y subconsultas
 Nos permiten filtrar una consulta usando resultados de otras consultas internas. Se utilizan en el predicado cuando queremos comparar las tuplas del FROM contra los resultados de otra consulta.
@@ -450,6 +496,8 @@ WHERE continent = 'europe' AND gdp/population >(
          FROM world 
          WHERE name = 'United Kingdom')
 ```
+
+[Volver al Indice](#Indice)
 
 ### Combinado con IN, AND, CONCAT....
 Si el select interno devuelve mas de una fila, podemos usar in para comprobar que está dentro
@@ -503,6 +551,9 @@ SELECT name, CONCAT (
 FROM world
 WHERE continent = 'Europe'
 ```
+
+[Volver al Indice](#Indice)
+
 ## ALL
 Es una clasula que comprueba si una condición se cumple en todas las filas. (En este caso, busca el nombre del pais cuyo gdp es mayor a todos los de Europa).
 
@@ -514,6 +565,9 @@ WHERE gdp > ALL(
 	SELECT gdp FROM world WHERE continent = 	
 	'Europe' AND gdp IS NOT NULL) ;
 ```
+
+[Volver al Indice](#Indice)
+
 ## Alias para las Tablas
 Podemos comparar las tablas de dos selects usando alias para cada consulta
 ```SQL
@@ -600,6 +654,7 @@ SELECT (population*3) FROM world y
 WHERE x.continent=y.continent AND y.name<>x.name)
 ```
 
+[Volver al Indice](#Indice)
 
 ## GROUP BY
 Nos permite agrupar los resultados por un campo concreto. De esta manera se generan subtablas para cada valor del campo agrupado.
@@ -626,6 +681,9 @@ WHERE 100000000<=(SELECT SUM(population) FROM world y
 WHERE y.continent=x.continent)
 GROUP BY continent;
 ```
+
+[Volver al Indice](#Indice)
+
 ## HAVING
 Nos sirve como filtro para el agrupado Group By. Normalmente actua sobre funciones reductoras, tales como COUNT, SUM..., o sobre los mismos campos agrupados.
 
@@ -637,6 +695,9 @@ FROM world
 GROUP BY continent
 HAVING SUM(population)>=100000000;
 ```
+
+[Volver al Indice](#Indice)
+
 # Ejercicios de repaso
 ## Tabla nobel
 Cambiamos la tabla activa por una sobre premios nobel con la siguiente estructura: 
@@ -747,10 +808,14 @@ SELECT winner, subject
  ORDER BY subject IN ('Physics','Chemistry') ASC, subject, winner;
 ```
 
+[Volver al Indice](#Indice)
+
 # JOIN
 Hasta ahora estuvimos trabajando con una sola tabla. Para trabajar con multiples tablas necesitamos JOINs que viene a unir dos o mas tablas en una resultante para que operemos con ella, con la suma de las columnas de ambas (Si una tabla tiene 3 columnas y la otra dos, la tabla unida resultante tendrá 5 columnas). 
 
 Antes de empezar, hay que destacar que al hacer JOIN se produce un producto cartesiano, conformando todas las combinaciones posibles entre las tuplas de una tabla y otra. Para acotar este resultado, debemos usar la cláusula ON, que nos permite especificar en que campo coincidente se produce la union entre tablas, y a partir de ahi trabajar con WHEREs o HAVINGs para filtrar el resultado.
+
+[Volver al Indice](#Indice)
 
 ## ON 
 Nos permite especificar en que campo se produce la unión entre dos tablas que DEBEN ESTAR RELACIONADAS.
@@ -761,6 +826,8 @@ Nos permite especificar en que campo se produce la unión entre dos tablas que D
 Tenemos la siguiente base de datos. Necesitamos saber las claves y las claves ajenas a las que referencian, para poder usar los joins:
 
 ![image](./img/tablaJoin.png "Logo Title Text 1")
+
+[Volver al Indice](#Indice)
 
 ### Ejercicios BD Eurocopa con JOIN
 Ejemplo. Supongamos que queremos los goles de un equipo. Tendriamos algo como esto.
@@ -856,11 +923,15 @@ WHERE teamid='GER'
 GROUP BY matchid, mdate
 ```
 
+[Volver al Indice](#Indice)
+
 ## BD Pelis
 Volvemos a cambiar de base de datos para seguir trabajando con JOINS. La base de datos es sobre peliculas y castings.
+![image](./img/pelis.png "Logo Title Text 1")
+
+[Volver al Indice](#Indice)
 
 ### Ejercicios BD Pelis con JOIN
-![image](./img/pelis.png "Logo Title Text 1")
 
 Peliculas de 1962:
 ```SQL
@@ -1042,6 +1113,8 @@ Cambiamos a otra base de datos, de profesores y departamentos donde la relación
 
 ![image](./img/profes.png "Logo Title Text 1")
 
+[Volver al Indice](#Indice)
+
 ### INNER JOIN
 Este tipo de JOIN ignora los nulos de ambos lados, y solo incluye tuplas donde haya valores de los dos lados.
 
@@ -1059,6 +1132,8 @@ Resultado:
 | Throd     | Computing |
 | Splint    | Computing |
 | Cutflower | Design    |
+
+[Volver al Indice](#Indice)
 
 ### LEFT JOIN
 Solo ignora los nulos del lado derecho, incluyendo todas las tuplas donde el izquierdo tiene un valor no nulo:
@@ -1078,6 +1153,8 @@ Resultado:
 | Cutflower  | Design    |
 | Deadyawn   | Design    |
 
+[Volver al Indice](#Indice)
+
 ### RIGHT JOIN
 Solo ignora los nulos del lado izquierdo, incluyendo todas las tuplas donde el derecho tiene un valor no nulo:
 ```SQL
@@ -1095,6 +1172,8 @@ Resultado:
 | Splint    | Computing   |
 | Cutflower | Design      |
 |           | Engineering |
+
+[Volver al Indice](#Indice)
 
 ### Sentido de los JOINs
 En el Inner Join, salvo en casos muy especificos, en orden de las tablas no afecta a la operación. Sin embargo, tanto LEFT JOIN como RIGHT JOIN dependen del orden en el que presentamos la tabla. Por ejemplo, la consulta de antes:
@@ -1114,6 +1193,7 @@ FROM dept RIGHT JOIN teacher
 
 > Lo que si podemos intercambiar es el orden de los atributos en la igualdad, ya que no es relevante.
 
+[Volver al Indice](#Indice)
 
 ### COALESCE
 Nos permite sustituir NULL por un valor que nos permita tratar el campo, como por ejemplo en concatenaciones o funciones de suma.
@@ -1126,6 +1206,9 @@ Por ejemplo, sustituimos el movil del usuario por el telefono del centro, cuando
 SELECT name, COALESCE(mobile, '07986 444 2266')
 FROM teacher;
 ```
+
+[Volver al Indice](#Indice)
+
 ### CASE WHEN
 Nos permite especificar imprimir en la tabla distintos resultados segun la condicional que cumpla el campo que comprobamos. Similar al Case de JAVA:
 
@@ -1148,6 +1231,9 @@ END
 AS 'type'
 FROM teacher;
 ```
+
+[Volver al Indice](#Indice)
+
 ### Ejercicios BD Profes con NULL
 
 Lista de profesores con departamento nulo:
@@ -1192,6 +1278,9 @@ END
 AS 'type'
 FROM teacher;
 ```
+
+[Volver al Indice](#Indice)
+
 # GOTCHAs
 ### Problemas con los caracteres especiales
 
@@ -1264,6 +1353,8 @@ Este es precísamente el orden de ejecución.
 4. Ejecutamos el `HAVING` **una vez por cada grupo/subtabla**.
 5. Finalmente ejecutamos el `SELECT` **una vez por cada grupo/subtabla**.
 
+[Volver al Indice](#Indice)
+
 ### Repasar
 1. XOR y variante
 2. Between variante
@@ -1278,4 +1369,4 @@ Este es precísamente el orden de ejecución.
 •	Renombrar campos en campos calculados o funciones reductoras
 
 --------------------------------------------
-
+[Volver al Indice](#Indice)
