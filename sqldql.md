@@ -644,12 +644,15 @@ Cambiamos la tabla activa por una sobre premios nobel con la siguiente estructur
 
 ## Ejercicios
 
+Premios Nobel de 1950:
+
 ```SQL
 SELECT yr, subject, winner
   FROM nobel
  WHERE yr = 1950
 ```
 
+Ganador del Nobel de Literatura en 1962:
 
 ```SQL
 SELECT winner
@@ -658,68 +661,76 @@ SELECT winner
    AND subject = 'Literature'
 ```
 
+Año y tema del Nobel de Einstein:
 ```SQL
 SELECT yr, subject
 FROM nobel
 WHERE winner = 'Albert Einstein';
 ```
 
+Ganadores del Nobel de la Paz desde el 2000 en adelante:
 ```SQL
 SELECT winner
 FROM nobel
 WHERE yr>=2000 AND subject='Peace';
 ```
 
+Toda la información de los premios Nobel de Literatura entre 1980 y 1989, estos años incluidos:
 ```SQL
 SELECT *
 FROM nobel
 WHERE subject = 'Literature' AND yr BETWEEN 1980 AND 1989;
 ```
 
-
+Toda la información de los premios Nobel presidenciales (Roosevelt, Wilson, Carter y Obama):
 ```SQL
 SELECT * FROM nobel
  WHERE winner IN ('Theodore Roosevelt','Woodrow Wilson','Jimmy Carter','Barack Obama');
 ```
 
-
+Ganadores con nombre John:
 ```SQL
 SELECT winner
 FROM nobel
 WHERE winner LIKE 'John%';
 ```
 
+Año, tema y ganador del Nobel de Física en 1980 o de Química en 1984:
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
 WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984);
 ```
 
+Año, tema y ganador de Nobel de 1980, excluyendo Medicina y Química:
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
 WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine');
 ```
 
+Año, tema y ganador del Nobel de mediciona antes de 1910 o de literatura de 2004 en adelante:
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
 WHERE (subject = 'Medicine' AND yr<1910) OR (subject = 'Literature' AND yr>=2004);
 ```
 
-
+Toda la informacion de PETER GRÜNBERG:
 ```SQL
 SELECT *
 FROM nobel
 WHERE winner like 'Peter GrÃ¼nberg'
 ```
 
+Toda la informacion de EUGENE O'NEILL (Para la comilla simple hay que poner dos comillas simples consecutivas):
 ```SQL
 SELECT *
 FROM nobel
 WHERE winner like 'Eugene O''Neill';
 ```
 
+Mostrar ganador, año y categoría, cuando el ganador tenga el título de Sir, ordenado de mas reciente a mas antiguo:
 ```SQL
 SELECT winner, yr, subject
 FROM nobel
@@ -727,6 +738,7 @@ WHERE winner LIKE 'Sir%'
 ORDER BY yr DESC;
 ```
 
+Ganador y categoría del año 1984, estando los de Física y Química al final:
 ```SQL
 SELECT winner, subject
   FROM nobel
