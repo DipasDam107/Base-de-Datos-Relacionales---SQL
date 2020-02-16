@@ -60,6 +60,7 @@ Evidentemente, además de almacenar la información relevante, las bases de dato
 > SELECT campo1, campo2.... FROM Base_Datos;
 
 Cabe destacar que, si bien en SQL Zoo no hace falta, las sentencias SQL deben acabar SIEMPRE con punto y coma ';'.
+
 [Volver al Indice](#Indice)
 
 ### Primeras Consultas
@@ -704,6 +705,8 @@ Cambiamos la tabla activa por una sobre premios nobel con la siguiente estructur
 
 ![image](./img/nobel.png "Logo Title Text 1")
 
+[Volver al Indice](#Indice)
+
 ## Ejercicios
 
 Premios Nobel de 1950:
@@ -929,6 +932,7 @@ GROUP BY matchid, mdate
 
 ## BD Pelis
 Volvemos a cambiar de base de datos para seguir trabajando con JOINS. La base de datos es sobre peliculas y castings.
+
 ![image](./img/pelis.png "Logo Title Text 1")
 
 [Volver al Indice](#Indice)
@@ -1110,6 +1114,9 @@ FROM actor AS a1
           JOIN actor AS a2 ON a2.id=c2.actorid
 WHERE a2.name='Art Garfunkel' AND a1.id<>a2.id;
 ```
+
+[Volver al Indice](#Indice)
+
 ## BD Profes
 Cambiamos a otra base de datos, de profesores y departamentos donde la relación puede no existir (0:N).
 
