@@ -91,14 +91,14 @@ El predicado devuelve true o false dependiendo de si cada tupla cumple o no con 
 Obtener población de Alemania:
 ```SQL
 	SELECT population FROM world
-  	WHERE name = 'Germany'
+  	WHERE name = 'Germany';
 ```
 
 Paises con población superior a 20 Millones:
 
 ```SQL
 	SELECT name FROM world
-	WHERE population>=200000000
+	WHERE population>=200000000;
 ```
 Podemos agrupar condiciones con las cláusulas AND, OR o XOR:
 
@@ -110,7 +110,7 @@ Nos permite obtener filas que cumplen dos condiciones. Si no cumple una, al carr
 ```SQL
 SELECT name, population, area
 FROM world
-WHERE area > 3000000 AND population > 250000000
+WHERE area > 3000000 AND population > 250000000;
 ```
 [Volver al Indice](#Indice)
 
@@ -120,7 +120,7 @@ Nos permite obtener las filas que cumplen una condicion, la otra o las dos.
 ```SQL
 SELECT name, population, area
 FROM world
-WHERE area > 3000000 OR population > 250000000
+WHERE area > 3000000 OR population > 250000000;
 ```
 
 [Volver al Indice](#Indice)
@@ -131,14 +131,14 @@ Nos permite obtener las filas que cumplen una condicion, la otra, pero no las do
 ```SQL
 SELECT name, population, area
 FROM world
-WHERE area > 3000000 XOR population > 250000000
+WHERE area > 3000000 XOR population > 250000000;
 ```
 Seria el equivalente a la siguiente consulta:
 
 ```SQL
 SELECT name, population, area
 FROM world
-WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000)
+WHERE (area > 3000000 OR population > 250000000) AND NOT ( area > 3000000 AND population > 250000000);
 ```
 [Volver al Indice](#Indice)
 
@@ -150,14 +150,14 @@ Paises con un area de 6000000o con una población de 250 millones y un area de 3
 ```SQL
 SELECT name, population, area
 FROM world
-WHERE area > 6000000 OR (population > 250000000 AND area > 3000000)
+WHERE area > 6000000 OR (population > 250000000 AND area > 3000000);
 ```
 
 En el ejemplo se obtienen los ganadores del nobel de quimica en 1984 o los que ganaron el de física en 1980
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
-WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984)
+WHERE (subject = 'Physics' AND yr=1980) OR (subject = 'Chemistry' AND yr=1984);
 ```
 [Volver al Indice](#Indice)
 
@@ -189,7 +189,7 @@ PIB por persona:
 ```SQL
 Select name, gdp/population as 'GDP Per Capita'
 		  FROM world
-	          WHERE population >= 200000000
+	          WHERE population >= 200000000;
 ```
 
 Continente Sudamerica, con población en Millones:
@@ -197,14 +197,14 @@ Continente Sudamerica, con población en Millones:
 ```SQL
 SELECT name, population/1000000 as "Millones de Personas"
 	FROM world
-	WHERE continent = 'South America'
+	WHERE continent = 'South America';
 ```
 [Volver al Indice](#Indice)
 
 ### AS
 Sirve para poner alias en los campos, de manera que sea mas facil identificar el tipo de info que contienen.
 ```SQL
-	SELECT name, continent as 'Continente', population FROM world
+	SELECT name, continent as 'Continente', population FROM world;
 ```
 
 De esta manera, la tabla resultante contendrá una columna llamada "Continente". Es especialmente útil a la hora de usar funciones de agregado o campos calculados, donde el nombre generado automáticamente por el motor SQL puede ser algo menos representativo.
@@ -259,7 +259,7 @@ Por ejemplo, en este caso, nombres de paises que contengan United en el nombre, 
 ```SQL
 SELECT name
 FROM world
-WHERE name LIKE '%United%'
+WHERE name LIKE '%United%';
 ```
 
 Los paises que tienen todas las vocales, sin espacios:
@@ -368,7 +368,7 @@ Calcula el promedio de un conjunto de resultado.
 Población media:
 ```SQL
 SELECT AVG(population)
-FROM world
+FROM world;
 ```
 
 [Volver al Indice](#Indice)
@@ -430,7 +430,7 @@ Redondeo con dos decimales:
 ```SQL
 SELECT name, ROUND(population/1000000, 2) as 'Poblacion Millones', ROUND(gdp/1000000000,2) as 'Billones PB'
 FROM world
-WHERE continent = 'South America'
+WHERE continent = 'South America';
 ```
 
 Redondeo a millares (Podemos ver que se usa un valor negativo... La vida es dura):
@@ -438,7 +438,7 @@ Redondeo a millares (Podemos ver que se usa un valor negativo... La vida es dura
  ```SQL
  SELECT name, ROUND(gdp/population, -3) as 'PIB per Capita'
 FROM world
-WHERE gdp>1000000000000
+WHERE gdp>1000000000000;
 ```
 
 [Volver al Indice](#Indice)
@@ -468,7 +468,7 @@ En el siguiente ejercicio, se cogen los países cuyo nombre y nombre de capital 
 ```SQL
 SELECT name, capital
 FROM world
-WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital
+WHERE LEFT(name,1) = LEFT(capital,1) AND name<>capital;
 ```
 
 [Volver al Indice](#Indice)
@@ -479,7 +479,7 @@ Básicamente ignora aquellas filas que cumplan la condicion que la sigue, solo l
 ```SQL
 SELECT yr, subject, winner
 FROM nobel
-WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine')
+WHERE yr = 1980 AND subject NOT IN ('Chemistry', 'Medicine');
 ```
 
 Actua de la misma manera que el operador de negación de Java (!);
@@ -495,7 +495,7 @@ FROM world
 WHERE continent = 'europe' AND gdp/population >(        
          SELECT gdp/population 
          FROM world 
-         WHERE name = 'United Kingdom')
+         WHERE name = 'United Kingdom');
 ```
 
 [Volver al Indice](#Indice)
@@ -521,7 +521,7 @@ WHERE population > (
 AND population < (
 		SELECT population 
 		FROM world 
-		WHERE name='Poland')
+		WHERE name='Poland');
 ```
 
 Alternativa con BETWEEN (Notese que debemos omitir los valores de canada y polonia):
@@ -550,7 +550,7 @@ SELECT name, CONCAT (
 	*100)
 	,'%')
 FROM world
-WHERE continent = 'Europe'
+WHERE continent = 'Europe';
 ```
 
 [Volver al Indice](#Indice)
@@ -576,7 +576,7 @@ SELECT continent, name
 FROM world x
 WHERE name <= ALL(
 	SELECT name FROM world y 
-	WHERE x.continent=y.continent)
+	WHERE x.continent=y.continent);
 ```
 Si no usaramos alias, comparariamos el continente con el de la misma consulta , y la consulta haría cualquier cosa...
 
@@ -592,7 +592,7 @@ SELECT continent, name, area FROM world x
 SELECT continent, name
 FROM world x
 WHERE name <= ALL(SELECT name FROM world y 
-WHERE x.continent=y.continent)
+WHERE x.continent=y.continent);
 ```
 Esto sería lo mismo que la anterior:
 ```SQL
@@ -600,7 +600,7 @@ SELECT continent, name
 FROM world x
 WHERE name < ALL(SELECT name FROM world y 
 WHERE x.continent=y.continent
-AND x.name <> y.name)
+AND x.name <> y.name);
 ```
 En la primera ponemos >= que nombre para incluir que el pais alfabéticamente menor también cumpla la función. Una manera de hacer lo mismo solo con >, es excluyendo al pais de mismo nombre en la propia consulta interna.
 
@@ -630,7 +630,7 @@ FROM world WHERE continent IN
 	FROM world x
 	WHERE 25000000 >= ALL(SELECT population 
 	from world y WHERE 	
-	x.continent=y.continent)) 
+	x.continent=y.continent)) ;
 ```
 
 Alternativa con Group BY:
@@ -652,7 +652,7 @@ SELECT name, continent
 FROM world x
 WHERE population > ALL(
 SELECT (population*3) FROM world y
-WHERE x.continent=y.continent AND y.name<>x.name)
+WHERE x.continent=y.continent AND y.name<>x.name);
 ```
 
 [Volver al Indice](#Indice)
@@ -714,7 +714,7 @@ Premios Nobel de 1950:
 ```SQL
 SELECT yr, subject, winner
   FROM nobel
- WHERE yr = 1950
+ WHERE yr = 1950;
 ```
 
 Ganador del Nobel de Literatura en 1962:
@@ -723,7 +723,7 @@ Ganador del Nobel de Literatura en 1962:
 SELECT winner
   FROM nobel
  WHERE yr = 1962
-   AND subject = 'Literature'
+   AND subject = 'Literature';
 ```
 
 Año y tema del Nobel de Einstein:
@@ -785,7 +785,7 @@ Toda la informacion de PETER GRÜNBERG:
 ```SQL
 SELECT *
 FROM nobel
-WHERE winner like 'Peter GrÃ¼nberg'
+WHERE winner like 'Peter GrÃ¼nberg';
 ```
 
 Toda la informacion de EUGENE O'NEILL (Para la comilla simple hay que poner dos comillas simples consecutivas):
@@ -856,21 +856,21 @@ Ahora supongamos que queremos mostrar todos los goles de alemania en el torneo, 
 ```SQL
 SELECT player, teamid, stadium, mdate
   FROM game JOIN goal ON (id=matchid)
-WHERE teamid='GER'
+WHERE teamid='GER';
 ```
 
 Mostrar equipos y jugador para cada gol marcado por alguien llamado mario.
 ```SQL
 SELECT team1, team2, player
   FROM game JOIN goal ON (id=matchid)
-WHERE player LIKE 'Mario%'
+WHERE player LIKE 'Mario%';
 ```
 
 Goles marcados los primeros 10 minutos, mostrando jugador, equipo, entrenador y tiempo:
 ```SQL
 SELECT player, teamid, coach, gtime
   FROM goal JOIN eteam on teamid=id
- WHERE gtime<=10
+ WHERE gtime<=10;
 ```
 
 > Podemos referenciar tanto atribrutos como las claves de join especificando la tabla a la que pertenecen, usando la estructura  (tabla.campo)
@@ -880,21 +880,21 @@ Lista de partidos y nombre de equipo entrenado por fernando santos. Cabe destaca
 ```SQL
 SELECT mdate, teamname
 FROM game JOIN eteam ON (team1=eteam.id)
-WHERE coach='Fernando Santos'
+WHERE coach='Fernando Santos';
 ```
 
 Jugadores que han marcado en el estadio de varsovia:
 ```SQL
 SELECT player 
 FROM goal JOIN game on matchid=id
-WHERE stadium='National Stadium, Warsaw'
+WHERE stadium='National Stadium, Warsaw';
 ```
 
 Mostrar nombre de los jugadores que marcaron a alemania:
 ```SQL
 SELECT DISTINCT(player)
   FROM game JOIN goal ON matchid = id 
-    WHERE (team1='GER' OR team2='GER') AND teamid<>'GER'
+    WHERE (team1='GER' OR team2='GER') AND teamid<>'GER';
 ```
 
 Mostrar equipo y goles metidos por cada uno. Necesitamos agrupar:
@@ -902,14 +902,14 @@ Mostrar equipo y goles metidos por cada uno. Necesitamos agrupar:
 SELECT teamname, count(*)
 FROM eteam JOIN goal ON id=teamid
 GROUP BY teamname
-ORDER BY teamname
+ORDER BY teamname;
 ```
 
 Numero de goles marcados en cada estadio:
 ```SQL
 SELECT stadium, count(*) AS 'Goles'
 FROM goal JOIN game on matchid=id
-GROUP BY stadium
+GROUP BY stadium;
 ```
 
 Goles marcados en cada partido donde polonia jugo, mostrando id de partido y fecha:
@@ -917,7 +917,7 @@ Goles marcados en cada partido donde polonia jugo, mostrando id de partido y fec
 SELECT matchid, mdate, COUNT(*) AS 'Goles'
   FROM game JOIN goal ON matchid = id 
  WHERE (team1 = 'POL' OR team2 = 'POL')
-GROUP BY matchid, mdate
+GROUP BY matchid, mdate;
 ```
 
 En cada partido con goles de Alemania, mostrar id de partido, fecha y numero de goles alemanes:
@@ -925,7 +925,7 @@ En cada partido con goles de Alemania, mostrar id de partido, fecha y numero de 
 SELECT matchid, mdate, count(*)
 FROM goal JOIN game on matchid=id
 WHERE teamid='GER'
-GROUP BY matchid, mdate
+GROUP BY matchid, mdate;
 ```
 
 [Volver al Indice](#Indice)
@@ -943,7 +943,7 @@ Peliculas de 1962:
 ```SQL
 SELECT id, title
  FROM movie
- WHERE yr=1962
+ WHERE yr=1962;
 ```
 
 Año en el que se hace Ciudadano Kane:
@@ -1042,7 +1042,7 @@ SELECT yr,COUNT(title) FROM
         JOIN actor   ON actorid=actor.id
 WHERE name='Rock Hudson'
 GROUP BY yr
-HAVING COUNT(title) > 2
+HAVING COUNT(title) > 2;
 ```
 
 Actor principal y nombre de las pelis donde participa Julie Andrews:
@@ -1068,7 +1068,7 @@ JOIN casting ON casting.actorid=actor.id
 WHERE casting.ord=1
 GROUP BY actor.name
 HAVING count(casting.movieid)>=30
-ORDER BY actor.name ASC
+ORDER BY actor.name ASC;
 ```
 
 Peliculas de 1978 ordenadas por numero de actores:
@@ -1078,7 +1078,7 @@ FROM movie
 JOIN casting on movie.id=casting.movieid
 WHERE yr=1978
 GROUP BY movie.title
-ORDER BY count(casting.actorid) DESC, movie.title 
+ORDER BY count(casting.actorid) DESC, movie.title;
 ```
 
 Actores que han trabajado con Art Garfunkel:
@@ -1093,15 +1093,6 @@ WHERE actor.name<>'Art Garfunkel'
                              JOIN casting y 
                              ON actor.id=y.actorid 
                              WHERE x.movieid=y.movieid);
-```
-
-Otra manera: 
-```SQL
-SELECT actor.name
-FROM actor JOIN casting ON actor.id = casting.actorid
-	WHERE actor.name <> 'Art Garfunkel'
-	AND casting.movieid IN (
-		 
 ```
 
 Alternativa con JOINs:
