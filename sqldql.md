@@ -610,7 +610,7 @@ Tenemos que sacar los paises de los continentes donde todos los países tienen m
 SELECT name, continent, population
 FROM world x
 WHERE 25000000 >= ALL(SELECT population 
-from world y WHERE x.continent=y.continent)
+from world y WHERE x.continent=y.continent);
 ```
 Podemos simplemente usar la poblacion maxima de cada continente:
 ```SQL
