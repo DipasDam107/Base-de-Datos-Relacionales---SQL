@@ -116,17 +116,24 @@ Podemos especificar que operaciones se van a realizar si en la misma tabla se pr
 > Actualizaciones: ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT
 
 Tipos de Accion de modificacion y borrado (UPDATE\DELETE):
-	- [CASCADE]: El borrado de un registro, borra todos los registros de la otra tabla que referencien a esa tupla
-		![image](./img/BD_C.png "Cascade")
 
-	- [NO ACTION]  (Por defecto) : No hace nada
-		![image](./img/bd_NA.png "No Action")
+##### CASCADE 
+El borrado de un registro, borra todos los registros de la otra tabla que referencien a esa tupla
+
+![image](./img/BD_C.png "Cascade")
 		
-	- [SET DEFAULT]: Cambia el valor en la tabla ajena a un valor por defecto
-		![image](./img/bd_SD.png "Set Default")
-		
-	- [SET NULL]: Cambia el valor en la tabla ajena a un valor nulo
-		![image](./img/BD_SN.png "Set Null")
+
+##### NO ACTION  (Por defecto)
+No toma acciones a mayores si se produce borrado o modificacion.
+![image](./img/bd_NA.png "No Action")
+
+##### SET DEFAULT
+Cambia el valor en la tabla ajena a un valor por defecto.
+![image](./img/bd_SD.png "Set Default")
+
+##### SET NULL
+Cambia el valor en la tabla ajena a un valor nulo.	
+![image](./img/BD_SN.png "Set Null")
 
 #### Tipos de datos
 - CHAR: Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
