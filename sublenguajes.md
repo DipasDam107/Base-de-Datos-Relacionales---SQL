@@ -136,6 +136,12 @@ Cambia el valor en la tabla ajena a un valor por defecto.
 Cambia el valor en la tabla ajena a un valor nulo.	
 ![image](./img/BD_SN.png "Set Null")
 
+##### MATCH FULL
+Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es decir, o coinciden los datos en ambas tablas, o han de ser todos NULL, no solo uno.
+
+##### MATCH PARTIAL
+No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga NULL en parte de la clave. Con MATCH FULL, esto no sería posible salvo que todas las columnas relacionadas sean NULL, mientras que MATCH PARTIAL si que lo permite.
+
 #### Tipos de datos
 - CHAR: Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
 - NCHAR
