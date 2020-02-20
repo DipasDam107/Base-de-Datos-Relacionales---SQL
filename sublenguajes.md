@@ -115,7 +115,7 @@ Podemos especificar que operaciones se van a realizar si en la misma tabla se pr
 > Borrado: ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT
 > Actualizaciones: ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT
 
-Tipos de Accion de modificacion y borrado:
+Tipos de Accion de modificacion y borrado (UPDATE\DELETE):
 	- [CASCADE]: El borrado de un registro, borra todos los registros de la otra tabla que referencien a esa tupla
 	- [NO ACTION]  (Por defecto) : No hace nada
 	- [SET DEFAULT]: Cambia el valor en la tabla ajena a un valor por defecto
