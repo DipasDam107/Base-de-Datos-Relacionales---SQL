@@ -210,6 +210,9 @@ ALTER TABLE <nome-tabla> DROP COLUMN <atributo> [CASCADE|RESTRICT]
 
 ### Añadir Restriccion
 ALTER TABLE ADD CONSTRAINT <Nome_Restriccion>.... 
+### Borrar Restriccion
+ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
+
 # GOTCHAs
 
 ## Cuantas Lenguajes SQL hay
