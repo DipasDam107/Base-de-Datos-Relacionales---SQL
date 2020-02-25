@@ -61,15 +61,19 @@ Abrimos pgadmin, que nos proporciona una interfaz en el navegador para gestionar
 ![image](./img/img11.png "Logo Title Text 1")
 
 Creamos un nuevo servidor, el cual se conectará al de ElephantSQL:
+
 ![image](./img/img12.png "Logo Title Text 1")
 
 Le damos nombre a la conexión, la cual no necesariamente tiene que verse correspondida con el nombre de la base de datos.
+
 ![image](./img/img13.png "Logo Title Text 1")
 
 Volvemos a usar los datos de la instancia de ElephantSQL para indicar servidor, usuario, base de datos y contraseña.
+
 ![image](./img/img14.png "Logo Title Text 1")
 
 Creada la conexión ya podemos empezar a trabajar con la base de datos de Elephant. En este momento ya habia creado la tabla world y metido un par de datos desde la linea de comandos, con lo cual podemos ver los resultados desde la interfaz.
+
 ![image](./img/img15.png "Logo Title Text 1")
 
 
