@@ -43,4 +43,12 @@ El instalador de Postgre trae varias características como el servidor, Stack Bu
 
 ![image](./img/img8.png "Logo Title Text 1")
 
+## Acceder al Servidor desde psql
+Para acceder al servidor desde psql, nos vamos al CMD y usamos el comando SQL con la siguiente estructura:
+> Ruta\psql.exe -h servidor -U usuario -d basededatospordefecto -p puerto
 
+![image](./img/img9.png "Logo Title Text 1")
+
+Hasta donde se, no hay manera de incluir la contraseña en este comando, ya que se considera extremadamente inseguro.
+
+## Acceder al Servidor desde Pgadmin
