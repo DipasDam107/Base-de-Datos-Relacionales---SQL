@@ -68,3 +68,19 @@ VALUES('Argentina',44270000);
 A este punto tendríamos los siguientes datos:
 
 ![image](./img/img22.png "Logo Title Text 1")
+
+# BD nobel
+![image](../img/nobel.png "Logo Title Text 1")
+
+## Creando tabla nobel
+```SQL
+    CREATE TABLE nobel(
+      winner varchar(50) PRIMARY KEY,
+      yr int NOT NULL,
+      subject varchar(39) NOT NULL);
+```
+## Metiendo Datos
+INSERT INTO nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby'),
+                                             (1960,'Literature','Saint-John Perse'),
+                                             (1960,'Medicine','Sir Frank Macfarlane Burnet'),
+                                             (1960,'Medicine','Peter Madawar');
