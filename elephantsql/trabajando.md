@@ -66,4 +66,5 @@ INSERT INTO world (name, population)
 VALUES('Argentina',44270000);
 ```
 A este punto tendríamos los siguientes datos:
-![image](./img/img20.png "Logo Title Text 1")
+
+![image](./img/img22.png "Logo Title Text 1")
