@@ -39,3 +39,31 @@ Podríamos hacer un SELECT ahora de la misma tabla para ver si se ha creado corr
 
 
 ## Metiendo Datos
+Para introducir datos en la tabla antes creada usamos la instrucción INSERT:
+> INSERT INTO nombreTABLA [(orden de campos)] VALUES (valorcampo1, valorcampo2...);
+
+Si bien el apartado de orden de campos se puede omitir, es útil para cuando no queremos introducir valores en todos los campos o lo queremos hacer en desorden, por la razón que sea. En ese caso, debemos tener cuidado de que el orden de los campos se correspondan con los valores introducidos al final.
+
+Así pues, introducimos algunos valores de prueba directamente sacados de SQLZOO:
+
+```SQL
+INSERT INTO world VALUES('Afghanistan','Asia',652230,25500100,20343000000);
+```
+
+Podemos añadir múltiples tuplas en la misma sentencia, separando cada tupla con comas:
+
+```SQL
+INSERT INTO world VALUES('Albania','Europe',28748,2831741,12960000000),
+                        ('Algeria','Africa',2381741,37100000,188681000000)
+                        ('Andorra','Europe',468,78115,3712000000)
+                        ;
+```
+
+Usando el orden de los campos, podríamos meter nombre y población, tomando el resto valores nulos:
+
+```SQL
+INSERT INTO world (name, population)
+VALUES('Argentina',44270000);
+```
+A este punto tendríamos los siguientes datos:
+![image](./img/img20.png "Logo Title Text 1")
