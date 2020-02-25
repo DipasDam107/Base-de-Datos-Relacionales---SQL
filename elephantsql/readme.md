@@ -26,3 +26,21 @@ Creada la primera instancia, repetimos el proceso hasta tener las cuatro base de
 
 ![image](./img/img5.png "Logo Title Text 1")
 
+Cada instancia contará con un servidor (Dependiente de la plataforma de hosting), un usuario y base de datos por defecto y una contraseña (El puerto suele ser 5432). Debemos tener presentes estos datos a la hora de conectarse al servidor de base de datos mas adelante.
+
+![image](./img/img6.png "Logo Title Text 1")
+
+Teniendo esto en cuenta, dejamos nuestra cuenta de Elephant por el momento, y vamos a trabajar en Windows.
+
+## Instalando PGAdmin y SQLShell (psql)
+Descargamos el instalador de PostgreSQL.
+[Enlace](https://www.postgresql.org/download/)
+
+
+![image](./img/img7.png "Logo Title Text 1")
+
+El instalador de Postgre trae varias características como el servidor, Stack Builder (que facilita la incorporación de nuevos módulos al sistema), pero las dos cosas que nos interesan son Pgadmin, que nos permite gestionar las bases de datos a través de interfaz gráfica, y Command Line Tools, que permite lo mismo pero a golpe de comandos. Voy a explicar como poner en funcionamiento cada una, pero la idea es trabajar con comandos una vez detallada la configuración.
+
+![image](./img/img8.png "Logo Title Text 1")
+
+
