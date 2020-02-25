@@ -51,4 +51,26 @@ Para acceder al servidor desde psql, nos vamos al CMD y usamos el comando SQL co
 
 Hasta donde se, no hay manera de incluir la contraseña en este comando, ya que se considera extremadamente inseguro.
 
+Una vez realizada la conexión e indicada la contraseña, ya podemos empezar a trabajar con nuestra base de datos desde la linea de comandos, haciendo las operaciones de DQL o DML vistas hasta ahora.
+
+![image](./img/img10.png "Logo Title Text 1")
+
 ## Acceder al Servidor desde Pgadmin
+Abrimos pgadmin, que nos proporciona una interfaz en el navegador para gestionar la base de datos. PAra el primer uso, nos perdirá una contraseña para el usuario master.
+
+![image](./img/img11.png "Logo Title Text 1")
+
+Creamos un nuevo servidor, el cual se conectará al de ElephantSQL:
+![image](./img/img12.png "Logo Title Text 1")
+
+Le damos nombre a la conexión, la cual no necesariamente tiene que verse correspondida con el nombre de la base de datos.
+![image](./img/img13.png "Logo Title Text 1")
+
+Volvemos a usar los datos de la instancia de ElephantSQL para indicar servidor, usuario, base de datos y contraseña.
+![image](./img/img14.png "Logo Title Text 1")
+
+Creada la conexión ya podemos empezar a trabajar con la base de datos de Elephant. En este momento ya habia creado la tabla world y metido un par de datos desde la linea de comandos, con lo cual podemos ver los resultados desde la interfaz.
+![image](./img/img15.png "Logo Title Text 1")
+
+
+
