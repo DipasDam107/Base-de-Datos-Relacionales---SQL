@@ -5,8 +5,8 @@
 - [BD Nobel](#bd-nobel)
   - [Creando world](#creando-tabla-nobel)
   - [Metiendo datos](#metiendo-datos-nobel)
-- [BD goal](bd-goal)
-- [BD movies](bd-movies)
+- [BD goal](#bd-goal)
+- [BD movies](#bd-movies)
   
 -----------------------------------------------
 
