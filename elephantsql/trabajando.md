@@ -2,6 +2,11 @@
 - [BD World](#bd-world)
   - [Creando world](#creando-tabla-world)
   - [Metiendo datos](#metiendo-datos)
+- [BD Nobel](#bd-nobel)
+  - [Creando world](#creando-tabla-nobel)
+  - [Metiendo datos](#metiendo-datos-nobel)
+- [BD goal](bd-goal)
+- [BD movies](bd-movies)
   
 -----------------------------------------------
 
@@ -79,7 +84,7 @@ A este punto tendríamos los siguientes datos:
       yr int NOT NULL,
       subject varchar(39) NOT NULL);
 ```
-## Metiendo Datos
+## Metiendo Datos Nobel
 ```SQL
 INSERT INTO nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby'),
                                              (1960,'Literature','Saint-John Perse'),
@@ -89,3 +94,7 @@ INSERT INTO nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby
 ```
 
 ![image](./img/img23.png "Logo Title Text 1")
+
+# BD goal
+
+# BD movies
