@@ -33,4 +33,9 @@ Por tanto, la instrucción para crear la tabla será la siguiente:
 
 ![image](./img/img16.png "Logo Title Text 1")
 
+Podríamos hacer un SELECT ahora de la misma tabla para ver si se ha creado correctamente, aunque evidentemente no devolvería ningun dato, ya que está vacía.
+
+![image](./img/img17.png "Logo Title Text 1")
+
+
 ## Metiendo Datos
