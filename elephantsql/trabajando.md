@@ -97,4 +97,58 @@ INSERT INTO nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby
 
 # BD goal
 
+```SQL
+CREATE TABLE eteam(
+	id char(3) PRIMARY KEY,
+	teamname nchar(30),
+	coach nchar(30)
+)
+
+CREATE TABLE game(
+	id integer PRIMARY KEY,
+	mdate date NOT NULL,
+	stadium nchar(30),
+	team1 char(3),
+	team2 char(3),
+	FOREIGN KEY (team1) REFERENCES eteam(id),
+	FOREIGN KEY (team2) REFERENCES eteam(id)
+)
+
+CREATE TABLE goal(
+	matchid integer,
+	teamid char(3),
+	player nchar(30),
+	gtime integer,
+	PRIMARY KEY(matchid, gtime),
+	FOREIGN KEY (teamid) REFERENCES eteam (id),
+	FOREIGN KEY (matchid) REFERENCES game (id)
+);
+
+```
+
 # BD movies
+```SQL
+CREATE TABLE actor(
+	actor integer PRIMARY KEY,
+	name nchar(30)	
+)
+
+CREATE TABLE movie(
+	id integer PRIMARY KEY,
+	title nchar(30) NOT NULL,
+	yr integer,
+	director integer,
+	budget bigint,
+	gross bigint,
+	FOREIGN KEY (director) REFERENCES actor(id)	
+)
+
+CREATE TABLE casting(
+	movieid integer,
+	actorid integer,
+	ord integer,
+	PRIMARY KEY (movieid,actorid),
+	FOREIGN KEY (movieid) REFERENCES movie(id),
+	FOREIGN KEY (actorid) REFERENCES actor(id)
+);
+```
