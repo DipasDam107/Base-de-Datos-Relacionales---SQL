@@ -125,7 +125,25 @@ CREATE TABLE goal(
 );
 
 ```
+```SQL
 
+INSERT INTO eteam VALUES('POL','Poland','Entrenador1'),
+			('RUS','Russia','Entrenador2'),
+			('CZE','Czech Republic','Entrenador3'),
+			('GRE','Greece','Entrenador4')
+;
+
+INSERT INTO game VALUES(1001,'2012-06-08','Warsaw', 'POL','GRE'),
+			(1002,'2012-06-08','Wroclaw', 'RUS','CZE'),
+			(1003,'2012-06-12','Wroclaw', 'GRE','CZE'),
+			(1004,'2012-06-12','Warsaw', 'POL','RUS');
+
+
+INSERT INTO goal VALUES(1001,'POL', 'Lewandowski',17),
+		       (1001,'GRE', 'Salpingidis',51),
+		       (1002,'RUS', 'Dzagoev',17),
+		       (1002,'RUS', 'Pavlyuchenko',17);
+```
 # BD movies
 ```SQL
 CREATE TABLE actor(
