@@ -102,7 +102,7 @@ CREATE TABLE eteam(
 	id char(3) PRIMARY KEY,
 	teamname nchar(30),
 	coach nchar(30)
-)
+);
 
 CREATE TABLE game(
 	id integer PRIMARY KEY,
@@ -112,7 +112,7 @@ CREATE TABLE game(
 	team2 char(3),
 	FOREIGN KEY (team1) REFERENCES eteam(id),
 	FOREIGN KEY (team2) REFERENCES eteam(id)
-)
+);
 
 CREATE TABLE goal(
 	matchid integer,
@@ -129,9 +129,9 @@ CREATE TABLE goal(
 # BD movies
 ```SQL
 CREATE TABLE actor(
-	actor integer PRIMARY KEY,
+	id integer PRIMARY KEY,
 	name nchar(30)	
-)
+);
 
 CREATE TABLE movie(
 	id integer PRIMARY KEY,
@@ -141,7 +141,7 @@ CREATE TABLE movie(
 	budget bigint,
 	gross bigint,
 	FOREIGN KEY (director) REFERENCES actor(id)	
-)
+);
 
 CREATE TABLE casting(
 	movieid integer,
