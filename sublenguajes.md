@@ -215,12 +215,12 @@ ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 
 # DML - Data Manipulation Language
 ## INSERT
-INSERT INTO <nome_da_taboa> [(<Atributo1>, <Atributo2>....)](VALUES (<valor1>, <valor2>....) | SELECT...);
+> INSERT INTO <nome_da_taboa> [(<Atributo1>, <Atributo2>....)](VALUES (<valor1>, <valor2>....) | SELECT...);
 
 Podemos introducir los datos sin especificar en que orden van a entrar (Por eso lo de antes de VALUES es opcional), pero debemos conocer como están los datos almacenados y en que orden han sido creadas las columnas. Como esto no siempre es posible, lo mejor es especificar siempre el orden de las columnas, y nos curamos en salud.
 
 Si queremos introducir varias tuplas en la misma instrucción:
-INSERT INTO <nome_da_taboa> VALUES (<valor1A>, <valor2A>....),
+> INSERT INTO <nome_da_taboa> VALUES (<valor1A>, <valor2A>....),
 				   (<valor1B>, <valor2B>....),
 				   (<valor1C>, <valor2D>....);
 	
@@ -230,7 +230,7 @@ Restricciones al usar SELECT:
 	
 
 ## UPDATE
-UPDATE <Nombre_Tabla> SET <atributo1>=<valor1>,
+> UPDATE <Nombre_Tabla> SET <atributo1>=<valor1>,
 		          <atributo2>=<valor2>,
 			  ... 
 [WHERE <Predicado>];
