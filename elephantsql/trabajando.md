@@ -142,7 +142,7 @@ INSERT INTO game VALUES(1001,'2012-06-08','Warsaw', 'POL','GRE'),
 INSERT INTO goal VALUES(1001,'POL', 'Lewandowski',17),
 		       (1001,'GRE', 'Salpingidis',51),
 		       (1002,'RUS', 'Dzagoev',17),
-		       (1002,'RUS', 'Pavlyuchenko',17);
+		       (1002,'RUS', 'Pavlyuchenko',50);
 ```
 # BD movies
 ```SQL
