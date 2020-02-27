@@ -203,10 +203,10 @@ DROP TABLE [IF EXISTS] <nome-taboa>
 Podemos modificar, borrar o añadir columnas, restricciones
 
 ###  Añadir Columna
-ALTER TABLE <nome-tabla> ADD [COLUMN] <atributo> <dominio> ..... NOT NULL | DEFAULT
+ALTER TABLE nome-tabla ADD [COLUMN] atributo dominio ..... NOT NULL | DEFAULT
 
 ### Borrar Columna *
-ALTER TABLE <nome-tabla> DROP COLUMN <atributo> [CASCADE|RESTRICT]
+ALTER TABLE nome-tabla DROP COLUMN atributo [CASCADE|RESTRICT]
 
 ### Añadir Restriccion
 ALTER TABLE ADD CONSTRAINT <Nome_Restriccion>.... 
@@ -220,9 +220,9 @@ ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 Podemos introducir los datos sin especificar en que orden van a entrar (Por eso lo de antes de VALUES es opcional), pero debemos conocer como están los datos almacenados y en que orden han sido creadas las columnas. Como esto no siempre es posible, lo mejor es especificar siempre el orden de las columnas, y nos curamos en salud.
 
 Si queremos introducir varias tuplas en la misma instrucción:
-> INSERT INTO <nome_da_taboa> VALUES (<valor1A>, <valor2A>....),
-				   (<valor1B>, <valor2B>....),
-				   (<valor1C>, <valor2D>....);
+> INSERT INTO <nome_da_taboa> VALUES (valor1A, valor2A....),
+				   (valor1B, valor2B....),
+				   (valor1C, valor2D....);
 	
 Restricciones al usar SELECT:
 	- El SELECT debe tener el mismo numero de columnas que la tabla destino.
@@ -230,10 +230,10 @@ Restricciones al usar SELECT:
 	
 
 ## UPDATE
-> UPDATE <Nombre_Tabla> SET <atributo1>=<valor1>,
-		          <atributo2>=<valor2>,
+> UPDATE <Nombre_Tabla> SET atributo1=valor1,
+		          atributo2=valor2,
 			  ... 
-[WHERE <Predicado>];
+[WHERE Predicado];
 
 Si bien WHERE es opcional, es recomendable incluir siempre una condición, ya que rara vez nos va a interesar cambiar los valores de uno o varios vamos en todas las tuplas.
 
