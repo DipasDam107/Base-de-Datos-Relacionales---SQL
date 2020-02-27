@@ -76,5 +76,18 @@ Creada la conexión ya podemos empezar a trabajar con la base de datos de Elepha
 
 ![image](./img/img15.png "Logo Title Text 1")
 
+# Lo que sea
+A partir de aquí tenemos tres opciones para ejecutar instrucciones SQL en nuestra instancia ElephantSQL.
 
+## A golpe de comando
+![image](./img/sql_cmd.png "Logo Title Text 1")
+
+## Desde la propia web de ElephantSQL
+![image](./img/elephantsql.png "Logo Title Text 1")
+
+## Desde pgadmin
+
+![image](./img/pgadminsql1.png "Logo Title Text 1")
+
+![image](./img/pgadminsql2.png "Logo Title Text 1")
 
