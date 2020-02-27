@@ -235,11 +235,36 @@ Restricciones al usar SELECT:
 			  ... 
 [WHERE Predicado];
 
-Si bien WHERE es opcional, es recomendable incluir siempre una condición, ya que rara vez nos va a interesar cambiar los valores de uno o varios vamos en todas las tuplas.
+Si bien WHERE es opcional, es recomendable incluir siempre una condición, ya que rara vez nos va a interesar cambiar los valores de uno o varios vamos en todas las tuplas. Es decir, supongamos que queremos cambiar Spain por España y ponerle Africa de continente en world, y que tenemos algo así:
 
+```sql
+UPDATE world
+SET name = 'España', continent='Africa';
+```
+
+Nos pondría todos las tuplas con name 'España' y continent 'Africa'. Nos interesa filtrar para que solo modifique la tupla de Spain:
+
+```sql
+UPDATE world
+SET name = 'España', continent='Africa'
+WHERE name = 'Spain';
+```
 				  
 ## DELETE
+> DELETE FROM nombre_tabla [WHERE predicado]
 
+Igual que con el UPDATE, debemos tener cuidado con no incluir predicados, ya que aunque sean opcionales, no incluilos significa borrar todos los datos de la tabla.
+
+Si hacemos:
+```sql
+DELETE FROM world;
+```
+
+Borramos todos los datos de world. Lo mas normal sería borrar tuplas específicas:
+```sql
+DELETE FROM world
+WHERE population>100000000;
+```
 
 # GOTCHAs
 
