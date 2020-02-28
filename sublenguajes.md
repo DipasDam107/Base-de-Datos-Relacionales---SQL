@@ -166,7 +166,16 @@ No es necesario que las coincidencias sean completas. Por ejemplo, puede que en 
 - INTERVAL
 
 ##### Booleano
-- BOOLEAN
+- BOOLEAN (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
+
+##### Moneda
+- MONEY
+
+##### Otros
+- UUID (Identificador Único)
+- JSON
+- CIDR (Redes)
+- INET (Redes)
 
 #### UNIQUE 
 Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla
