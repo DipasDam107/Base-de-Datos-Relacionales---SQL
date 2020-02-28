@@ -145,21 +145,28 @@ Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es dec
 No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga NULL en parte de la clave. Con MATCH FULL, esto no sería posible salvo que todas las columnas relacionadas sean NULL, mientras que MATCH PARTIAL si que lo permite.
 
 #### Tipos de datos
-- CHAR: Cadenas Fijas. Rellena con espacios hasta llenar todo el dato
-- NCHAR
-- NCHAR VARYING
-- VARCHAR
-- TEXT
-- SERIAL
+##### Numericos
 - INTEGER
-- SMALLINT: Entero Pequeño
-- FLOAT
-- NUMERIC
-- DATE: Fecha
-- TIME: Hora
-- TIMESTAMP: Incluye Date y Time
-- BOOLEAN
+- BIGINT
+- SMALLINT
+- DECIMAL (Preciso)
+- REAL (No preciso, 6 Decimales)
 
+##### Textos
+- CHAR (Longitud fija)
+- VARCHAR (Longitud Variable)
+- TEXT (Logitud ilimitada variable)
+
+##### Fechas
+- DATE (Dia, mes y año)
+- TIME (Hora, minuto y segundo)
+- TIME WITH TIME ZONE (Hora, minuto y segundo)
+- TIMESTAMP (Incluye Date y Time)
+- TIMESTAMP WITH TIME ZONE (Incluye Date y Time)
+- INTERVAL
+
+##### Booleano
+- BOOLEAN
 
 #### UNIQUE 
 Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla
