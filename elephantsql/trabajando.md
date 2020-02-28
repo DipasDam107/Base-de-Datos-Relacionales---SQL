@@ -27,7 +27,9 @@ Se toman las siguientes consideraciones:
 Por tanto, la instrucción para crear la tabla será la siguiente:
 
 ```SQL
-  CREATE TABLE world(
+  CREATE SCHEMA world;
+  
+  CREATE TABLE world.world(
     name VARCHAR(40) PRIMARY KEY,
     continent VARCHAR(40),
     area bigint,
@@ -52,13 +54,13 @@ Si bien el apartado de orden de campos se puede omitir, es útil para cuando no 
 Así pues, introducimos algunos valores de prueba directamente sacados de SQLZOO:
 
 ```SQL
-INSERT INTO world VALUES('Afghanistan','Asia',652230,25500100,20343000000);
+INSERT INTO world.world VALUES('Afghanistan','Asia',652230,25500100,20343000000);
 ```
 
 Podemos añadir múltiples tuplas en la misma sentencia, separando cada tupla con comas:
 
 ```SQL
-INSERT INTO world VALUES('Albania','Europe',28748,2831741,12960000000),
+INSERT INTO world.world VALUES('Albania','Europe',28748,2831741,12960000000),
                         ('Algeria','Africa',2381741,37100000,188681000000)
                         ('Andorra','Europe',468,78115,3712000000)
                         ;
@@ -67,7 +69,7 @@ INSERT INTO world VALUES('Albania','Europe',28748,2831741,12960000000),
 Usando el orden de los campos, podríamos meter nombre y población, tomando el resto valores nulos:
 
 ```SQL
-INSERT INTO world (name, population)
+INSERT INTO world.world (name, population)
 VALUES('Argentina',44270000);
 ```
 A este punto tendríamos los siguientes datos:
@@ -79,14 +81,15 @@ A este punto tendríamos los siguientes datos:
 
 ## Creando tabla nobel
 ```SQL
-    CREATE TABLE nobel(
+    CREATE SCHEMA nobel;
+    CREATE TABLE nobel.nobel(
       winner varchar(50) PRIMARY KEY,
       yr int NOT NULL,
       subject varchar(39) NOT NULL);
 ```
 ## Metiendo Datos Nobel
 ```SQL
-INSERT INTO nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby'),
+INSERT INTO nobel.nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby'),
                                              (1960,'Literature','Saint-John Perse'),
                                              (1960,'Medicine','Sir Frank Macfarlane Burnet'),
                                              (1960,'Medicine','Peter Madawar');
@@ -98,13 +101,15 @@ INSERT INTO nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby
 # BD goal
 
 ```SQL
-CREATE TABLE eteam(
+CREATE SCHEMA goal;
+
+CREATE TABLE goal.eteam(
 	id char(3) PRIMARY KEY,
 	teamname nchar(30),
 	coach nchar(30)
 );
 
-CREATE TABLE game(
+CREATE TABLE goal.game(
 	id integer PRIMARY KEY,
 	mdate date NOT NULL,
 	stadium nchar(30),
@@ -114,7 +119,7 @@ CREATE TABLE game(
 	FOREIGN KEY (team2) REFERENCES eteam(id)
 );
 
-CREATE TABLE goal(
+CREATE TABLE goal.goal(
 	matchid integer,
 	teamid char(3),
 	player nchar(30),
@@ -127,31 +132,33 @@ CREATE TABLE goal(
 ```
 ```SQL
 
-INSERT INTO eteam VALUES('POL','Poland','Entrenador1'),
+INSERT INTO goal.eteam VALUES('POL','Poland','Entrenador1'),
 			('RUS','Russia','Entrenador2'),
 			('CZE','Czech Republic','Entrenador3'),
 			('GRE','Greece','Entrenador4')
 ;
 
-INSERT INTO game VALUES(1001,'2012-06-08','Warsaw', 'POL','GRE'),
+INSERT INTO goal.game VALUES(1001,'2012-06-08','Warsaw', 'POL','GRE'),
 			(1002,'2012-06-08','Wroclaw', 'RUS','CZE'),
 			(1003,'2012-06-12','Wroclaw', 'GRE','CZE'),
 			(1004,'2012-06-12','Warsaw', 'POL','RUS');
 
 
-INSERT INTO goal VALUES(1001,'POL', 'Lewandowski',17),
+INSERT INTO goal.goal VALUES(1001,'POL', 'Lewandowski',17),
 		       (1001,'GRE', 'Salpingidis',51),
 		       (1002,'RUS', 'Dzagoev',17),
 		       (1002,'RUS', 'Pavlyuchenko',50);
 ```
 # BD movies
 ```SQL
-CREATE TABLE actor(
+CREATE SCHEMA movies;
+
+CREATE TABLE movies.actor(
 	id integer PRIMARY KEY,
 	name nchar(30)	
 );
 
-CREATE TABLE movie(
+CREATE TABLE movies.movie(
 	id integer PRIMARY KEY,
 	title nchar(30) NOT NULL,
 	yr integer,
@@ -161,7 +168,7 @@ CREATE TABLE movie(
 	FOREIGN KEY (director) REFERENCES actor(id)	
 );
 
-CREATE TABLE casting(
+CREATE TABLE movies.casting(
 	movieid integer,
 	actorid integer,
 	ord integer,
