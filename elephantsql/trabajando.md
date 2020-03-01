@@ -106,13 +106,19 @@ INSERT INTO nobel.nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F.
 ![image](./img/img23.png "Logo Title Text 1")
 
 Ahora probemos las restricciones anteriores. En primer lugar, vamos a probar a poner un registro con año inválido:
+```SQL
 INSERT INTO nobel.nobel (yr,subject,winner) VALUES (2960,'Chemistry','Daniel Dipas');
+```
+
 ![image](./img/insertfallido1.png "Logo Title Text 1") 
 
 Como se puede observar, no cumple con el CHECK del año, con lo cual el registro no se inserta en la tabla. Esto es perfecto para especificar normas sencillas que debe cumplir un dato para ser válido.
 
 Lo mismo pasaría con campos NOT NULL si intentamos insertar valores nulos:
+```SQL
 INSERT INTO nobel.nobel (yr,winner) VALUES (2960,'Daniel Dipas');
+```
+
 ![image](./img/insertfallido2.png "Logo Title Text 1")
 
 Este insert violaría la regla NOT NULL del campo subject, con lo cual no se permite su inserción:
