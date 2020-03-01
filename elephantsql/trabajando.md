@@ -255,8 +255,13 @@ Ahora probemos a jugar con SET DEFAULT y CASCADE. Como ya dije antes, si borro u
 
 En caso de borrar un equipo, todos los registros asociados en goal y game pasan a tomar valor por defecto ('N/A'):
 
-![image](./img/ejemplodefault1.png  "Logo Title Text 1")
 ![image](./img/ejemplodefault2.png  "Logo Title Text 1")
+![image](./img/ejemplodefault1.png  "Logo Title Text 1")
+
+Ahora probemos simplemente a actualizar el valor de los registros. En cualquiera de los casos he especificado que debe realizarse en cascada:
+
+![image](./img/ejemploupdate1.png  "Logo Title Text 1")
+![image](./img/ejemploupdate2.png  "Logo Title Text 1")
 
 # BD movies
 ```SQL
