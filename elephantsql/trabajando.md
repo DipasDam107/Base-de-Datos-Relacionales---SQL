@@ -264,12 +264,14 @@ Ahora probemos simplemente a actualizar el valor de los registros. En cualquiera
 ![image](./img/ejemploupdate2.png  "Logo Title Text 1")
 
 # BD movies
+![image](../img/pelis.png "Logo Title Text 1")
+
 ```SQL
 CREATE SCHEMA movies;
 
 CREATE TABLE movies.actor(
 	id integer PRIMARY KEY,
-	name nchar(30)	
+	name nchar(30) NOT NULL
 );
 
 CREATE TABLE movies.movie(
@@ -279,15 +281,15 @@ CREATE TABLE movies.movie(
 	director integer,
 	budget bigint,
 	gross bigint,
-	FOREIGN KEY (director) REFERENCES actor(id)	
+	FOREIGN KEY (director) REFERENCES actor(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE movies.casting(
-	movieid integer,
+	movieid integer NOT NULL,
 	actorid integer,
-	ord integer,
+	ord integer NOT NULL,
 	PRIMARY KEY (movieid,actorid),
-	FOREIGN KEY (movieid) REFERENCES movie(id),
-	FOREIGN KEY (actorid) REFERENCES actor(id)
+	FOREIGN KEY (movieid) REFERENCES movie(id) ON UPDATE CASCADE ON DELETE CASCADE, 
+	FOREIGN KEY (actorid) REFERENCES actor(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 ```
