@@ -80,14 +80,21 @@ A este punto tendríamos los siguientes datos:
 ![image](../img/nobel.png "Logo Title Text 1")
 
 ## Creando tabla nobel
+La tabla nobel tampoco cuenta con claves ajenas con lo cual es muy similar a la anterior. Sin embargo, podemos empezar a introducir algunas restricciones nuevas, como por ejemplo NOT NULL, la cual impide que el campo al que afecta pueda tomar el valor NULL en las inserciones de datos:
+
 ```SQL
     CREATE SCHEMA nobel;
     CREATE TABLE nobel.nobel(
       winner varchar(50) PRIMARY KEY,
       yr int NOT NULL,
-      subject varchar(39) NOT NULL);
+      subject varchar(39) NOT NULL,
+      CHECK (yr>1900 AND yr<=2020));
 ```
+
+Así mismo, podemos optar por indicar que el año solo puede estar comprendido entre 1901 (Año de la primera entrega) y el año actual, ambos incluidos. Esto lo permite la CONSTRAINT CHECK, la cual nos permite espeficar el predicado que se ha de cumplir para que la inserción sea válida.
+
 ## Metiendo Datos Nobel
+Introducimos los primeros datos en la tabla nobel, sin ningun tipo de problema:
 ```SQL
 INSERT INTO nobel.nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby'),
                                              (1960,'Literature','Saint-John Perse'),
@@ -97,6 +104,18 @@ INSERT INTO nobel.nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F.
 ```
 
 ![image](./img/img23.png "Logo Title Text 1")
+
+Ahora probemos las restricciones anteriores. En primer lugar, vamos a probar a poner un registro con año inválido:
+INSERT INTO nobel.nobel (yr,subject,winner) VALUES (2960,'Chemistry','Daniel Dipas');
+![image](./img/insertfallido1.png "Logo Title Text 1") 
+
+Como se puede observar, no cumple con el CHECK del año, con lo cual el registro no se inserta en la tabla. Esto es perfecto para especificar normas sencillas que debe cumplir un dato para ser válido.
+
+Lo mismo pasaría con campos NOT NULL si intentamos insertar valores nulos:
+INSERT INTO nobel.nobel (yr,winner) VALUES (2960,'Daniel Dipas');
+![image](./img/insertfallido2.png "Logo Title Text 1")
+
+Este insert violaría la regla NOT NULL del campo subject, con lo cual no se permite su inserción:
 
 # BD goal
 
