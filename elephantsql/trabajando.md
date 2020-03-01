@@ -225,6 +225,9 @@ CREATE TABLE goal.goal(
 ```
 
 ## Introducir datos
+Empezamos introduciendo datos válidos, siempre teniendo en cuenta el orden de implementación (No podemos introducir datos en game sin tener equipos a los que referenciar). La única particularidad de este ejercicio es la siguiente:
+	- Como he optado por poner valores por defecto para los equipos en las tablas con clave ajena (N/A), tengo que incluir un equipo con dicha clave para que funcione ('N/A','Unknown','NoOne'). Si no lo pongo, a la hora de borrar da error, ya que no habría ningun equipo con esa clave.
+	
 ```SQL
 
 INSERT INTO goal.eteam VALUES('POL','Poland','Entrenador1'),
@@ -244,6 +247,16 @@ INSERT INTO goal.goal VALUES(1001,'POL', 'Lewandowski',17),
 		       (1002,'RUS', 'Dzagoev',17),
 		       (1002,'RUS', 'Pavlyuchenko',50);
 ```
+
+Ahora probemos a jugar con SET DEFAULT y CASCADE. Como ya dije antes, si borro un partido no me interesa mantener los goles del mismo (Los goles necesitan a los partidos para poder existir e identificarse). Al haber incluido un ON DELETE CASCADE, cuando borre un partido, los goles asociados se borrarán acto seguido:
+
+![image](./img/ejemplocascade1.png  "Logo Title Text 1")
+![image](./img/ejemplocascade2.png  "Logo Title Text 1")
+
+En caso de borrar un equipo, todos los registros asociados en goal y game pasan a tomar valor por defecto ('N/A'):
+
+![image](./img/ejemplodefault1.png  "Logo Title Text 1")
+![image](./img/ejemplodefault2.png  "Logo Title Text 1")
 
 # BD movies
 ```SQL
