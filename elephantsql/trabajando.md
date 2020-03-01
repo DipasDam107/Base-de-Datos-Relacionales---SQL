@@ -105,28 +105,31 @@ CREATE SCHEMA goal;
 
 CREATE TABLE goal.eteam(
 	id char(3) PRIMARY KEY,
-	teamname nchar(30),
-	coach nchar(30)
+	teamname nchar(30) NOT NULL,
+	coach nchar(30) NOT NULL,
+	CHECK LENGTH(id)=3
 );
 
 CREATE TABLE goal.game(
 	id integer PRIMARY KEY,
 	mdate date NOT NULL,
-	stadium nchar(30),
+	stadium nchar(30) NOT NULL,
 	team1 char(3),
 	team2 char(3),
 	FOREIGN KEY (team1) REFERENCES eteam(id),
-	FOREIGN KEY (team2) REFERENCES eteam(id)
+	FOREIGN KEY (team2) REFERENCES eteam(id),
+	ON DELETE CASCADE, ON UPDATE CASCADE
 );
 
 CREATE TABLE goal.goal(
 	matchid integer,
-	teamid char(3),
+	teamid char(3) NOT NULL,
 	player nchar(30),
-	gtime integer,
+	gtime integer NOT NULL,
 	PRIMARY KEY(matchid, gtime),
 	FOREIGN KEY (teamid) REFERENCES eteam (id),
-	FOREIGN KEY (matchid) REFERENCES game (id)
+	FOREIGN KEY (matchid) REFERENCES game (id),
+	CHECK gtime >= 0 AND gtime <= 120
 );
 
 ```
