@@ -116,18 +116,18 @@ CREATE TABLE goal.game(
 	stadium nchar(30) NOT NULL,
 	team1 char(3),
 	team2 char(3),
-	FOREIGN KEY (team1) REFERENCES goal.eteam(id),
-	FOREIGN KEY (team2) REFERENCES goal.eteam(id)
+	FOREIGN KEY (team1) REFERENCES goal.eteam(id) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (team2) REFERENCES goal.eteam(id) ON DELETE SET NULL ON UPDATE CASCADE
 	
 );
 
 CREATE TABLE goal.goal(
 	matchid integer,
 	teamid char(3) NOT NULL,
-	player nchar(30),
+	player nchar(30) NOT NULL,
 	gtime integer NOT NULL,
 	PRIMARY KEY(matchid, gtime),
-	FOREIGN KEY (teamid) REFERENCES goal.eteam (id),
+	FOREIGN KEY (teamid) REFERENCES goal.eteam (id) ON DELETE SET NULL ON UPDATE CASCADE,
 	FOREIGN KEY (matchid) REFERENCES goal.game (id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CHECK (gtime >= 0 AND gtime <= 120)
 );
