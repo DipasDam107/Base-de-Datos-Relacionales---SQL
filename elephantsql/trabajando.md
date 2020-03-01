@@ -138,8 +138,8 @@ CREATE TABLE goal.goal(
 INSERT INTO goal.eteam VALUES('POL','Poland','Entrenador1'),
 			('RUS','Russia','Entrenador2'),
 			('CZE','Czech Republic','Entrenador3'),
-			('GRE','Greece','Entrenador4')
-;
+			('GRE','Greece','Entrenador4'),
+			('N/A','Unknown','NoOne');
 
 INSERT INTO goal.game VALUES(1001,'2012-06-08','Warsaw', 'POL','GRE'),
 			(1002,'2012-06-08','Wroclaw', 'RUS','CZE'),
@@ -152,6 +152,7 @@ INSERT INTO goal.goal VALUES(1001,'POL', 'Lewandowski',17),
 		       (1002,'RUS', 'Dzagoev',17),
 		       (1002,'RUS', 'Pavlyuchenko',50);
 ```
+
 # BD movies
 ```SQL
 CREATE SCHEMA movies;
