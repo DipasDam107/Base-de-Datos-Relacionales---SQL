@@ -123,7 +123,7 @@ CREATE TABLE goal.game(
 
 CREATE TABLE goal.goal(
 	matchid integer,
-	teamid char(3) NOT NULL,
+	teamid char(3),
 	player nchar(30) NOT NULL,
 	gtime integer NOT NULL,
 	PRIMARY KEY(matchid, gtime),
