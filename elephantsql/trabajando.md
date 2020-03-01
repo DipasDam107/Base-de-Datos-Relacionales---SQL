@@ -107,7 +107,7 @@ CREATE TABLE goal.eteam(
 	id char(3) PRIMARY KEY,
 	teamname nchar(30) NOT NULL,
 	coach nchar(30) NOT NULL,
-	CHECK LENGTH(id)=3
+	CHECK (LENGTH(id)=3)
 );
 
 CREATE TABLE goal.game(
@@ -116,9 +116,9 @@ CREATE TABLE goal.game(
 	stadium nchar(30) NOT NULL,
 	team1 char(3),
 	team2 char(3),
-	FOREIGN KEY (team1) REFERENCES eteam(id),
-	FOREIGN KEY (team2) REFERENCES eteam(id),
-	ON DELETE CASCADE, ON UPDATE CASCADE
+	FOREIGN KEY (team1) REFERENCES goal.eteam(id),
+	FOREIGN KEY (team2) REFERENCES goal.eteam(id)
+	
 );
 
 CREATE TABLE goal.goal(
@@ -127,9 +127,9 @@ CREATE TABLE goal.goal(
 	player nchar(30),
 	gtime integer NOT NULL,
 	PRIMARY KEY(matchid, gtime),
-	FOREIGN KEY (teamid) REFERENCES eteam (id),
-	FOREIGN KEY (matchid) REFERENCES game (id),
-	CHECK gtime >= 0 AND gtime <= 120
+	FOREIGN KEY (teamid) REFERENCES goal.eteam (id),
+	FOREIGN KEY (matchid) REFERENCES goal.game (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CHECK (gtime >= 0 AND gtime <= 120)
 );
 
 ```
