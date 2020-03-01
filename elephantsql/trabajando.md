@@ -124,7 +124,72 @@ INSERT INTO nobel.nobel (yr,winner) VALUES (2960,'Daniel Dipas');
 Este insert violaría la regla NOT NULL del campo subject, con lo cual no se permite su inserción:
 
 # BD goal
+![image](../img/tablaJoin.png "Logo Title Text 1")
 
+La base de datos goal gana en complejidad por varios hechos:
+	- En primer lugar, contamos con varias tablas relacionadas entre ellas, con lo cual tendremos que unirlas con FOREIGN KEY
+	- Existe una dependencia en identificación: Solo queremos goles de los partidos existentes. Si borramos un partido, los goles del mismo se van fuera.
+	- Por no utilizar todo borrados CASCADE, voy a jugar con valores por defecto en caso de que se borre un equipo.
+	
+## Creando la BD
+En primer lugar empezamos definiendo el nuevo esquema y la primera tabla, que será eteam. Muy importante recordar lo siguiente:
+	- Si pretendemos definir tablas y relaciones simultaneamente, deben introducirse primero las tablas que no tienen relación y posteriormente las siguientes de manera sucesiva.
+	- Una alternativa a esto es definir todas las tablas sin relaciones al principio y, antes de introducir datos, añadir las restricciones y relaciones posteriormente. Esto es especialemente útil en caso de que existan tablas que se relacionen en los dos sentidos, dependiendo la una de la otra (No sería posible implementarlas con el primer método).
+	
+En este caso, voy a ir definiendo las tablas en orden de implementación, con las relaciones y restricciones incluidas en la propia definición:
+
+```SQL
+CREATE SCHEMA goal;
+
+CREATE TABLE goal.eteam(
+	id char(3) PRIMARY KEY,
+	teamname nchar(30) NOT NULL,
+	coach nchar(30) NOT NULL,
+	CHECK (LENGTH(id)=3)
+);
+```
+
+Tenemos la tabla eteam definida (La id de cada equipo está compuesta por 3 caracteres), ahora toca definir aquella tabla que se relaciona con ella, que es game. Para establecer la relación necesitamos echar mano de la restricción FOREIGN KEY:
+
+ ```SQL
+ [CONSTRAINT <nombreRestriccion>] FOREIGN KEY (<Atributos>) REFERENCES <Nombre_tabla_referenciada>[(<Atributos_referenciados>)]
+ [ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
+ [ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
+ ```
+
+Como de momento no interesa usar constraints con nombre, omitimos ese paso y directamente referenciamos el campo team1 y team2 con eteam.id, estableciendo así una doble relación entre las tablas:
+
+```SQL
+CREATE TABLE goal.game(
+	id integer PRIMARY KEY,
+	mdate date NOT NULL,
+	stadium nchar(30) NOT NULL,
+	team1 char(3) DEFAULT 'N/A',
+	team2 char(3) DEFAULT 'N/A',
+	FOREIGN KEY (team1) REFERENCES goal.eteam(id) ON DELETE SET DEFAULT ON UPDATE CASCADE,
+	FOREIGN KEY (team2) REFERENCES goal.eteam(id) ON DELETE SET DEFAULT ON UPDATE CASCADE
+);
+```
+
+ON UPDATE y ON DELETE establecen que acción se debe realizar a la hora de modificar o borrar datos respectivamente. En este caso, las actualizaciones las hago en cascada (Si actualizo un registro de eteam, los registros relacionados en game se actualizan) y establezco un valor por defecto en los registros relacionados con uno borrado de eteam. Nótese que para esto último, los campos team1 y team2 tienen que tener definido un valor por defecto, así saben cual tomar (Es un poco forzado el ejemplo, pero para probar el funcionamiento me viene bien).
+
+Solo nos queda la tabla goal, la cual se relaciona tanto con team como con game. La diferencia radica que los registros de esta tabla dependen en existencia y en identificación del partido al que referencian. Con lo cual, si no existe el partido, los goles no nos interesan para nada, hay que borrarlos (ON DELETE CASCADE)
+
+```SQL
+CREATE TABLE goal.goal(
+	matchid integer NOT NULL,
+	teamid char(3) DEFAULT 'N/A',
+	player nchar(30) NOT NULL,
+	gtime integer NOT NULL,
+	PRIMARY KEY(matchid, gtime),
+	FOREIGN KEY (teamid) REFERENCES goal.eteam (id) ON DELETE SET DEFAULT ON UPDATE CASCADE,
+	FOREIGN KEY (matchid) REFERENCES goal.game (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CHECK (gtime >= 0 AND gtime <= 120)
+);
+```
+Para finalizar, con el CHECK compruebo que el gol está comprendido entre el minuto 0 y 120 (prórroga). 
+
+## Codigo final
 ```SQL
 CREATE SCHEMA goal;
 
@@ -147,7 +212,7 @@ CREATE TABLE goal.game(
 );
 
 CREATE TABLE goal.goal(
-	matchid integer,
+	matchid integer NOT NULL,
 	teamid char(3) DEFAULT 'N/A',
 	player nchar(30) NOT NULL,
 	gtime integer NOT NULL,
@@ -158,6 +223,8 @@ CREATE TABLE goal.goal(
 );
 
 ```
+
+## Introducir datos
 ```SQL
 
 INSERT INTO goal.eteam VALUES('POL','Poland','Entrenador1'),
