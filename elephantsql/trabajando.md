@@ -309,14 +309,23 @@ CREATE TABLE movies.casting(
 ```
 
 # Borrando esquema y tablas
-
+![image](./img/capt1.png "Logo Title Text 1")
+![image](./img/capt2.png "Logo Title Text 1")
+![image](./img/capt3.png "Logo Title Text 1")
+![image](./img/capt4.png "Logo Title Text 1")
 
 # Adición y borrado de columnas
+![image](./img/capt5.png "Logo Title Text 1")
 
 # Adición y borrado de restricciones
-
+![image](./img/capt6.png "Logo Title Text 1")
+![image](./img/capt7.png "Logo Title Text 1")
+![image](./img/capt8.png "Logo Title Text 1")
 SELECT * FROM information_schema.table_constraints WHERE table_name='empleado';
 
 # Inserción, Modificación y Borrado de tuplas
+![image](./img/capt9.png "Logo Title Text 1")
+![image](./img/capt11.png "Logo Title Text 1")
+![image](./img/capt10.png "Logo Title Text 1")
 
 INSERT INTO prueba.empleado VALUES (1,'Dipas',28), (2,'Manuel',20), (3,'Jose Luis', 35), (4,'Alfonso', 50),(5,'Jose Doval', 35), (6,'Maradroga', 50);
