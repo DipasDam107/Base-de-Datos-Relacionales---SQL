@@ -388,26 +388,33 @@ ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 
 # DML - Data Manipulation Language
 ## INSERT
-> INSERT INTO <nome_da_taboa> [(Atributo1, Atributo2....)](VALUES (valor1, valor2....) | SELECT...);
+```sql
+INSERT INTO <nome_da_taboa> [(Atributo1, Atributo2....)](VALUES (valor1, valor2....) | SELECT...);
+```
 
 Podemos introducir los datos sin especificar en que orden van a entrar (Por eso lo de antes de VALUES es opcional), pero debemos conocer como están los datos almacenados y en que orden han sido creadas las columnas. Como esto no siempre es posible, lo mejor es especificar siempre el orden de las columnas, y nos curamos en salud.
 
 Si queremos introducir varias tuplas en la misma instrucción:
-> INSERT INTO <nome_da_taboa> VALUES (valor1A, valor2A....),
+
+```sql
+INSERT INTO <nome_da_taboa> VALUES (valor1A, valor2A....),
 				   (valor1B, valor2B....),
 				   (valor1C, valor2D....);
-	
+```	
+
 Restricciones al usar SELECT:
-	- El SELECT debe tener el mismo numero de columnas que la tabla destino.
-	- El dominio de los datos de tablas origen y destino han de ser los mismos, para que no haya conflicto entre tipos de dato (Pensemos por ejemplo que el SELECT devuelva un NCHAR() y lo quiera guardar en un integer).
+	- El `SELECT` debe tener el mismo numero de columnas que la tabla destino.
+	- El dominio de los datos de tablas origen y destino han de ser los mismos, para que no haya conflicto entre tipos de dato (Pensemos por ejemplo que el `SELECT` devuelva un `VARCHAR()` y lo quiera guardar en un integer).
 
 [Volver al Indice](#indice)
 
 ## UPDATE
-> UPDATE <Nombre_Tabla> SET atributo1=valor1,
+```sql
+UPDATE <Nombre_Tabla> SET atributo1=valor1,
 		          atributo2=valor2,
 			  ... 
 [WHERE Predicado];
+```
 
 Si bien WHERE es opcional, es recomendable incluir siempre una condición, ya que rara vez nos va a interesar cambiar los valores de uno o varios vamos en todas las tuplas. Es decir, supongamos que queremos cambiar Spain por España y ponerle Africa de continente en world, y que tenemos algo así:
 
