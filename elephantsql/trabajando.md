@@ -1,25 +1,32 @@
 # Indice
-- [BD World](#bd-world)
-  - [Creando world](#creando-tabla-world)
-  - [Metiendo datos](#metiendo-datos)
-- [BD Nobel](#bd-nobel)
-  - [Creando world](#creando-tabla-nobel)
-  - [Metiendo datos](#metiendo-datos-nobel)
-- [BD goal](#bd-goal)
-	- [Creando la BD](#creando-la-bd)
-	- [Codigo final](#codigo-final)
-	- [Introducir Datos](#introducir-datos)
-- [BD movies](#bd-movies)
-	- [Creando BD Movies](#crear-bd-movies)
-  
+- [Creando esquema y tablas e insertando datos] (#creando-esquema-y-tablas-e-insertando-datos)
+	- [BD World](#bd-world)
+	  - [Creando world](#creando-tabla-world)
+	  - [Metiendo datos](#metiendo-datos)
+	- [BD Nobel](#bd-nobel)
+	  - [Creando world](#creando-tabla-nobel)
+	  - [Metiendo datos](#metiendo-datos-nobel)
+	- [BD goal](#bd-goal)
+		- [Creando la BD](#creando-la-bd)
+		- [Codigo final](#codigo-final)
+		- [Introducir Datos](#introducir-datos)
+	- [BD movies](#bd-movies)
+		- [Creando BD Movies](#crear-bd-movies)
+- [Borrando esquema y tablas](#borrando-esquema-y-tablas)
+- [Adición y borrado de columnas](#adicion-y-borrado-de-columnas)
+- [Adición y borrado de restricciones](#adicion-y-borrado-de-restricciones)
+- [Modificación y Borrado de tuplas](#modificacion-y-borrado-de-tuplas)
+ 
 -----------------------------------------------
+# Creando esquema y tablas e insertando datos
+Para empezar a probar las instrucciones CREATE e INSERT voy a recrear las BDs de SQLZOO (world, nobel, goal y movie) y a introducirles datos.
 
-# BD World
+## BD World
 Vamos a intentar recrear esta tabla de SQLZOO y trabajar con ella.
 
 ![image](../img/tabla1.png "Logo Title Text 1")
 
-## Creando tabla world
+### Creando tabla world
 Para crear la tabla world, es necesario utilizar la instrucción CREATE TABLE:
   > CREATE TABLE nombre tabla (campo1 tipo, campo2 tipo....);
 
@@ -49,7 +56,7 @@ Podríamos hacer un SELECT ahora de la misma tabla para ver si se ha creado corr
 ![image](./img/img17.png "Logo Title Text 1")
 
 
-## Metiendo Datos
+### Metiendo Datos
 Para introducir datos en la tabla antes creada usamos la instrucción INSERT:
 > INSERT INTO nombreTABLA [(orden de campos)] VALUES (valorcampo1, valorcampo2...);
 
@@ -80,10 +87,10 @@ A este punto tendríamos los siguientes datos:
 
 ![image](./img/img22.png "Logo Title Text 1")
 
-# BD nobel
+## BD nobel
 ![image](../img/nobel.png "Logo Title Text 1")
 
-## Creando tabla nobel
+### Creando tabla nobel
 La tabla nobel tampoco cuenta con claves ajenas con lo cual es muy similar a la anterior. Sin embargo, podemos empezar a introducir algunas restricciones nuevas, como por ejemplo NOT NULL, la cual impide que el campo al que afecta pueda tomar el valor NULL en las inserciones de datos:
 
 ```SQL
@@ -97,7 +104,7 @@ La tabla nobel tampoco cuenta con claves ajenas con lo cual es muy similar a la 
 
 Así mismo, podemos optar por indicar que el año solo puede estar comprendido entre 1901 (Año de la primera entrega) y el año actual, ambos incluidos. Esto lo permite la CONSTRAINT CHECK, la cual nos permite espeficar el predicado que se ha de cumplir para que la inserción sea válida.
 
-## Metiendo Datos Nobel
+### Metiendo Datos Nobel
 Introducimos los primeros datos en la tabla nobel, sin ningun tipo de problema:
 ```SQL
 INSERT INTO nobel.nobel (yr,subject,winner) VALUES (1960,'Chemistry','Willard F. Libby'),
@@ -127,7 +134,7 @@ INSERT INTO nobel.nobel (yr,winner) VALUES (2960,'Daniel Dipas');
 
 Este insert violaría la regla NOT NULL del campo subject, con lo cual no se permite su inserción:
 
-# BD goal
+## BD goal
 ![image](../img/tablaJoin.png "Logo Title Text 1")
 
 La base de datos goal gana en complejidad por varios hechos:
@@ -135,7 +142,7 @@ La base de datos goal gana en complejidad por varios hechos:
 	- Existe una dependencia en identificación: Solo queremos goles de los partidos existentes. Si borramos un partido, los goles del mismo se van fuera.
 	- Por no utilizar todo borrados CASCADE, voy a jugar con valores por defecto en caso de que se borre un equipo.
 	
-## Creando la BD
+### Creando la BD
 En primer lugar empezamos definiendo el nuevo esquema y la primera tabla, que será eteam. Muy importante recordar lo siguiente:
 	- Si pretendemos definir tablas y relaciones simultaneamente, deben introducirse primero las tablas que no tienen relación y posteriormente las siguientes de manera sucesiva.
 	- Una alternativa a esto es definir todas las tablas sin relaciones al principio y, antes de introducir datos, añadir las restricciones y relaciones posteriormente. Esto es especialemente útil en caso de que existan tablas que se relacionen en los dos sentidos, dependiendo la una de la otra (No sería posible implementarlas con el primer método).
@@ -193,7 +200,7 @@ CREATE TABLE goal.goal(
 ```
 Para finalizar, con el CHECK compruebo que el gol está comprendido entre el minuto 0 y 120 (prórroga). 
 
-## Codigo final
+### Codigo final
 ```SQL
 CREATE SCHEMA goal;
 
@@ -228,7 +235,7 @@ CREATE TABLE goal.goal(
 
 ```
 
-## Introducir datos
+### Introducir datos
 Empezamos introduciendo datos válidos, siempre teniendo en cuenta el orden de implementación (No podemos introducir datos en game sin tener equipos a los que referenciar). La única particularidad de este ejercicio es la siguiente:
 	- Como he optado por poner valores por defecto para los equipos en las tablas con clave ajena (N/A), tengo que incluir un equipo con dicha clave para que funcione ('N/A','Unknown','NoOne'). Si no lo pongo, a la hora de borrar da error, ya que no habría ningun equipo con esa clave.
 	
@@ -267,12 +274,12 @@ Ahora probemos simplemente a actualizar el valor de los registros. En cualquiera
 ![image](./img/ejemploupdate1.png  "Logo Title Text 1")
 ![image](./img/ejemploupdate2.png  "Logo Title Text 1")
 
-# BD movies
+## BD movies
 La base de datos movies es muy similar a la anterior, con lo cual no me voy a parar mucho en la misma.
 
 ![image](../img/pelis.png "Logo Title Text 1")
 
-## Crear BD Movies
+### Crear BD Movies
 ```SQL
 CREATE SCHEMA movies;
 
@@ -300,3 +307,10 @@ CREATE TABLE movies.casting(
 	FOREIGN KEY (actorid) REFERENCES actor(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 ```
+# Borrando esquema y tablas
+
+# Adición y borrado de columnas
+
+# Adición y borrado de restricciones
+
+# Modificación y Borrado de tuplas
