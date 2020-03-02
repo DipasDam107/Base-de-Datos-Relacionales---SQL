@@ -2,7 +2,6 @@ SUBLENGUAJES
 -----------------------
 
 # Indice
-- [Volver al Indice](#indice)
 - [Sublenguajes](#sublenguajes)
 - [DDL Data Definition Language](#ddl-data-definition-language)
 	- [CREATE SCHEMA DATABASE](#create-schema-o-database)
@@ -64,6 +63,8 @@ SUBLENGUAJES
 [Volver al Indice](#indice)
 
 # DDL Data Definition Language
+Permite definir objetos (esquemas, bases de datos, columnas, restricciones... ) en una base de datos.
+
 ## CREATE SCHEMA o DATABASE 
 Para crear base de datos, utilizamos la siguiente sintaxis:
 
@@ -387,6 +388,8 @@ ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 -----------------------------
 
 # DML - Data Manipulation Language
+Permite manipular los datos de una base de datos.
+
 ## INSERT
 ```sql
 INSERT INTO <nome_da_taboa> [(Atributo1, Atributo2....)](VALUES (valor1, valor2....) | SELECT...);
