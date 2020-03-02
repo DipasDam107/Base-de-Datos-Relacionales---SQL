@@ -1,8 +1,20 @@
+# Indice
 - [Sublenguajes](#sublenguajes)
 - [DDL Data Definition Language](#ddl-data-definition-language)
 	- [CREATE SCHEMA DATABASE](#create-schema-o-database)
 	- [CREATE TABLE](#create-table)
 		- [DECLARACION DE CAMPOS](#declaracion-de-campos)
+			- [CONSTRAINT PK](#constraint-pk)
+			- [CONSTRAINT FK](#constraint-fk)
+				- [CASCADE](#cascade)
+				- [NO ACTION](#no-action)
+				- [SET DEFAULT](#set-default)
+				- [SET NULL](#set-null)
+				- [MATCH FULL](#match-full)
+				- [MATCH PARTIAL](#match-partial)
+			- [CONSTRAINT UNIQUE](#constraint-unique)
+			- [CONSTRAINT CHECK](#constraint-check)
+			
 -----------------------
 # Sublenguajes
 - DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
@@ -80,6 +92,40 @@ Para declarar un campo a la hora de definir una tabla, se sigue la siguiente est
 <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL]
 ```
 
+Los campos que vamos a definir dentro de la tabla pueden tener los siguientes tipos, entre los cuales debemos elegir uno que represente con exactitud el dato que queremos reflejar:
+
+- Numericos
+	- INTEGER
+	- BIGINT
+	- SMALLINT
+	- DECIMAL (Preciso)
+	- REAL (No preciso, 6 Decimales)
+
+- Textos
+	- CHAR (Longitud fija)
+	- VARCHAR (Longitud Variable)
+	- TEXT (Logitud ilimitada variable)
+
+- Fechas
+	- DATE (Dia, mes y año)
+	- TIME (Hora, minuto y segundo)
+	- TIME WITH TIME ZONE (Hora, minuto y segundo)
+	- TIMESTAMP (Incluye Date y Time)
+	- TIMESTAMP WITH TIME ZONE (Incluye Date y Time)
+	- INTERVAL
+
+- Booleano
+	- BOOLEAN (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
+
+- Moneda
+	- MONEY
+	
+- Otros
+	- UUID (Identificador Único)
+	- JSON
+	- CIDR (Redes)
+	- INET (Redes)
+
 Se pueden declarar múltiples campos, cada uno con su respectivo tipo de dato, hasta que cumplamos las condiciones de la base de datos. A la hora de declarar el propio campo, se pueden definir las siguientes constraints opcionales:
 - PRIMARY KEY
 - UNIQUE
@@ -148,8 +194,8 @@ El borrado de un registro, borra todos los registros de la otra tabla que refere
 ![image](./img/BD_C.png "Cascade")
 		
 
-##### NO ACTION  (Por defecto)
-No toma acciones a mayores si se produce borrado o modificacion.
+##### NO ACTION
+Valor por defecto si no especificamos uno. No toma acciones a mayores si se produce borrado o modificacion.
 
 ![image](./img/bd_NA.png "No Action")
 
@@ -169,39 +215,6 @@ Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es dec
 ##### MATCH PARTIAL
 No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga NULL en parte de la clave. Con MATCH FULL, esto no sería posible salvo que todas las columnas relacionadas sean NULL, mientras que MATCH PARTIAL si que lo permite.
 
-
-##### Tipos de datos
-- Numericos
-	- INTEGER
-	- BIGINT
-	- SMALLINT
-	- DECIMAL (Preciso)
-	- REAL (No preciso, 6 Decimales)
-
-- Textos
-	- CHAR (Longitud fija)
-	- VARCHAR (Longitud Variable)
-	- TEXT (Logitud ilimitada variable)
-
-- Fechas
-	- DATE (Dia, mes y año)
-	- TIME (Hora, minuto y segundo)
-	- TIME WITH TIME ZONE (Hora, minuto y segundo)
-	- TIMESTAMP (Incluye Date y Time)
-	- TIMESTAMP WITH TIME ZONE (Incluye Date y Time)
-	- INTERVAL
-
-- Booleano
-	- BOOLEAN (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
-
-- Moneda
-	- MONEY
-	
-- Otros
-	- UUID (Identificador Único)
-	- JSON
-	- CIDR (Redes)
-	- INET (Redes)
 
 #### CONSTRAINT UNIQUE 
 Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla
