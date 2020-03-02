@@ -409,6 +409,8 @@ Restricciones al usar SELECT:
 [Volver al Indice](#indice)
 
 ## UPDATE
+La instrucción `UPDATE` permite modificar datos de una o varias tuplas de una tabla:
+
 ```sql
 UPDATE <Nombre_Tabla> SET atributo1=valor1,
 		          atributo2=valor2,
@@ -434,7 +436,11 @@ WHERE name = 'Spain';
 [Volver al Indice](#indice)
 				  
 ## DELETE
-> DELETE FROM nombre_tabla [WHERE predicado]
+La instrucción `DELETE` permite borrar tuplas de una tabla concreta:
+
+```sql
+DELETE FROM nombre_tabla [WHERE predicado]
+```
 
 Igual que con el UPDATE, debemos tener cuidado con no incluir predicados, ya que aunque sean opcionales, no incluilos significa borrar todos los datos de la tabla.
 
