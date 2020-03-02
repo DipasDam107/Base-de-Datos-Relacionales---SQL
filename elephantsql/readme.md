@@ -76,7 +76,7 @@ Creada la conexión ya podemos empezar a trabajar con la base de datos de Elepha
 
 ![image](./img/img15.png "Logo Title Text 1")
 
-# Lo que sea
+# Empezar a trabajar
 A partir de aquí tenemos tres opciones para ejecutar instrucciones SQL en nuestra instancia ElephantSQL.
 
 ## A golpe de comando
