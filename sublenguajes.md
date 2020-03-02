@@ -269,31 +269,70 @@ CHECK (saldo >= (
 ```
 
 ----------------------------------
-# DROP
-### Borrar base de datos
+## DROP
+La instrucción DROP nos permite borrar objetos de la base de datos o la propia base de datos.
+
+### DROP SCHEMA o DATABASE
+Esta instrucción nos permite borrar el SCHEMA o DATABASE. Estructura:
+
+```sql
 DROP SCHEMA [IF EXISTS] <nome-da-bd>;
+	....
 DROP DATABASE [IF EXISTS] <nome-da-bd>;
-	
-### Borrar Tabla
+```
+La cláusula opcional IF EXISTS comprueba que la base de datos existe antes de borrarla.
+
+### DROP TABLE
+Esta instrucción permite borrar objetos de tipo tabla de una base de datos o esquema. Estructura:
+```sql
 DROP TABLE [IF EXISTS] <nome-taboa>
 [CASCADE|RESTRICT];
-
-- CASCADE: Borra todo en cascada, incluyendo los objetos dependientes
-- RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes
+```
+Opciones:
+- IF EXISTS: Comprueba que la tabla existe antes de borrarla.
+- CASCADE: Borra todo en cascada, incluyendo los objetos dependientes.
+- RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
 
 ## ALTER
-Podemos modificar, borrar o añadir columnas, restricciones
+Podemos modificar, borrar o añadir columnas, restricciones.
 
-###  Añadir Columna
-ALTER TABLE nome-tabla ADD [COLUMN] atributo dominio ..... NOT NULL | DEFAULT
+### ADD COLUMN
+La opción ADD COLUMN de ALTER TABLE, nos permite añadir una nueva columna a una tabla previamente creada, añadiendo tipo y modificadores (La misma estructura que al crear la tabla)
 
-### Borrar Columna *
-ALTER TABLE nome-tabla DROP COLUMN atributo [CASCADE|RESTRICT]
+```sql
+ALTER TABLE nome-tabla ADD [COLUMN] <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)];
+```
 
-### Añadir Restriccion
-ALTER TABLE ADD CONSTRAINT <Nome_Restriccion>.... 
-### Borrar Restriccion
+### DROP COLUMN
+La opción DROP COLUMN de ALTER TABLE nos permite borrar un campo de una tabla existente.
+
+```sql
+ALTER TABLE nome-tabla DROP COLUMN <nombrecampo> [CASCADE|RESTRICT];
+```
+
+Opciones:
+- CASCADE: Borra todas las CONSTRAINTS y campos de otras tablas que la referencien.
+- RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
+
+### ADD CONSTRAINT
+La opción ADD CONSTRAINT de ALTER TABLE añade una restricción a una tabla existente:
+
+```sql
+ALTER TABLE ADD [CONSTRAINT <Nome_Restriccion>] UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
+```
+Cada tipo de CONSTRAINT usa la misma estructura para ser creada que la que vimos en CREATE TABLE antes. Así mismo, puede omitirse la parte del nombre:
+
+```sql
+ALTER TABLE ADD UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
+```
+
+### DROP CONSTRAINT
+La opción DROP CONSTRAINT de ALTER TABLE permite borrar una restricción existente en una tabla:
+```sql
 ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
+```
+
+-----------------------------
 
 # DML - Data Manipulation Language
 ## INSERT
