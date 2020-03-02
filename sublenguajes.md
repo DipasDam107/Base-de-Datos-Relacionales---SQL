@@ -1,5 +1,6 @@
-# SUBLENGUAJES
+SUBLENGUAJES
 -----------------------
+
 # Indice
 - [Volver al Indice](#indice)
 - [Sublenguajes](#sublenguajes)
@@ -83,9 +84,9 @@ Alternativa:
 ```
 
 Opciones:
-- IF NOT EXISTS: Opcional. Comprueba si la base de datos que vamos a crear ya existe en el SGBD.
-- CHARACTER SET: Opcional. CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1).
-- COLLATE: Opcional. Se combina con CHARACTER SET. Ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
+- `IF NOT EXISTS`: Opcional. Comprueba si la base de datos que vamos a crear ya existe en el SGBD.
+- `CHARACTER SET`: Opcional. CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1).
+- `COLLATE`: Opcional. Se combina con CHARACTER SET. Ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
 
 [Volver al Indice](#indice)
 
@@ -151,10 +152,10 @@ Los campos que vamos a definir dentro de la tabla pueden tener los siguientes ti
 	- INET (Redes)
 
 Se pueden declarar múltiples campos, cada uno con su respectivo tipo de dato, hasta que cumplamos las condiciones de la base de datos. A la hora de declarar el propio campo, se pueden definir las siguientes constraints opcionales:
-- PRIMARY KEY
-- UNIQUE
-- NOT NULL
-- CHECK
+- `PRIMARY KEY`
+- `UNIQUE`
+- `NOT NULL`
+- `CHECK`
 
 A continuación procedo a explicar cada una.
 
@@ -197,7 +198,7 @@ Podemos darle nombre al constraint, útil especificamente para DBAs:
 [Volver al Indice](#indice)
 
 #### CONSTRAINT FK
-Nos permite establecer la relación entre varias tablas, especificando los campos que tienen en común. Estructura:
+Nos permite `establecer la relación entre varias tablas`, especificando los campos que tienen en común. Estructura:
 
 ```sql
 [CONSTRAINT <nombreRestriccion>] FOREIGN KEY (<Atributos>) REFERENCES <Nombre_tabla_referenciada>[(<Atributos_referenciados>)]
@@ -208,8 +209,8 @@ Nos permite establecer la relación entre varias tablas, especificando los campo
 
 Podemos especificar que operaciones se van a realizar si en la misma tabla se producen modificaciones, indicando como va a afectar a las que están enlazadas a través de clave ajena:
 
-> Borrado: ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT
-> Actualizaciones: ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT
+> Borrado: `ON DELETE` CASCADE|NO ACTION|SET NULL|SET DEFAULT
+> Actualizaciones: `ON UPDATE` CASCADE|NO ACTION|SET NULL|SET DEFAULT
 
 Vamos a ver los tipos de acciones que se pueden tomar tras un UPDATE o un DELETE usando una Base de Datos con tablas de departamentos y profesores relacionadas:
 
@@ -224,7 +225,7 @@ El borrado de un registro, borra todos los registros de la otra tabla que refere
 		
 
 ##### NO ACTION
-Valor por defecto si no especificamos uno. No toma acciones a mayores si se produce borrado o modificacion.
+`Valor por defecto` si no especificamos uno. No toma acciones a mayores si se produce borrado o modificacion.
 
 ![image](./img/bd_NA.png "No Action")
 
@@ -239,10 +240,10 @@ Cambia el valor en la tabla ajena a un valor nulo.
 ![image](./img/BD_SN.png "Set Null")
 
 ##### MATCH FULL
-Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es decir, o coinciden los datos en ambas tablas, o han de ser todos NULL, no solo uno.
+Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es decir, o coinciden los datos en ambas tablas, o han de ser todos `NULL`, no solo uno.
 
 ##### MATCH PARTIAL
-No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga NULL en parte de la clave. Con MATCH FULL, esto no sería posible salvo que todas las columnas relacionadas sean NULL, mientras que MATCH PARTIAL si que lo permite.
+No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga `NULL` en parte de la clave. Con `MATCH FULL`, esto no sería posible salvo que todas las columnas relacionadas sean `NULL`, mientras que `MATCH PARTIAL` si que lo permite.
 
 [Volver al Indice](#indice)
 
@@ -256,7 +257,7 @@ Nos permite especificar que los valores de un campo no se pueden repetir. Habitu
 	); <
 ```
 
-Como alternativa, podemos definir un campo UNIQUE como una restriccion aparte, ya sea especificando nombre de CONSTRAINT o no:
+Como alternativa, podemos definir un campo `UNIQUE` como una restriccion aparte, ya sea especificando nombre de `CONSTRAINT` o no:
 
 ```sql
 	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
@@ -265,7 +266,7 @@ Como alternativa, podemos definir un campo UNIQUE como una restriccion aparte, y
 [Volver al Indice](#indice)
 
 #### CONSTRAINT CHECK
-Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve true. Puede introducirse de varias maneras, siendo la primera en la declaración del propio campo:
+Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve `true`. Puede introducirse de varias maneras, siendo la primera en la declaración del propio campo:
 
 ```sql
  CREATE TABLE <NombreTabla> (
@@ -283,13 +284,13 @@ Por otra parte, podemos definirlo como una constraint al final:
 
 ##### Modificadores
 Tiene dos modificadores:
-- [NOT] DEFERRABLE: Determina si la aplicación del check es aplazable (DEFERRABLE) o no (NOT DEFERRABLE). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar. 
-- INITIALLY[IMMEDIATE|DEFERRABLE]: 
-	- INITIALLY DEFERRABLE va con DEFERRABLE - Lo aplaza
-	- INITIALLY INMEDIATE va con NOT DEFERRABLE - Lo hace inmediatamente 
+- `[NOT] DEFERRABLE`: Determina si la aplicación del check es aplazable (DEFERRABLE) o no (NOT DEFERRABLE). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar. 
+- `INITIALLY[IMMEDIATE|DEFERRABLE]`: 
+	- `INITIALLY DEFERRABLE` va con `DEFERRABLE`. Lo aplaza
+	- `INITIALLY INMEDIATE` va con `NOT DEFERRABLE`. Lo hace inmediatamente 
 	
 ##### Predicado
-Un predicado de un CHECK es útil para comprobar si el campo introducido cumple un requisito. En caso de cumplirlo devuelve true y la modificación se realiza y en caso contrario devuelve false y al carrer. Ejemplo que comprueba que en una inserción o modificación el campo saldo sea mayor que 0:
+Un predicado de un `CHECK` es útil para comprobar si el campo introducido cumple un requisito. En caso de cumplirlo devuelve `true` y la modificación se realiza y en caso contrario devuelve `false` y al carrer. Ejemplo que comprueba que en una inserción o modificación el campo saldo sea mayor que 0:
 
 ```sql
 CHECK (saldo>0)
@@ -307,19 +308,19 @@ CHECK (saldo >= (
 
 ----------------------------------
 ## DROP
-La instrucción DROP nos permite borrar objetos de la base de datos o la propia base de datos.
+La instrucción `DROP` nos permite borrar objetos de la base de datos o la propia base de datos.
 
 [Volver al Indice](#indice)
 
 ### DROP SCHEMA o DATABASE
-Esta instrucción nos permite borrar el SCHEMA o DATABASE. Estructura:
+Esta instrucción nos permite borrar el `SCHEMA` o `DATABASE`. Estructura:
 
 ```sql
 DROP SCHEMA [IF EXISTS] <nome-da-bd>;
 	....
 DROP DATABASE [IF EXISTS] <nome-da-bd>;
 ```
-La cláusula opcional IF EXISTS comprueba que la base de datos existe antes de borrarla.
+La cláusula opcional `IF EXISTS` comprueba que la base de datos existe antes de borrarla.
 
 [Volver al Indice](#indice)
 
@@ -330,9 +331,9 @@ DROP TABLE [IF EXISTS] <nome-taboa>
 [CASCADE|RESTRICT];
 ```
 Opciones:
-- IF EXISTS: Comprueba que la tabla existe antes de borrarla.
-- CASCADE: Borra todo en cascada, incluyendo los objetos dependientes.
-- RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
+- `IF EXISTS`: Comprueba que la tabla existe antes de borrarla.
+- `CASCADE`: Borra todo en cascada, incluyendo los objetos dependientes.
+- `RESTRICT`: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
 
 [Volver al Indice](#indice)
 
@@ -340,7 +341,7 @@ Opciones:
 Podemos modificar, borrar o añadir columnas, restricciones.
 
 ### ADD COLUMN
-La opción ADD COLUMN de ALTER TABLE, nos permite añadir una nueva columna a una tabla previamente creada, añadiendo tipo y modificadores (La misma estructura que al crear la tabla)
+La opción `ADD COLUMN` de `ALTER TABLE`, nos permite añadir una nueva columna a una tabla previamente creada, añadiendo tipo y modificadores (La misma estructura que al crear la tabla)
 
 ```sql
 ALTER TABLE nome-tabla ADD [COLUMN] <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)];
@@ -349,7 +350,7 @@ ALTER TABLE nome-tabla ADD [COLUMN] <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE]
 [Volver al Indice](#indice)
 
 ### DROP COLUMN
-La opción DROP COLUMN de ALTER TABLE nos permite borrar un campo de una tabla existente.
+La opción `DROP COLUMN` de `ALTER TABLE` nos permite borrar un campo de una tabla existente.
 
 ```sql
 ALTER TABLE nome-tabla DROP COLUMN <nombrecampo> [CASCADE|RESTRICT];
@@ -362,7 +363,7 @@ Opciones:
 [Volver al Indice](#indice)
 
 ### ADD CONSTRAINT
-La opción ADD CONSTRAINT de ALTER TABLE añade una restricción a una tabla existente:
+La opción `ADD CONSTRAINT` de `ALTER TABLE` añade una restricción a una tabla existente:
 
 ```sql
 ALTER TABLE ADD [CONSTRAINT <Nome_Restriccion>] UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
@@ -376,7 +377,7 @@ ALTER TABLE ADD UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
 [Volver al Indice](#indice)
 
 ### DROP CONSTRAINT
-La opción DROP CONSTRAINT de ALTER TABLE permite borrar una restricción existente en una tabla:
+La opción `DROP CONSTRAINT` de `ALTER TABLE` permite borrar una restricción existente en una tabla:
 ```sql
 ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 ```
