@@ -1,5 +1,5 @@
 # Indice
-- [Creando esquema y tablas e insertando datos] (#creando-esquema-y-tablas-e-insertando-datos)
+- [Creando esquema y tablas e insertando datos](#creando-esquema-y-tablas-e-insertando-datos)
 	- [BD World](#bd-world)
 	  - [Creando world](#creando-tabla-world)
 	  - [Metiendo datos](#metiendo-datos)
