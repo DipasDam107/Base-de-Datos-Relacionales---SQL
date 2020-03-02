@@ -342,19 +342,69 @@ Igual que pasó antes, la tabla podría tener objetos hijos los cuales impedirí
 ![image](./img/capt4.png "Logo Title Text 1")
 
 # Adición y borrado de columnas
-![image](./img/capt5.png "Logo Title Text 1")
+Para añadir una columna a una tabla existente usamos la siguiente estructura:
+
+```SQL
+ALTER TABLE <nombreTabla> ADD COLUMN <nombrecolumna> tipo restricciones;
+```
+
+Añado por ejemplo el campo prueba entero:
 ![image](./img/capt12.png "Logo Title Text 1")
+
+Para borrar simplemente usamos:
+```SQL
+ALTER TABLE <nombreTabla> DROP COLUMN <nombrecolumna>;
+```
+
 ![image](./img/capt13.png "Logo Title Text 1")
 
 # Adición y borrado de restricciones
+Para añadir una restricción usamos la siguiente sentencia:
+```SQL
+ALTER TABLE <nombreTabla> [ADD CONSTRAINT <nombre>] CHECK | PRIMARY KEY | FOREIGN KEY....;
+```
+
+Añado una restricción que compruebe que el nombre tenga al menos 5 letras. Pruebo a añadir 'Pepe', y da error:
 ![image](./img/capt6.png "Logo Title Text 1")
+
+Como soy subnormal no le di nombre a la restricción. Si sois tan jodidamente deficientes como yo, teneis que comprobar el nombre de la restricción con el siguiente comando:
+```SQL
+	SELECT * FROM information_schema.table_constraints WHERE table_name='empleado';
+```
+
+De esta manera, compruebo las restricciones existentes en mi tabla (En este caso quiero borrar empleado_nombre_check):
 ![image](./img/capt7.png "Logo Title Text 1")
+
+Sabiendo el nombre de la constraint, uso la siguiente sentencia para borrar:
+```SQL
+ALTER TABLE <nombreTabla> DROP CONSTRAINT <nombre>;
+```
+
 ![image](./img/capt8.png "Logo Title Text 1")
-SELECT * FROM information_schema.table_constraints WHERE table_name='empleado';
+
 
 # Inserción, Modificación y Borrado de tuplas
-![image](./img/capt9.png "Logo Title Text 1")
+Hago un insert con válidos:
+```SQL
+INSERT INTO prueba.empleado VALUES (1,'Dipas',28), (2,'Manuel',20), (3,'Jose Luis', 35), (4,'Alfonso', 50),(5,'Jose Doval', 35), (6,'maradona', 50);
+```
 ![image](./img/capt11.png "Logo Title Text 1")
+
+Supongamos que la he liado con un nombre y no le puse mayúscula. Necesito actualizar dicho registro ('maradona'). Uso update con la siguiente estructura:
+```SQL
+UPDATE <nombretabla> SET campo=valor WHERE (predicado);
+```
+Pongo Maradona donde el nombre sea maradona:
 ![image](./img/capt10.png "Logo Title Text 1")
 
-INSERT INTO prueba.empleado VALUES (1,'Dipas',28), (2,'Manuel',20), (3,'Jose Luis', 35), (4,'Alfonso', 50),(5,'Jose Doval', 35), (6,'Maradroga', 50);
+Por último, para borrar registros uso DELETE con la siguiente estructura:
+```SQL
+DELETE FROM <nombretabla> WHERE (predicado);
+```
+
+Borro aquellas tuplas cuyo campo nombre empiece por J:
+![image](./img/capt9.png "Logo Title Text 1")
+
+
+
+
