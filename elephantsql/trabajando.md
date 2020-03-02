@@ -316,6 +316,8 @@ CREATE TABLE movies.casting(
 
 # Adición y borrado de columnas
 ![image](./img/capt5.png "Logo Title Text 1")
+![image](./img/capt12.png "Logo Title Text 1")
+![image](./img/capt13.png "Logo Title Text 1")
 
 # Adición y borrado de restricciones
 ![image](./img/capt6.png "Logo Title Text 1")
