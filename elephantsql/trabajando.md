@@ -309,9 +309,36 @@ CREATE TABLE movies.casting(
 ```
 
 # Borrando esquema y tablas
+Para crear un `SCHEMA` usamos la instrucción:
+```SQL
+CREATE SCHEMA <nombreSchema>;
+```
+
+Así mismo, para borrar el esquema, uso la siguiente instrucción:
+```SQL
+DROP SCHEMA <nombreSchema> CASCADE|RESTRICT;
+```
+
+Para este experimento creo un esquema llamado 'prueba', con una tabla empleado dentro:
+
 ![image](./img/capt1.png "Logo Title Text 1")
+
+Esto lo hago para que, al intentar borrar el `SCHEMA` me de error. Esto se debe a que el `SCHEMA` tiene objetos dependientes por debajo (La Tabla empleado):
+
 ![image](./img/capt2.png "Logo Title Text 1")
+
+Para poder borrar el `SCHEMA` tenemos dos opciones. En primer lugar, borrar todos los objetos dependientes y posteriormente dicho `SCHEMA`. La otra alternativa sería realizar un borrado en `CASCADE`, es decir, que borre todos los objetos hijos y luego el `SCHEMA`:
+
 ![image](./img/capt3.png "Logo Title Text 1")
+
+Para borrar tablas usamos la siguiente estructura:
+
+```SQL
+DROP TABLE <nombreTabla> CASCADE|RESTRICT;
+```
+
+Igual que pasó antes, la tabla podría tener objetos hijos los cuales impedirían un borrado que no fuera `CASCADE`. Pruebo un borrado con una nueva iteración de la tabla empleado:
+
 ![image](./img/capt4.png "Logo Title Text 1")
 
 # Adición y borrado de columnas
