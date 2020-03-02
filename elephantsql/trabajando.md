@@ -313,4 +313,5 @@ CREATE TABLE movies.casting(
 
 # Adición y borrado de restricciones
 
-# Modificación y Borrado de tuplas
+# Inserción, Modificación y Borrado de tuplas
+INSERT INTO prueba.empleado VALUES (1,'Dipas',28), (2,'Manuel',20), (3,'Jose Luis', 35), (4,'Alfonso', 50),(5,'Jose Doval', 35), (6,'Maradroga', 50);
