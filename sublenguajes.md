@@ -16,6 +16,7 @@ SUBLENGUAJES
 				- [MATCH FULL](#match-full)
 				- [MATCH PARTIAL](#match-partial)
 			- [CONSTRAINT UNIQUE](#constraint-unique)
+			- [CONSTRAINT DEFAULT](#constraint-default)
 			- [CONSTRAINT CHECK](#constraint-check)
 	- [DROP](#drop)
 		- [DROP SCHEMA o DATABASE](#drop-schema-o-database)
@@ -96,12 +97,13 @@ Para crear Tablas, utilizamos la siguiente sintaxis:
 
 ```sql
  CREATE TABLE <NombreTabla> (
-	<nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)],
+	<nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)][DEFAULT <valorPorDefecto>],
 	<nombrecampo2> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)],
 	.....
 	[CONSTRAINT <NombrePK>] PRIMARY KEY (atributo1, atributo2....),
 	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>),
 	[CONSTRAINT <nombreRestriccion>] CHECK predicado(atributos),
+	[CONSTRAINT <nombreRestriccion>] DEFAULT <valor> FOR <campo>,
 	[CONSTRAINT <nombreRestriccion>] FOREIGN KEY (<Atributos>) REFERENCES <Nombre_tabla_referenciada>[(<Atributos_referenciados>)]
 	[ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
 	[ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
@@ -262,6 +264,24 @@ Como alternativa, podemos definir un campo `UNIQUE` como una restriccion aparte,
 
 ```sql
 	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
+```
+
+[Volver al Indice](#indice)
+
+#### CONSTRAINT DEFAULT
+Nos permite añadir un valor por defecto a un campo, en caso de que en la introducción de la tupla no sea especificado uno distinto. Se puede especificar en la propia declaración del campo a la hora de crear la tabla:
+
+```sql
+ CREATE TABLE <NombreTabla> (
+	numero INTEGER DEFAULT 1,
+	...
+	); <
+```
+
+También se puede crear la `CONSTRAINT` de la declaración de campos:
+
+```sql
+	[CONSTRAINT <nombreRestriccion>] DEFAULT 1 FOR numero
 ```
 
 [Volver al Indice](#indice)
