@@ -4,7 +4,7 @@ ELEPHANT SQL
 # Indice
 - [¿Que es Elephant?](#¿que-es-elephant?)
 - [Creando Instancias](#creando-instancias)
-- [Instalando pgadmin y SQLshell](#instalando-pgadmin-y-sqlshell)
+- [Instalando pgadmin y SQLshell](#instalando-pgadmin-y-sqlshell-psql)
 - [Acceder al servidor desde psql](#acceder-al-servidor-desde-psql)
 - [Acceder al servidor desde pgadmin](#acceder-al-servidor-desde-pgadmin)
 - [Empezar a Trabajar](#empezar-a-trabajar)
@@ -48,7 +48,7 @@ Teniendo esto en cuenta, dejamos nuestra cuenta de Elephant por el momento, y va
 
 [Volver al indice](#indice)
 
-# Instalando PGAdmin y SQLShell (psql)
+# Instalando PGAdmin y SQLShell psql
 Descargamos el instalador de PostgreSQL.
 [Enlace](https://www.postgresql.org/download/)
 
