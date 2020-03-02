@@ -1,87 +1,101 @@
-# Sublenguajes SQL
--DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
+- [Sublenguajes](#sublenguajes)
+- [DDL Data Definition Language](#ddl-data-definition-language)
+	- [CREATE SCHEMA DATABASE](#create-schema-o-database)
+	- [CREATE TABLE](#create-table)
+		- [DECLARACION DE CAMPOS](#declaracion-de-campos)
+-----------------------
+# Sublenguajes
+- DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
+	- CREATE
+	- ALTER
+	- DROP
 
-	-CREATE
-	-ALTER
-	-DROP
-
--DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
-
-	-UPDATE 
-	-INSERT
-	-DELETE
-
--DCL Data Control Language (Permisos)
-
-	-GRANT
-	-REVOKE
+- DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
+	- UPDATE 
+	- INSERT
+	- DELETE
 	
--SCL Session Control Language (Manejar dinamicamente propiedades de sesión de usuario)
-
-	-ALTER SESSION
-	-SET ROLE
+- DCL Data Control Language (Permisos)
+	- GRANT
+	- REVOKE
 	
--TCL Transaction Control Language (Unidad logica de procesado compuesta por varias transacciones)
-
-	-Commit
-	-Rollback
-	-SafePoint
-
--DQL Data Query Language (Relativamente nuevo para englobar a SELECT, que es muy potente. Opera sobre los datos)
-
-	-SELECT
-
-# DDL - Data Definition Language
-## CREATE
-Podemos crear Bases de datos, tablas y usuarios.
+- SCL Session Control Language (Manejar dinamicamente propiedades de sesión de usuario)
+	- ALTER SESSION
+	- SET ROLE
 	
-### DATABASE
+- TCL Transaction Control Language (Unidad logica de procesado compuesta por varias transacciones)
+	- Commit
+	- Rollback
+	- SafePoint
+
+- DQL Data Query Language (Relativamente nuevo para englobar a SELECT, que es muy potente. Opera sobre los datos)
+	- SELECT
+
+# DDL Data Definition Language
+## CREATE SCHEMA o DATABASE 
 Para crear base de datos, utilizamos la siguiente sintaxis:
 
-> CREATE (SCHEMA|DATABASE) [IF NOT EXISTS] [CHARACTER SET <Nombre Charset> [COLLATE <Nombre_Variante>]] << NombreBD >>;
+```sql
+CREATE (SCHEMA|DATABASE) [IF NOT EXISTS] [CHARACTER SET <Nombre Charset> [COLLATE <Nombre_Variante>]] << NombreBD >>;
+```
 
-#### SCHEMA o DATABASE
-En general se comportan de la misma manera, habiendo algunas diferencias en el tratamiento de permisos.
+En general las bases de datos y los esquemas se comportan de la misma manera, habiendo algunas diferencias en el tratamiento de permisos.
 
 Estructura:
-> CREATE DATABASE nombreBD;
+```sql
+CREATE DATABASE nombreBD;
+```
 
 Alternativa:
-> CREATE SCHEMA nombreBD;
+```sql
+ CREATE SCHEMA nombreBD;
+```
 
-#### IF NOT EXISTS
-Comprueba si la base de datos que vamos a crear ya existe en el SGBD.
+Opciones:
+- IF NOT EXISTS: Opcional. Comprueba si la base de datos que vamos a crear ya existe en el SGBD.
+- CHARACTER SET: Opcional. CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1).
+- COLLATE: Opcional. Se combina con CHARACTER SET. Ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
 
-#### CHARACTER SET y COLLATE
-CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1), y COLLATE nos ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
-
-### TABLE
+## CREATE TABLE
 Para crear Tablas, utilizamos la siguiente sintaxis:
+
 ```sql
  CREATE TABLE <NombreTabla> (
-	id INTEGER PRIMARY KEY,
-	nome NCHAR(50) NOT NULL,
-	apelidos NCHAR(200),
-	nacido DATE,
-	[CONSTRAINT <NombrePK>] PRIMARY KEY (atributo1, atributo2....)
+	<nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)],
+	<nombrecampo2> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)],
+	.....
+	[CONSTRAINT <NombrePK>] PRIMARY KEY (atributo1, atributo2....),
+	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>),
+	[CONSTRAINT <nombreRestriccion>] CHECK predicado(atributos),
 	[CONSTRAINT <nombreRestriccion>] FOREIGN KEY (<Atributos>) REFERENCES <Nombre_tabla_referenciada>[(<Atributos_referenciados>)]
-	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
-	[CONSTRAINT <nombreRestriccion>] CHECK predicado(atributos)
 	[ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
 	[ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
 	[MATCH FULL| MATCH PARTIAL]
 	); <
 	
 ```
+### Declaracion de campos
+Para declarar un campo a la hora de definir una tabla, se sigue la siguiente estructura:
+```sql
+<nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL]
+```
+
+Se pueden declarar múltiples campos, cada uno con su respectivo tipo de dato, hasta que cumplamos las condiciones de la base de datos. A la hora de declarar el propio campo, se pueden definir las siguientes constraints opcionales:
+- PRIMARY KEY
+- UNIQUE
+- NOT NULL
+- CHECK
+
+A continuación procedo a explicar cada una.
 
 #### CONSTRAINT PK
 La constraint PRIMARY KEY indica que campo/s forman parte de la clave principal, que indica el campo que actúa como diferenciador a nivel tupla. Hay varias maneras de utilizarlo. 
 
-En primer lugar podemos definir la clave principal en la misma definicion del atributo:
+En primer lugar podemos definir la clave principal en la misma definicion del campo:
 
 ```sql
  CREATE TABLE <NombreTabla> (
-	id INTEGER ** PRIMARY KEY **,
+	id INTEGER PRIMARY KEY,
 	...
 	); <
 ```
@@ -110,7 +124,14 @@ Podemos darle nombre al constraint, útil especificamente para DBAs:
 
 
 #### CONSTRAINT FK
-Nos permite establecer la relación entre varias tablas, especificando los campos que tienen en común.
+Nos permite establecer la relación entre varias tablas, especificando los campos que tienen en común. Estructura:
+
+```sql
+[CONSTRAINT <nombreRestriccion>] FOREIGN KEY (<Atributos>) REFERENCES <Nombre_tabla_referenciada>[(<Atributos_referenciados>)]
+[ON DELETE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
+[ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT]
+[MATCH FULL| MATCH PARTIAL]
+```
 
 Podemos especificar que operaciones se van a realizar si en la misma tabla se producen modificaciones, indicando como va a afectar a las que están enlazadas a través de clave ajena:
 
@@ -118,6 +139,7 @@ Podemos especificar que operaciones se van a realizar si en la misma tabla se pr
 > Actualizaciones: ON UPDATE CASCADE|NO ACTION|SET NULL|SET DEFAULT
 
 Vamos a ver los tipos de acciones que se pueden tomar tras un UPDATE o un DELETE usando una Base de Datos con tablas de departamentos y profesores relacionadas:
+
 ![image](./img/BD_DEPT.png "Cascade")
 
 ##### CASCADE 
@@ -128,14 +150,17 @@ El borrado de un registro, borra todos los registros de la otra tabla que refere
 
 ##### NO ACTION  (Por defecto)
 No toma acciones a mayores si se produce borrado o modificacion.
+
 ![image](./img/bd_NA.png "No Action")
 
 ##### SET DEFAULT
 Cambia el valor en la tabla ajena a un valor por defecto.
+
 ![image](./img/bd_SD.png "Set Default")
 
 ##### SET NULL
-Cambia el valor en la tabla ajena a un valor nulo.	
+Cambia el valor en la tabla ajena a un valor nulo.
+
 ![image](./img/BD_SN.png "Set Null")
 
 ##### MATCH FULL
@@ -144,44 +169,45 @@ Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es dec
 ##### MATCH PARTIAL
 No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga NULL en parte de la clave. Con MATCH FULL, esto no sería posible salvo que todas las columnas relacionadas sean NULL, mientras que MATCH PARTIAL si que lo permite.
 
-#### Tipos de datos
-##### Numericos
-- INTEGER
-- BIGINT
-- SMALLINT
-- DECIMAL (Preciso)
-- REAL (No preciso, 6 Decimales)
 
-##### Textos
-- CHAR (Longitud fija)
-- VARCHAR (Longitud Variable)
-- TEXT (Logitud ilimitada variable)
+##### Tipos de datos
+- Numericos
+	- INTEGER
+	- BIGINT
+	- SMALLINT
+	- DECIMAL (Preciso)
+	- REAL (No preciso, 6 Decimales)
 
-##### Fechas
-- DATE (Dia, mes y año)
-- TIME (Hora, minuto y segundo)
-- TIME WITH TIME ZONE (Hora, minuto y segundo)
-- TIMESTAMP (Incluye Date y Time)
-- TIMESTAMP WITH TIME ZONE (Incluye Date y Time)
-- INTERVAL
+- Textos
+	- CHAR (Longitud fija)
+	- VARCHAR (Longitud Variable)
+	- TEXT (Logitud ilimitada variable)
 
-##### Booleano
-- BOOLEAN (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
+- Fechas
+	- DATE (Dia, mes y año)
+	- TIME (Hora, minuto y segundo)
+	- TIME WITH TIME ZONE (Hora, minuto y segundo)
+	- TIMESTAMP (Incluye Date y Time)
+	- TIMESTAMP WITH TIME ZONE (Incluye Date y Time)
+	- INTERVAL
 
-##### Moneda
-- MONEY
+- Booleano
+	- BOOLEAN (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
 
-##### Otros
-- UUID (Identificador Único)
-- JSON
-- CIDR (Redes)
-- INET (Redes)
+- Moneda
+	- MONEY
+	
+- Otros
+	- UUID (Identificador Único)
+	- JSON
+	- CIDR (Redes)
+	- INET (Redes)
 
-#### UNIQUE 
+#### CONSTRAINT UNIQUE 
 Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla
 	>[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
 
-#### CHECK
+#### CONSTRAINT CHECK
 Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve true. Tiene dos modificadores:
 - [NOT] DEFERRABLE 
 - INITIALLY[IMMEDIATE|DEFERRABLE] - 
