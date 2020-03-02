@@ -1,4 +1,7 @@
+# SUBLENGUAJES
+-----------------------
 # Indice
+- [Volver al Indice](#indice)
 - [Sublenguajes](#sublenguajes)
 - [DDL Data Definition Language](#ddl-data-definition-language)
 	- [CREATE SCHEMA DATABASE](#create-schema-o-database)
@@ -14,34 +17,50 @@
 				- [MATCH PARTIAL](#match-partial)
 			- [CONSTRAINT UNIQUE](#constraint-unique)
 			- [CONSTRAINT CHECK](#constraint-check)
-			
+	- [DROP](#drop)
+		- [DROP SCHEMA o DATABASE](#drop-schema-o-database)
+		- [DROP TABLE](#drop-table)
+	- [ALTER](#alter)
+		- [ADD COLUMN](#add-column)
+		- [DROP COLUMN](#drop-column)
+		- [ADD CONSTRAINT](#add-constraint)
+		- [DROP CONSTRAINT](#drop-constraint)
+- [DML Data Manipulation Language](#ddl-data-manipulation-language)
+	- [INSERT](#insert)
+	- [UPDATE](#update)
+	- [DELETE](#delete)
+- [GOTCHAs](#gotchas)
+
 -----------------------
+
 # Sublenguajes
-- DDL Data Definition `Lenguage` (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
+- `DDL Data Definition Lenguage` (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
 	- CREATE
 	- ALTER
 	- DROP
 
-- DML Data Manipulation Language (Antes SELECT se incluía ahi. Opera sobre los datos)
+- `DML Data Manipulation Language` (Antes SELECT se incluía ahi. Opera sobre los datos)
 	- UPDATE 
 	- INSERT
 	- DELETE
 	
-- DCL Data Control Language (Permisos)
+- `DCL Data Control Language` (Permisos)
 	- GRANT
 	- REVOKE
 	
-- SCL Session Control Language (Manejar dinamicamente propiedades de sesión de usuario)
+- `SCL Session Control Language` (Manejar dinamicamente propiedades de sesión de usuario)
 	- ALTER SESSION
 	- SET ROLE
 	
-- TCL Transaction Control Language (Unidad logica de procesado compuesta por varias transacciones)
+- `TCL Transaction Control Language` (Unidad logica de procesado compuesta por varias transacciones)
 	- Commit
 	- Rollback
 	- SafePoint
 
-- DQL Data Query Language (Relativamente nuevo para englobar a SELECT, que es muy potente. Opera sobre los datos)
+- `DQL Data Query Language` (Relativamente nuevo para englobar a SELECT, que es muy potente. Opera sobre los datos)
 	- SELECT
+
+[Volver al Indice](#indice)
 
 # DDL Data Definition Language
 ## CREATE SCHEMA o DATABASE 
@@ -68,6 +87,8 @@ Opciones:
 - CHARACTER SET: Opcional. CHARACTER SET especifica el conjunto de caracteres que se va a utilizar (Ejemplo: latin1).
 - COLLATE: Opcional. Se combina con CHARACTER SET. Ayuda a elegir la variante esepecífica dentro de dicho conjunto (Ejemplo: latin1_swedish_ci)
 
+[Volver al Indice](#indice)
+
 ## CREATE TABLE
 Para crear Tablas, utilizamos la siguiente sintaxis:
 
@@ -86,6 +107,9 @@ Para crear Tablas, utilizamos la siguiente sintaxis:
 	); <
 	
 ```
+
+[Volver al Indice](#indice)
+
 ### Declaracion de campos
 Para declarar un campo a la hora de definir una tabla, se sigue la siguiente estructura:
 ```sql
@@ -134,6 +158,8 @@ Se pueden declarar múltiples campos, cada uno con su respectivo tipo de dato, h
 
 A continuación procedo a explicar cada una.
 
+[Volver al Indice](#indice)
+
 #### CONSTRAINT PK
 La constraint PRIMARY KEY indica que campo/s forman parte de la clave principal, que indica el campo que actúa como diferenciador a nivel tupla. Hay varias maneras de utilizarlo. 
 
@@ -168,6 +194,7 @@ Podemos darle nombre al constraint, útil especificamente para DBAs:
 	);
 ```
 
+[Volver al Indice](#indice)
 
 #### CONSTRAINT FK
 Nos permite establecer la relación entre varias tablas, especificando los campos que tienen en común. Estructura:
@@ -187,6 +214,8 @@ Podemos especificar que operaciones se van a realizar si en la misma tabla se pr
 Vamos a ver los tipos de acciones que se pueden tomar tras un UPDATE o un DELETE usando una Base de Datos con tablas de departamentos y profesores relacionadas:
 
 ![image](./img/BD_DEPT.png "Cascade")
+
+[Volver al Indice](#indice)
 
 ##### CASCADE 
 El borrado de un registro, borra todos los registros de la otra tabla que referencien a esa tupla
@@ -215,6 +244,7 @@ Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es dec
 ##### MATCH PARTIAL
 No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga NULL en parte de la clave. Con MATCH FULL, esto no sería posible salvo que todas las columnas relacionadas sean NULL, mientras que MATCH PARTIAL si que lo permite.
 
+[Volver al Indice](#indice)
 
 #### CONSTRAINT UNIQUE 
 Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla. Puede definirse de dos maneras, siendo la primera en la declaración del campo:
@@ -232,6 +262,8 @@ Como alternativa, podemos definir un campo UNIQUE como una restriccion aparte, y
 	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
 ```
 
+[Volver al Indice](#indice)
+
 #### CONSTRAINT CHECK
 Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve true. Puede introducirse de varias maneras, siendo la primera en la declaración del propio campo:
 
@@ -246,6 +278,9 @@ Por otra parte, podemos definirlo como una constraint al final:
 ```sql
 	[CONSTRAINT <nombreRestriccion>] CHECK(predicado)
 ```
+
+[Volver al Indice](#indice)
+
 ##### Modificadores
 Tiene dos modificadores:
 - [NOT] DEFERRABLE: Determina si la aplicación del check es aplazable (DEFERRABLE) o no (NOT DEFERRABLE). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar. 
@@ -268,9 +303,13 @@ CHECK (saldo >= (
 	WHERE departamento ='A'))
 ```
 
+[Volver al Indice](#indice)
+
 ----------------------------------
 ## DROP
 La instrucción DROP nos permite borrar objetos de la base de datos o la propia base de datos.
+
+[Volver al Indice](#indice)
 
 ### DROP SCHEMA o DATABASE
 Esta instrucción nos permite borrar el SCHEMA o DATABASE. Estructura:
@@ -281,6 +320,8 @@ DROP SCHEMA [IF EXISTS] <nome-da-bd>;
 DROP DATABASE [IF EXISTS] <nome-da-bd>;
 ```
 La cláusula opcional IF EXISTS comprueba que la base de datos existe antes de borrarla.
+
+[Volver al Indice](#indice)
 
 ### DROP TABLE
 Esta instrucción permite borrar objetos de tipo tabla de una base de datos o esquema. Estructura:
@@ -293,6 +334,8 @@ Opciones:
 - CASCADE: Borra todo en cascada, incluyendo los objetos dependientes.
 - RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
 
+[Volver al Indice](#indice)
+
 ## ALTER
 Podemos modificar, borrar o añadir columnas, restricciones.
 
@@ -302,6 +345,8 @@ La opción ADD COLUMN de ALTER TABLE, nos permite añadir una nueva columna a un
 ```sql
 ALTER TABLE nome-tabla ADD [COLUMN] <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE][NOT NULL][CHECK(predicado)];
 ```
+
+[Volver al Indice](#indice)
 
 ### DROP COLUMN
 La opción DROP COLUMN de ALTER TABLE nos permite borrar un campo de una tabla existente.
@@ -313,6 +358,8 @@ ALTER TABLE nome-tabla DROP COLUMN <nombrecampo> [CASCADE|RESTRICT];
 Opciones:
 - CASCADE: Borra todas las CONSTRAINTS y campos de otras tablas que la referencien.
 - RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
+
+[Volver al Indice](#indice)
 
 ### ADD CONSTRAINT
 La opción ADD CONSTRAINT de ALTER TABLE añade una restricción a una tabla existente:
@@ -326,11 +373,15 @@ Cada tipo de CONSTRAINT usa la misma estructura para ser creada que la que vimos
 ALTER TABLE ADD UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
 ```
 
+[Volver al Indice](#indice)
+
 ### DROP CONSTRAINT
 La opción DROP CONSTRAINT de ALTER TABLE permite borrar una restricción existente en una tabla:
 ```sql
 ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 ```
+
+[Volver al Indice](#indice)
 
 -----------------------------
 
@@ -348,7 +399,8 @@ Si queremos introducir varias tuplas en la misma instrucción:
 Restricciones al usar SELECT:
 	- El SELECT debe tener el mismo numero de columnas que la tabla destino.
 	- El dominio de los datos de tablas origen y destino han de ser los mismos, para que no haya conflicto entre tipos de dato (Pensemos por ejemplo que el SELECT devuelva un NCHAR() y lo quiera guardar en un integer).
-	
+
+[Volver al Indice](#indice)
 
 ## UPDATE
 > UPDATE <Nombre_Tabla> SET atributo1=valor1,
@@ -370,6 +422,8 @@ UPDATE world
 SET name = 'España', continent='Africa'
 WHERE name = 'Spain';
 ```
+
+[Volver al Indice](#indice)
 				  
 ## DELETE
 > DELETE FROM nombre_tabla [WHERE predicado]
@@ -387,6 +441,8 @@ DELETE FROM world
 WHERE population>100000000;
 ```
 
+[Volver al Indice](#indice)
+
 # GOTCHAs
 
 ## Cuantas Lenguajes SQL hay
@@ -401,5 +457,4 @@ Se suele utilizar nombres en singular con la primera letra mayúscula
 ## Nombrar Constraints
 Util para ser referenciadas en el diccionario de datos
 
-# Enlaces
-- Elephant SQL: https://www.elephantsql.com/
+[Volver al Indice](#indice)
