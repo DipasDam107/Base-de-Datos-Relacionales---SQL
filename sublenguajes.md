@@ -217,32 +217,59 @@ No es necesario que las coincidencias sean completas. Por ejemplo, puede que en 
 
 
 #### CONSTRAINT UNIQUE 
-Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla
-	>[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
+Nos permite especificar que los valores de un campo no se pueden repetir. Habitual para claves candidatas que no han sido elegidas como principales en una tabla. Puede definirse de dos maneras, siendo la primera en la declaración del campo:
+
+```sql
+ CREATE TABLE <NombreTabla> (
+	idalternativa INTEGER UNIQUE,
+	...
+	); <
+```
+
+Como alternativa, podemos definir un campo UNIQUE como una restriccion aparte, ya sea especificando nombre de CONSTRAINT o no:
+
+```sql
+	[CONSTRAINT <nombreRestriccion>] UNIQUE(<nAtributos>)
+```
 
 #### CONSTRAINT CHECK
-Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve true. Tiene dos modificadores:
-- [NOT] DEFERRABLE 
-- INITIALLY[IMMEDIATE|DEFERRABLE] - 
+Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve true. Puede introducirse de varias maneras, siendo la primera en la declaración del propio campo:
 
-##### [NOT] DEFERRABLE
-Determina si la aplicación del check es aplazable (DEFERRABLE) o no (NOT DEFERRABLE). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar.
+```sql
+ CREATE TABLE <NombreTabla> (
+	campo INTEGER CHECK(predicado),
+	...
+	); <
+```
 
-##### INITIALLY[IMMEDIATE|DEFERRABLE]
-- INITIALLY DEFERRABLE va con DEFERRABLE - Lo aplaza
-- INITIALLY INMEDIATE va con NOT DEFERRABLE - Lo hace inmediatamente *
-> Por defecto: NOT DEFERRABLE INITIALLY INMEDIATE;
+Por otra parte, podemos definirlo como una constraint al final:
+```sql
+	[CONSTRAINT <nombreRestriccion>] CHECK(predicado)
+```
+##### Modificadores
+Tiene dos modificadores:
+- [NOT] DEFERRABLE: Determina si la aplicación del check es aplazable (DEFERRABLE) o no (NOT DEFERRABLE). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar. 
+- INITIALLY[IMMEDIATE|DEFERRABLE]: 
+	- INITIALLY DEFERRABLE va con DEFERRABLE - Lo aplaza
+	- INITIALLY INMEDIATE va con NOT DEFERRABLE - Lo hace inmediatamente 
+	
+##### Predicado
+Un predicado de un CHECK es útil para comprobar si el campo introducido cumple un requisito. En caso de cumplirlo devuelve true y la modificación se realiza y en caso contrario devuelve false y al carrer. Ejemplo que comprueba que en una inserción o modificación el campo saldo sea mayor que 0:
 
-##### Subconsultas
+```sql
+CHECK (saldo>0)
+```
+
 Podemos incluir subconsultas en el predicado de un check:
 ```sql
-CHECK saldo >= (
+CHECK (saldo >= (
 	SELECT saldo
 	FROM empleado
-	WHERE departamento ='A')
+	WHERE departamento ='A'))
 ```
+
 ----------------------------------
-## DROP
+# DROP
 ### Borrar base de datos
 DROP SCHEMA [IF EXISTS] <nome-da-bd>;
 DROP DATABASE [IF EXISTS] <nome-da-bd>;
