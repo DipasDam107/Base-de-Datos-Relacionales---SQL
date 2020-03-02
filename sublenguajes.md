@@ -17,7 +17,7 @@
 			
 -----------------------
 # Sublenguajes
-- DDL Data Definition Lenguage (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
+- DDL Data Definition `Lenguage` (Opera sobre los objetos de la BD. Tablas, fila, columna, indice...)
 	- CREATE
 	- ALTER
 	- DROP
