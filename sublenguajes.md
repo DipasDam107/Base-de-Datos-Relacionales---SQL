@@ -357,8 +357,8 @@ ALTER TABLE nome-tabla DROP COLUMN <nombrecampo> [CASCADE|RESTRICT];
 ```
 
 Opciones:
-- CASCADE: Borra todas las CONSTRAINTS y campos de otras tablas que la referencien.
-- RESTRICT: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
+- `CASCADE`: Borra todas las `CONSTRAINTS` y campos de otras tablas que la referencien.
+- `RESTRICT`: No permite borrar la tabla si tiene objetos o tablas dependientes. Por defecto.
 
 [Volver al Indice](#indice)
 
@@ -368,7 +368,7 @@ La opción `ADD CONSTRAINT` de `ALTER TABLE` añade una restricción a una tabla
 ```sql
 ALTER TABLE ADD [CONSTRAINT <Nome_Restriccion>] UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
 ```
-Cada tipo de CONSTRAINT usa la misma estructura para ser creada que la que vimos en CREATE TABLE antes. Así mismo, puede omitirse la parte del nombre:
+Cada tipo de `CONSTRAINT` usa la misma estructura para ser creada que la que vimos en `CREATE TABLE` antes. Así mismo, puede omitirse la parte del nombre:
 
 ```sql
 ALTER TABLE ADD UNIQUE | CHECK | FOREIGN KEY | PRIMARY KEY....;
@@ -392,7 +392,7 @@ ALTER TABLE DROP CONSTRAINT <Nome_Restriccion>;
 INSERT INTO <nome_da_taboa> [(Atributo1, Atributo2....)](VALUES (valor1, valor2....) | SELECT...);
 ```
 
-Podemos introducir los datos sin especificar en que orden van a entrar (Por eso lo de antes de VALUES es opcional), pero debemos conocer como están los datos almacenados y en que orden han sido creadas las columnas. Como esto no siempre es posible, lo mejor es especificar siempre el orden de las columnas, y nos curamos en salud.
+Podemos introducir los datos sin especificar en que orden van a entrar (Por eso lo de antes de `VALUES` es opcional), pero debemos conocer como están los datos almacenados y en que orden han sido creadas las columnas. Como esto no siempre es posible, `lo mejor es especificar siempre el orden de las columnas`, y nos curamos en salud.
 
 Si queremos introducir varias tuplas en la misma instrucción:
 
@@ -400,9 +400,9 @@ Si queremos introducir varias tuplas en la misma instrucción:
 INSERT INTO <nome_da_taboa> VALUES (valor1A, valor2A....),
 				   (valor1B, valor2B....),
 				   (valor1C, valor2D....);
-```	
+```
 
-Restricciones al usar SELECT:
+Restricciones al usar `SELECT`:
 	- El `SELECT` debe tener el mismo numero de columnas que la tabla destino.
 	- El dominio de los datos de tablas origen y destino han de ser los mismos, para que no haya conflicto entre tipos de dato (Pensemos por ejemplo que el `SELECT` devuelva un `VARCHAR()` y lo quiera guardar en un integer).
 
@@ -442,7 +442,7 @@ La instrucción `DELETE` permite borrar tuplas de una tabla concreta:
 DELETE FROM nombre_tabla [WHERE predicado]
 ```
 
-Igual que con el UPDATE, debemos tener cuidado con no incluir predicados, ya que aunque sean opcionales, no incluilos significa borrar todos los datos de la tabla.
+Igual que con el `UPDATE`, debemos tener cuidado con no incluir predicados, ya que aunque sean opcionales, `no incluir predicados significa borrar todos los datos` de la tabla.
 
 Si hacemos:
 ```sql
@@ -460,7 +460,7 @@ WHERE population>100000000;
 # GOTCHAs
 
 ## Cuantas Lenguajes SQL hay
-Una. Hay seis sublenguajes.
+`Una`. Hay seis sublenguajes.
 
 ## Importancia
 El nucleo central de SQL está compuesto de DQL, DML y DDL
