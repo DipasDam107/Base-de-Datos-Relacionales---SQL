@@ -121,36 +121,36 @@ Para declarar un campo a la hora de definir una tabla, se sigue la siguiente est
 Los campos que vamos a definir dentro de la tabla pueden tener los siguientes tipos, entre los cuales debemos elegir uno que represente con exactitud el dato que queremos reflejar:
 
 - Numericos
-	- INTEGER
-	- BIGINT
-	- SMALLINT
-	- DECIMAL (Preciso)
-	- REAL (No preciso, 6 Decimales)
+	- `INTEGER`
+	- `BIGINT`
+	- `SMALLINT`
+	- `DECIMAL` (Preciso)
+	- `REAL` (No preciso, 6 Decimales)
 
 - Textos
-	- CHAR (Longitud fija)
-	- VARCHAR (Longitud Variable)
-	- TEXT (Logitud ilimitada variable)
+	- `CHAR` (Longitud fija)
+	- `VARCHAR` (Longitud Variable)
+	- `TEXT` (Logitud ilimitada variable)
 
 - Fechas
-	- DATE (Dia, mes y año)
-	- TIME (Hora, minuto y segundo)
-	- TIME WITH TIME ZONE (Hora, minuto y segundo)
-	- TIMESTAMP (Incluye Date y Time)
-	- TIMESTAMP WITH TIME ZONE (Incluye Date y Time)
-	- INTERVAL
+	- `DATE` (Dia, mes y año)
+	- `TIME` (Hora, minuto y segundo)
+	- `TIME WITH TIME ZONE` (Hora, minuto y segundo con zona horaria)
+	- `TIMESTAMP` (Incluye Date y Time)
+	- `TIMESTAMP WITH TIME ZONE` (Incluye Date y Time con zona horaria)
+	- `INTERVAL`
 
 - Booleano
-	- BOOLEAN (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
+	- `BOOLEAN` (true, false, null. En el input acepta 1, yes, t, y como true, y 0, no, n, f como false) 
 
 - Moneda
-	- MONEY
+	- `MONEY`
 	
 - Otros
-	- UUID (Identificador Único)
-	- JSON
-	- CIDR (Redes)
-	- INET (Redes)
+	- `UUID` (Identificador Único)
+	- `JSON`
+	- `CIDR` (Redes)
+	- `INET` (Redes)
 
 Se pueden declarar múltiples campos, cada uno con su respectivo tipo de dato, hasta que cumplamos las condiciones de la base de datos. A la hora de declarar el propio campo, se pueden definir las siguientes constraints opcionales:
 - `PRIMARY KEY`
