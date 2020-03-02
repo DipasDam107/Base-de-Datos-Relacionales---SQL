@@ -1,11 +1,25 @@
-# ELEPHANT SQL
+ELEPHANT SQL
+--------------------
 
-## ¿Que es ElephantSQL?
+# Indice
+- [¿Que es Elephant?](#¿que-es-elephant?)
+- [Creando Instancias](#creando-instancias)
+- [Instalando pgadmin y SQLshell](#instalando-pgadmin-y-sqlshell)
+- [Acceder al servidor desde psql](#acceder-al-servidor-desde-psql)
+- [Acceder al servidor desde pgadmin](#acceder-al-servidor-desde-pgadmin)
+- [Empezar a Trabajar](#empezar-a-trabajar)
+  - [A golpe de comando](#a-golpe-de-comando)
+  - [Desde la propia web de ElephantSQL](#desde-la-propia-web-de-elephantsql)
+  - [Desde pgadmin](#desde-pgadmin)
+  
+# ¿Que es ElephantSQL?
 ElephantSQL es una plataforma de hosting de base de datos, que nos permite trabajar con Bases de datos de PostgreSQL en la nube, mientras el mismo se encarga de la instalación, actualizaciones o copias de seguridad.
 
 [Enlace a ElephantSQL](https://www.elephantsql.com/)
 
-## Creando instancias
+[Volver al indice](#indice)
+
+# Creando instancias
 Lo primero que tenemos que hacer es crear una cuenta propia. Se nos da opciones como crearla desde cero o incluso vincular una cuenta de GitHub. Una vez creada dicha cuenta, es hora de crear instancias para cada una de las bases de datos que vamos a crear (La idea es copiar aquellas presentes en SQLZOO).
 
 ![image](./img/img1.png "Logo Title Text 1")
@@ -32,7 +46,9 @@ Cada instancia contará con un servidor (Dependiente de la plataforma de hosting
 
 Teniendo esto en cuenta, dejamos nuestra cuenta de Elephant por el momento, y vamos a trabajar en Windows.
 
-## Instalando PGAdmin y SQLShell (psql)
+[Volver al indice](#indice)
+
+# Instalando PGAdmin y SQLShell (psql)
 Descargamos el instalador de PostgreSQL.
 [Enlace](https://www.postgresql.org/download/)
 
@@ -43,7 +59,9 @@ El instalador de Postgre trae varias características como el servidor, Stack Bu
 
 ![image](./img/img8.png "Logo Title Text 1")
 
-## Acceder al Servidor desde psql
+[Volver al indice](#indice)
+
+# Acceder al Servidor desde psql
 Para acceder al servidor desde psql, nos vamos al CMD y usamos el comando SQL con la siguiente estructura:
 > Ruta\psql.exe -h servidor -U usuario -d basededatospordefecto -p puerto
 
@@ -55,7 +73,9 @@ Una vez realizada la conexión e indicada la contraseña, ya podemos empezar a t
 
 ![image](./img/img10.png "Logo Title Text 1")
 
-## Acceder al Servidor desde Pgadmin
+[Volver al indice](#indice)
+
+# Acceder al Servidor desde Pgadmin
 Abrimos pgadmin, que nos proporciona una interfaz en el navegador para gestionar la base de datos. PAra el primer uso, nos perdirá una contraseña para el usuario master.
 
 ![image](./img/img11.png "Logo Title Text 1")
@@ -76,6 +96,8 @@ Creada la conexión ya podemos empezar a trabajar con la base de datos de Elepha
 
 ![image](./img/img15.png "Logo Title Text 1")
 
+[Volver al indice](#indice)
+
 # Empezar a trabajar
 A partir de aquí tenemos tres opciones para ejecutar instrucciones SQL en nuestra instancia ElephantSQL.
 
@@ -91,3 +113,4 @@ A partir de aquí tenemos tres opciones para ejecutar instrucciones SQL en nuest
 
 ![image](./img/pgadminsql2.png "Logo Title Text 1")
 
+[Volver al indice](#indice)
