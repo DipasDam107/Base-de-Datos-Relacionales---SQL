@@ -424,7 +424,7 @@ CREATE TABLE Proyectos_Investigacion.Programa(
 CREATE TABLE Proyectos_Investigacion.Proxecto(
 	Codigo_Proxecto INTEGER PRIMARY KEY,
 	Nome_Proxecto VARCHAR(30) UNIQUE NOT NULL,
-	Orzamento VARCHAR(30) NOT NULL,
+	Orzamento MONEY NOT NULL,
 	Data_Inicio DATE NOT NULL,
 	Data_Fin DATE,
 	Nome_Grupo VARCHAR(30),
@@ -518,3 +518,6 @@ ALTER TABLE Proyectos_Investigacion.Departamento ADD FOREIGN KEY (Director)
 REFERENCES Proyectos_Investigacion.Profesor (Dni) ON DELETE SET NULL ON UPDATE CASCADE;
 ```
 
+Suposiciones (Pendientes de añadir):
+- Podria usarse un assert para comprobar que todo el dinero de financiacion se invierte en el proyecto (Orzamento, Financiacion)
+- Comprobar las fechas de fin y cese de participa se corresponden con las fechas de inicio y fin del proyecto. Otro assert
