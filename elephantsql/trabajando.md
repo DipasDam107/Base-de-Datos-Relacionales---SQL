@@ -618,3 +618,10 @@ CREATE TABLE Naves_Espaciais.Visita(
 
 
 ```
+Suposiciones:
+	- Se debería comprobar que el numero de tripulantes no supere la capacidad de la cámara
+	- En general los tipos de dato son ambiguos:
+		- En general los códigos los pongo como enteros (Probar SERIAL)
+		- Visita.Tempo lo pongo como entero, supongo que se trata del numero de horas
+		- La clave de servicio es un codigo de 9 caracteres
+	
