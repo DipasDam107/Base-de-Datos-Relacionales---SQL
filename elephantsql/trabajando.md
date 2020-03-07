@@ -620,6 +620,7 @@ CREATE TABLE Naves_Espaciais.Visita(
 ```
 
 Suposiciones:
+
 	- Se debería comprobar que el numero de tripulantes no supere la capacidad de la cámara
 	- En general los tipos de dato son ambiguos:
 		- En general los códigos los pongo como enteros (Probar SERIAL)
