@@ -154,6 +154,22 @@ Los campos que vamos a definir dentro de la tabla pueden tener los siguientes ti
 	- `CIDR` (Redes)
 	- `INET` (Redes)
 
+Podemos definir nuestros propios Dominios de dato, partiendo de los tipos anteriores:
+
+```sql
+	CREATE DOMAIN <nombre_Tipo_Dato> Tipo;
+```
+
+Por ejemplo, para un DNI podemos crear un dominio que sea una cadena fija de 9 caracteres, un codigo de 5 caracteres o un nombre:
+
+```sql
+	CREATE DOMAIN Tipo_DNI CHAR(9);
+	CREATE DOMAIN Tipo_Codigo CHAR(5);
+	CREATE DOMAIN Nome_Valido VARCHAR(30);
+```
+
+Estos dominios son especialmente útiles cuando se utilizan tipos de dato concretos muy repetidamente en la base de datos en general. De esta manera, si ese tipo de dato cambia en el tiempo, solo tocando el dominio definido modificamos el tipo de dato de todos los campos que lo usen (No tendriamos que ir campo por campo).
+
 Se pueden declarar múltiples campos, cada uno con su respectivo tipo de dato, hasta que cumplamos las condiciones de la base de datos. A la hora de declarar el propio campo, se pueden definir las siguientes constraints opcionales:
 - `PRIMARY KEY`
 - `UNIQUE`
