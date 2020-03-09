@@ -17,6 +17,7 @@
 - [Adición y borrado de restricciones](#adicion-y-borrado-de-restricciones)
 - [Modificación y Borrado de tuplas](#modificacion-y-borrado-de-tuplas)
 - [Ejercicio 1](#ejercicio-1-proyectos-de-investigacion)
+- [Ejercicio 2](#ejercicio-2-naves-espaciales)
  
 -----------------------------------------------
 # Creando esquema y tablas e insertando datos
@@ -524,7 +525,7 @@ Suposiciones (Pendientes de añadir):
 - Podria usarse un assert para comprobar que todo el dinero de financiacion se invierte en el proyecto (Orzamento, Financiacion)
 - Comprobar las fechas de fin y cese de participa se corresponden con las fechas de inicio y fin del proyecto. Otro assert
 
-# Ejercicio 2
+# Ejercicio 2 Naves Espaciales
 ```sql
 DROP SCHEMA IF EXISTS Naves_Espaciais CASCADE;
  
