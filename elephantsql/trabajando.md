@@ -415,22 +415,22 @@ CREATE SCHEMA Proyectos_Investigacion;
 CREATE DOMAIN Proyectos_Investigacion.Nombre_Valido VARCHAR(30);
 
 CREATE TABLE Proyectos_Investigacion.Sede (
-	Nome_Sede Nombre_Valido PRIMARY KEY,
-	Campus Nombre_Valido NOT NULL
+	Nome_Sede Proyectos_Investigacion.Nombre_Valido PRIMARY KEY,
+	Campus Proyectos_Investigacion.Nombre_Valido NOT NULL
 );
 
 CREATE TABLE Proyectos_Investigacion.Programa(
-	Nome_Programa Nombre_Valido PRIMARY KEY
+	Nome_Programa Proyectos_Investigacion.Nombre_Valido PRIMARY KEY
 );
 
 CREATE TABLE Proyectos_Investigacion.Proxecto(
 	Codigo_Proxecto INTEGER PRIMARY KEY,
-	Nome_Proxecto Nombre_Valido UNIQUE NOT NULL,
+	Nome_Proxecto Proyectos_Investigacion.Nombre_Valido UNIQUE NOT NULL,
 	Orzamento MONEY NOT NULL,
 	Data_Inicio DATE NOT NULL,
 	Data_Fin DATE,
-	Nome_Grupo Nombre_Valido,
-	Nome_Departamento Nombre_Valido,
+	Nome_Grupo Proyectos_Investigacion.Nombre_Valido,
+	Nome_Departamento Proyectos_Investigacion.Nombre_Valido,
 	CHECK (Data_Inicio<Data_Fin),
 	CHECK (Codigo_Proxecto>0)
 );
@@ -439,31 +439,31 @@ CREATE TABLE Proyectos_Investigacion.Proxecto(
 
 CREATE TABLE Proyectos_Investigacion.Profesor(
 	Dni CHAR(9) PRIMARY KEY,
-	Nome_Profesor Nombre_Valido NOT NULL,
-	Titulacion Nombre_Valido NOT NULL,
+	Nome_Profesor Proyectos_Investigacion.Nombre_Valido NOT NULL,
+	Titulacion Proyectos_Investigacion.Nombre_Valido NOT NULL,
 	Experiencia INTEGER,
-	Nome_Grupo Nombre_Valido,
-	Nome_Departamento Nombre_Valido,
+	Nome_Grupo Proyectos_Investigacion.Nombre_Valido,
+	Nome_Departamento Proyectos_Investigacion.Nombre_Valido,
 	CHECK (LENGTH(Dni)=9)
 );
 
 CREATE TABLE Proyectos_Investigacion.Grupo(
-	Nome_Grupo Nombre_Valido,
-	Nome_Departamento Nombre_Valido,
+	Nome_Grupo Proyectos_Investigacion.Nombre_Valido,
+	Nome_Departamento Proyectos_Investigacion.Nombre_Valido,
 	Area VARCHAR(30) NOT NULL,
 	Lider CHAR(9),
 	PRIMARY KEY (Nome_Grupo, Nome_Departamento)
 );
 
 CREATE TABLE Proyectos_Investigacion.Departamento(
-	Nome_Departamento Nombre_Valido PRIMARY KEY,
+	Nome_Departamento Proyectos_Investigacion.Nombre_Valido PRIMARY KEY,
 	Telefono INTEGER NOT NULL,
 	Director CHAR(9)
 );
 
 CREATE TABLE Proyectos_Investigacion.Ubicacion(
- 	Nome_Sede Nombre_Valido,
-	Nome_Departamento Nombre_Valido,
+ 	Nome_Sede Proyectos_Investigacion.Nombre_Valido,
+	Nome_Departamento Proyectos_Investigacion.Nombre_Valido,
 	PRIMARY KEY(Nome_Sede, Nome_Departamento)
 	
 );
@@ -473,13 +473,13 @@ CREATE TABLE Proyectos_Investigacion.Participa(
 	Codigo_Proxecto INTEGER,
 	Data_Inicio DATE NOT NULL,
 	Data_Cese DATE,
-	Participacion Nombre_Valido,
+	Participacion Proyectos_Investigacion.Nombre_Valido,
 	PRIMARY KEY (Dni, Codigo_Proxecto),
 	CHECK(Data_Cese>Data_Inicio) 
 );
 
 CREATE TABLE Proyectos_Investigacion.Financia(
-	Nome_Programa Nombre_Valido,
+	Nome_Programa Proyectos_Investigacion.Nombre_Valido,
 	Codigo_Proxecto INTEGER,
 	Numero_Proxecto INTEGER NOT NULL,
 	Cantidade_Financiada MONEY NOT NULL,
