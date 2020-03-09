@@ -629,4 +629,21 @@ Suposiciones:
 		- En general los códigos los pongo como enteros (Probar SERIAL)
 		- Visita.Tempo lo pongo como entero, supongo que se trata del numero de horas
 		- La clave de servicio es un codigo de 9 caracteres
+		
+
+---------------------
+Ejercicio de prueba:
+
+-- A FOREIGN KEY de profesor esta mal. Hacer una nueva con B:N M:R
+
+```sql
+ALTER TABLE Profesor
+	DROP CONSTRAINT FK_Grupo_Profesor;
+
+ALTER TABLE Profesor
+	ADD CONSTRAINT FK_GP_Profesor FOREIGN KEY (Nome_Grupo, Nome_Departamento)
+	REFERENCES Proyectos_Investigacion.Grupo (Nome_Grupo, Nome_Departamento) 
+	ON DELETE SET NULL ON UPDATE NO ACTION;
+```
+
 	
