@@ -450,7 +450,7 @@ CREATE TABLE Proyectos_Investigacion.Profesor(
 CREATE TABLE Proyectos_Investigacion.Grupo(
 	Nome_Grupo Proyectos_Investigacion.Nombre_Valido,
 	Nome_Departamento Proyectos_Investigacion.Nombre_Valido,
-	Area VARCHAR(30) NOT NULL,
+	Area Proyectos_Investigacion.Nombre_Valido NOT NULL,
 	Lider CHAR(9),
 	PRIMARY KEY (Nome_Grupo, Nome_Departamento)
 );
