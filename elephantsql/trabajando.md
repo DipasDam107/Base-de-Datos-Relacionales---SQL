@@ -476,7 +476,7 @@ CREATE TABLE Proyectos_Investigacion.Participa(
 	Data_Cese DATE,
 	Participacion Proyectos_Investigacion.Nombre_Valido,
 	PRIMARY KEY (Dni, Codigo_Proxecto),
-	CHECK(Data_Cese>Data_Inicio) 
+	CHECK(Data_Cese IS NULL OR (Data_Cese IS NOT NULL AND Data_Cese>Data_Inicio)) 
 );
 
 CREATE TABLE Proyectos_Investigacion.Financia(
