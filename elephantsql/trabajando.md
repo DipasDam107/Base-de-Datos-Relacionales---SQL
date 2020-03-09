@@ -634,9 +634,10 @@ Suposiciones:
 ---------------------
 Ejercicio de prueba:
 
+```sql
+
 -- A FOREIGN KEY de profesor esta mal. Hacer una nueva con B:N M:R
 
-```sql
 ALTER TABLE Profesor
 	DROP CONSTRAINT FK_Grupo_Profesor;
 
