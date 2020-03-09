@@ -363,7 +363,7 @@ ALTER TABLE <nombreTabla> DROP COLUMN <nombrecolumna>;
 # Adición y borrado de restricciones
 Para añadir una restricción usamos la siguiente sentencia:
 ```SQL
-ALTER TABLE <nombreTabla> [ADD CONSTRAINT <nombre>] CHECK | PRIMARY KEY | FOREIGN KEY....;
+ALTER TABLE <nombreTabla> ADD [CONSTRAINT <nombre>] CHECK | PRIMARY KEY | FOREIGN KEY....;
 ```
 
 Añado una restricción que compruebe que el nombre tenga al menos 5 letras. Pruebo a añadir 'Pepe', y da error:
