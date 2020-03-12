@@ -629,6 +629,7 @@ Suposiciones:
 		- En general los códigos los pongo como enteros (Probar SERIAL)
 		- Visita.Tempo lo pongo como entero, supongo que se trata del numero de horas
 		- La clave de servicio es un codigo de 9 caracteres
+	- SERIAL es un entero autoincrementado. Como no nos interesa que los campos que referencian a un SERIAL se autoincrementen tambien, hacemos que sean enteros
 		
 
 ---------------------
