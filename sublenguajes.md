@@ -513,6 +513,7 @@ Util para ser referenciadas en el diccionario de datos.
 ## Foreign KEY
 - Los tipos o dominios de campos referenciados y los que referencian HAN DE SER LOS MISMOS
 - El REFERENCES puede especificar solo la Tabla, SQL ira a buscar que campos se referencian a la PK.
+- Acordarse de ON UPDATE y ON DELETE, ya que por defecto es NO ACTION. Seguramente nos interese cambiarlo.
 
 ## Cosas
 - Si hacemos una constraint mal, se borra y se vuelve a crear
