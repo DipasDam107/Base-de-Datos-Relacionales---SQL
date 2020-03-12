@@ -18,7 +18,7 @@ SUBLENGUAJES
 			- [CONSTRAINT UNIQUE](#constraint-unique)
 			- [CONSTRAINT DEFAULT](#constraint-default)
 			- [CONSTRAINT CHECK](#constraint-check)
-			- [ASSERTION](#assertion)
+			- [CONSTRAINT ASSERTION](#assertion)
 	- [DROP](#drop)
 		- [DROP SCHEMA o DATABASE](#drop-schema-o-database)
 		- [DROP TABLE](#drop-table)
@@ -344,7 +344,7 @@ CHECK (saldo >= (
 
 [Volver al Indice](#indice)
 
-#### ASSERTION
+#### CONSTRAINT ASSERTION
 Nos permite realizar comprobaciones incorporando datos de múltiples tablas, ya que, a diferencia de CHECK, es un objeto de la base de datos.
 
 ```sql
