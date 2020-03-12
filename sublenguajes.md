@@ -508,6 +508,10 @@ El nucleo central de SQL está compuesto de DQL, DML y DDL
 Se suele utilizar nombres en singular con la primera letra mayúscula
 
 ## Nombrar Constraints
-Util para ser referenciadas en el diccionario de datos
+Util para ser referenciadas en el diccionario de datos.
+
+## Foreign KEY
+- Los tipos o dominios de campos referenciados y los que referencian HAN DE SER LOS MISMOS
+- El REFERENCES puede especificar solo la Tabla, SQL ira a buscar que campos se referencian a la PK.
 
 [Volver al Indice](#indice)
