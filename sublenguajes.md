@@ -24,6 +24,7 @@ SUBLENGUAJES
 		- [DROP TABLE](#drop-table)
 	- [ALTER](#alter)
 		- [ADD COLUMN](#add-column)
+		- [ALTER COLUMN](#alter-column)
 		- [DROP COLUMN](#drop-column)
 		- [ADD CONSTRAINT](#add-constraint)
 		- [DROP CONSTRAINT](#drop-constraint)
@@ -397,6 +398,15 @@ ALTER TABLE nome-tabla ADD [COLUMN] <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE]
 
 [Volver al Indice](#indice)
 
+### ALTER COLUMN
+Podemos tambien cambiar el tipo de dato con un ALTER COLUMN:
+
+```sql
+ ALTER TABLE tabla ALTER COLUMN nombreCampo TYPE nuevoTipodeDato;
+```
+
+[Volver al Indice](#indice)
+
 ### DROP COLUMN
 La opción `DROP COLUMN` de `ALTER TABLE` nos permite borrar un campo de una tabla existente.
 
@@ -528,8 +538,6 @@ Util para ser referenciadas en el diccionario de datos.
 
 ## Cosas
 - Si hacemos una constraint mal, se borra y se vuelve a crear
-- Si hacemos un campo de tipo erroneo lo redefinimos haciendo lo mismo que para la constraint. Podemos tambien cambiar el tipo de dato con un ALTER COLUMN:
-	> ALTER TABLE tabla ALTER COLUMN nombreCampo TYPE nuevoTipodeDato;
 
 [Volver al Indice](#indice)
 
