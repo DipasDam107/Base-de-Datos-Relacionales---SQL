@@ -539,7 +539,7 @@ CREATE TABLE Naves_Espaciais.Servizo(
 );
 
 CREATE TABLE Naves_Espaciais.Dependencia(
-	Codigo_Dependencia INTEGER  PRIMARY KEY,
+	Codigo_Dependencia SERIAL PRIMARY KEY,
 	Nome_Dependencia VARCHAR(30) NOT NULL UNIQUE,
 	Clave_Servizo CHAR(9) NOT NULL,
 	Nome_Servizo VARCHAR(30) NOT NULL,
@@ -570,7 +570,7 @@ CREATE TABLE Naves_Espaciais.Raza(
 );
 
 CREATE TABLE Naves_Espaciais.Planeta(
-	Codigo_Planeta INTEGER PRIMARY KEY,
+	Codigo_Planeta SERIAL PRIMARY KEY,
 	Nome_Planeta VARCHAR(30) UNIQUE NOT NULL,
 	Galaxia VARCHAR(30) NOT NULL,
 	Coordenadas VARCHAR(15) UNIQUE NOT NULL
@@ -589,7 +589,7 @@ CREATE TABLE Naves_Espaciais.Habita(
 );
 
 CREATE TABLE Naves_Espaciais.Tripulacion(
-	Codigo_Tripulacion INTEGER PRIMARY KEY,
+	Codigo_Tripulacion SERIAL PRIMARY KEY,
 	Nome_Tripulacion VARCHAR(30) NOT NULL,
 	Codigo_Camara INTEGER NOT NULL,
 	Codigo_Dependencia INTEGER NOT NULL,
