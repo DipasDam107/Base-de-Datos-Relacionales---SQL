@@ -514,4 +514,9 @@ Util para ser referenciadas en el diccionario de datos.
 - Los tipos o dominios de campos referenciados y los que referencian HAN DE SER LOS MISMOS
 - El REFERENCES puede especificar solo la Tabla, SQL ira a buscar que campos se referencian a la PK.
 
+## Cosas
+- Si hacemos una constraint mal, se borra y se vuelve a crear
+- Si hacemos un campo de tipo erroneo lo redefinimos haciendo lo mismo que para la constraint. Podemos tambien cambiar el tipo de dato con un ALTER COLUMN:
+	> ALTER TABLE tabla ALTER COLUMN nombreCampo TYPE nuevoTipodeDato;
+
 [Volver al Indice](#indice)
