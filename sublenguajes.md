@@ -264,7 +264,7 @@ Cambia el valor en la tabla ajena a un valor nulo.
 Las coincidencias entre claves ajenas y referenciadas ha de ser completa, es decir, o coinciden los datos en ambas tablas, o han de ser todos `NULL`, no solo uno.
 
 ##### MATCH PARTIAL
-No es necesario que las coincidencias sean completas. Por ejemplo, puede que en FOREIGN KEY multicolumna, la relación tenga `NULL` en parte de la clave. Con `MATCH FULL`, esto no sería posible salvo que todas las columnas relacionadas sean `NULL`, mientras que `MATCH PARTIAL` si que lo permite.
+No es necesario que las coincidencias sean completas. Por ejemplo, puede que en `FOREIGN KEY` multicolumna, la relación tenga `NULL` en parte de la clave. Con `MATCH FULL`, esto no sería posible salvo que todas las columnas relacionadas sean `NULL`, mientras que `MATCH PARTIAL` si que lo permite.
 
 [Volver al Indice](#indice)
 
@@ -323,7 +323,7 @@ Por otra parte, podemos definirlo como una constraint al final:
 
 ##### Modificadores
 Tiene dos modificadores:
-- `[NOT] DEFERRABLE`: Determina si la aplicación del check es aplazable (DEFERRABLE) o no (NOT DEFERRABLE). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar. 
+- `[NOT] DEFERRABLE`: Determina si la aplicación del check es aplazable (`DEFERRABLE`) o no (`NOT DEFERRABLE`). Por defecto no es aplazable. Tiene sentido aplazar el check cuando se habla de grandes transacciones. Puede interesar que se llegue al final de dichas transacciones, de ahi que se pueda aplazar. 
 - `INITIALLY[IMMEDIATE|DEFERRABLE]`: 
 	- `INITIALLY DEFERRABLE` va con `DEFERRABLE`. Lo aplaza
 	- `INITIALLY INMEDIATE` va con `NOT DEFERRABLE`. Lo hace inmediatamente 
@@ -346,7 +346,7 @@ CHECK (saldo >= (
 [Volver al Indice](#indice)
 
 #### CONSTRAINT ASSERTION
-Nos permite realizar comprobaciones incorporando datos de múltiples tablas, ya que, a diferencia de CHECK, es un objeto de la base de datos.
+Nos permite realizar comprobaciones incorporando datos de múltiples tablas, ya que, a diferencia de `CHECK`, es un objeto de la base de datos.
 
 ```sql
 CREATE ASSERTION <NombreAsercion>
@@ -399,7 +399,7 @@ ALTER TABLE nome-tabla ADD [COLUMN] <nombrecampo> tipoDato [PRIMARY KEY][UNIQUE]
 [Volver al Indice](#indice)
 
 ### ALTER COLUMN
-Podemos tambien cambiar el tipo de dato con un ALTER COLUMN:
+Podemos tambien cambiar el tipo de dato con un `ALTER COLUMN`:
 
 ```sql
  ALTER TABLE tabla ALTER COLUMN nombreCampo TYPE nuevoTipodeDato;
@@ -522,6 +522,9 @@ WHERE population>100000000;
 ## Cuantas Lenguajes SQL hay
 `Una`. Hay seis sublenguajes.
 
+## Puede un campo ser PK y FK a la vez?
+Por supuesto. Son constraints distintas, y ademas una tabla puede necesitar datos de otra para identificar los campos.
+
 ## Importancia
 El nucleo central de SQL está compuesto de DQL, DML y DDL
 
@@ -532,9 +535,9 @@ Se suele utilizar nombres en singular con la primera letra mayúscula
 Util para ser referenciadas en el diccionario de datos.
 
 ## Foreign KEY
-- Los tipos o dominios de campos referenciados y los que referencian HAN DE SER LOS MISMOS
-- El REFERENCES puede especificar solo la Tabla, SQL ira a buscar que campos se referencian a la PK.
-- Acordarse de ON UPDATE y ON DELETE, ya que por defecto es NO ACTION. Seguramente nos interese cambiarlo.
+- Los tipos o dominios de campos referenciados y los que referencian `HAN DE SER LOS MISMOS`
+- El `REFERENCES` puede especificar solo la Tabla, SQL ira a buscar que campos se referencian a la PK.
+- Acordarse de `ON UPDATE` y `ON DELETE`, ya que por defecto es `NO ACTION`. Seguramente nos interese cambiarlo.
 
 ## Cosas
 - Si hacemos una constraint mal, se borra y se vuelve a crear
