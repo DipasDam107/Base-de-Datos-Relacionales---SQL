@@ -18,7 +18,7 @@ SUBLENGUAJES
 			- [CONSTRAINT UNIQUE](#constraint-unique)
 			- [CONSTRAINT DEFAULT](#constraint-default)
 			- [CONSTRAINT CHECK](#constraint-check)
-			- [CONSTRAINT ASSERTION](#assertion)
+			- [CONSTRAINT ASSERTION](#constraint-assertion)
 	- [DROP](#drop)
 		- [DROP SCHEMA o DATABASE](#drop-schema-o-database)
 		- [DROP TABLE](#drop-table)
