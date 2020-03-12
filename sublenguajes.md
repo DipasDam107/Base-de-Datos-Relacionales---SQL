@@ -18,6 +18,7 @@ SUBLENGUAJES
 			- [CONSTRAINT UNIQUE](#constraint-unique)
 			- [CONSTRAINT DEFAULT](#constraint-default)
 			- [CONSTRAINT CHECK](#constraint-check)
+			- [ASSERTION](#assertion)
 	- [DROP](#drop)
 		- [DROP SCHEMA o DATABASE](#drop-schema-o-database)
 		- [DROP TABLE](#drop-table)
@@ -303,7 +304,7 @@ También se puede crear la `CONSTRAINT` de la declaración de campos:
 [Volver al Indice](#indice)
 
 #### CONSTRAINT CHECK
-Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve `true`. Puede introducirse de varias maneras, siendo la primera en la declaración del propio campo:
+Objeto de la tabla. Permite introducir un predicado de manera que comprueba cualquier modificación, borrado o inserción (DML), y la realiza si cumple dicho predicado, es decir, cuando devuelve `true`. Puede introducirse de varias maneras, siendo la primera en la declaración del propio campo:
 
 ```sql
  CREATE TABLE <NombreTabla> (
@@ -339,6 +340,16 @@ CHECK (saldo >= (
 	SELECT saldo
 	FROM empleado
 	WHERE departamento ='A'))
+```
+
+[Volver al Indice](#indice)
+
+#### ASSERTION
+Nos permite realizar comprobaciones incorporando datos de múltiples tablas, ya que, a diferencia de CHECK, es un objeto de la base de datos.
+
+```sql
+CREATE ASSERTION <NombreAsercion>
+	CHECK (Predicado);
 ```
 
 [Volver al Indice](#indice)
@@ -521,3 +532,4 @@ Util para ser referenciadas en el diccionario de datos.
 	> ALTER TABLE tabla ALTER COLUMN nombreCampo TYPE nuevoTipodeDato;
 
 [Volver al Indice](#indice)
+
