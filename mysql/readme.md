@@ -1,6 +1,6 @@
 # Indice
 - [Instalacion MYSQL](#instalar-mysql-server-en-linux)
-- [Crear bases de datos MYSQL](#crear-bases-de-datos-mysql)
+- [Crear bases de datos MYSQL](#crear-bases-de-datos-en-mysql)
   - [Base de datos de Investigacion](#base-de-datos-de-investigacion)
   - [Base de datos de Naves Espaciales](#base-de-datos-de-naves-espaciales)
 
