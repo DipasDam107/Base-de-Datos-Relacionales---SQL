@@ -164,6 +164,7 @@ El comando `DESC` nos permite obtener una descripción detallada de cada base de
 ![image](../img/mysql11.png "Logo Title Text 1")
 
 ## Base de datos de Naves Espaciales
+El script para crear la base de datos de Naves Espaciales, con todas sus tablas relacionadas será el siguiente:
 
 ```sql
 DROP SCHEMA IF EXISTS Naves_Espaciais;
