@@ -47,7 +47,7 @@ CREATE TABLE Proyectos_Investigacion.Programa(
 CREATE TABLE Proyectos_Investigacion.Proxecto(
 	Codigo_Proxecto INTEGER PRIMARY KEY,
 	Nome_Proxecto VARCHAR(30) UNIQUE NOT NULL,
-	Orzamento MONEY NOT NULL,
+	Orzamento DECIMAL NOT NULL,
 	Data_Inicio DATE NOT NULL,
 	Data_Fin DATE,
 	Nome_Grupo VARCHAR(30),
@@ -103,7 +103,7 @@ CREATE TABLE Proyectos_Investigacion.Financia(
 	Nome_Programa VARCHAR(30),
 	Codigo_Proxecto INTEGER,
 	Numero_Proxecto INTEGER NOT NULL,
-	Cantidade_Financiada MONEY NOT NULL,
+	Cantidade_Financiada DECIMAL NOT NULL,
 	PRIMARY KEY (Nome_Programa, Codigo_Proxecto)
 );
 
