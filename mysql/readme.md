@@ -30,7 +30,9 @@ Comprobamos las bases de datos existentes:
 # Crear Bases de Datos en MYSQL
 
 ## Base de datos de Investigacion
+Creamos la base de datos Investigación, con la siguiente estructura:
 
+```sql
 DROP SCHEMA IF EXISTS Proyectos_Investigacion;
  
 CREATE SCHEMA Proyectos_Investigacion;
@@ -139,5 +141,26 @@ REFERENCES Proyectos_Investigacion.Departamento (Nome_Departamento) ON DELETE CA
 
 ALTER TABLE Proyectos_Investigacion.Departamento ADD FOREIGN KEY (Director)
 REFERENCES Proyectos_Investigacion.Profesor (Dni) ON DELETE SET NULL ON UPDATE CASCADE;
+```
+
+Comprobamos que nuestra base de datos esta entre las existentes en nuestro servidor con el comando `SHOW DATABASES`:
+
+![image](../img/mysql6.png "Logo Title Text 1")
+
+Pasamos a usar dicha base de datos con el comando `USE <NombreBD>`:
+
+![image](../img/mysql7.png "Logo Title Text 1")
+
+Comprobamos las tablas de la base de datos `SHOW TABLES`:
+
+![image](../img/mysql8.png "Logo Title Text 1")
+
+El comando `DESC` nos permite obtener una descripción detallada de cada base de datos:
+
+![image](../img/mysql9.png "Logo Title Text 1")
+
+![image](../img/mysql10.png "Logo Title Text 1")
+
+![image](../img/mysql11.png "Logo Title Text 1")
 
 ## Base de datos de Naves Espaciales
