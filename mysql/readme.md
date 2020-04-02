@@ -31,7 +31,7 @@ Comprobamos las bases de datos existentes:
 
 ## Base de datos de Investigacion
 
-DROP SCHEMA IF EXISTS Proyectos_Investigacion CASCADE;
+DROP SCHEMA IF EXISTS Proyectos_Investigacion;
  
 CREATE SCHEMA Proyectos_Investigacion;
 
