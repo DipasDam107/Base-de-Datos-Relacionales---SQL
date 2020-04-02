@@ -257,14 +257,24 @@ CREATE TABLE Naves_Espaciais.Visita(
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
 ```
+
+Para esta base de datos vamos a importar un archivo sql. Para ello creamos uno con el editor `NANO`:
+
 ![image](../img/mysql17.png "Logo Title Text 1")
+
+Añadimos el script de creación de la base de datos antes detallado:
 
 ![image](../img/mysql18.png "Logo Title Text 1")
 
-![image](../img/mysql16.png "Logo Title Text 1")
+Ahora con `mysql` importamos el script:
+
+![image](../img/mysql19.png "Logo Title Text 1")
+
+Comprobamos que se han creado las tablas con `SHOW TABLES`:
 
 ![image](../img/mysql12.png "Logo Title Text 1")
 
+Vemos información de cada tabla con el comando `DESC`:
 ![image](../img/mysql13.png "Logo Title Text 1")
 
 ![image](../img/mysql14.png "Logo Title Text 1")
