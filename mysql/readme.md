@@ -163,6 +163,8 @@ El comando `DESC` nos permite obtener una descripción detallada de cada base de
 
 ![image](../img/mysql11.png "Logo Title Text 1")
 
+[Volver al Indice](#indice)
+
 ## Base de datos de Naves Espaciales
 El script para crear la base de datos de Naves Espaciales, con todas sus tablas relacionadas será el siguiente:
 
@@ -279,3 +281,6 @@ Vemos información de cada tabla con el comando `DESC`:
 ![image](../img/mysql13.png "Logo Title Text 1")
 
 ![image](../img/mysql14.png "Logo Title Text 1")
+
+[Volver al Indice](#indice)
+
