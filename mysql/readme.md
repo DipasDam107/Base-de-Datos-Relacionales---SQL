@@ -25,6 +25,8 @@ Comprobamos las bases de datos existentes:
 
 ![image](../img/mysql5.png "Logo Title Text 1")
 
+[Volver al Indice](#indice)
+
 # Crear Bases de Datos en MYSQL
 
 ## Base de datos de Investigacion
