@@ -257,3 +257,16 @@ CREATE TABLE Naves_Espaciais.Visita(
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
 ```
+![image](../img/mysql5.png "Logo Title Text 1")
+
+![image](../img/mysql6.png "Logo Title Text 1")
+
+![image](../img/mysql7.png "Logo Title Text 1")
+
+![image](../img/mysql8.png "Logo Title Text 1")
+
+![image](../img/mysql2.png "Logo Title Text 1")
+
+![image](../img/mysql3.png "Logo Title Text 1")
+
+![image](../img/mysql4.png "Logo Title Text 1")
