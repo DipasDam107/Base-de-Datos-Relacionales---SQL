@@ -164,3 +164,96 @@ El comando `DESC` nos permite obtener una descripción detallada de cada base de
 ![image](../img/mysql11.png "Logo Title Text 1")
 
 ## Base de datos de Naves Espaciales
+
+```sql
+DROP SCHEMA IF EXISTS Naves_Espaciais;
+ 
+CREATE SCHEMA Naves_Espaciais;
+
+CREATE TABLE Naves_Espaciais.Servizo(
+	Clave_Servizo CHAR(9),
+	Nome_Servizo VARCHAR(30),
+	PRIMARY KEY(Clave_Servizo, Nome_Servizo),
+	CHECK(LENGTH(Clave_Servizo)=9)	
+);
+
+CREATE TABLE Naves_Espaciais.Dependencia(
+	Codigo_Dependencia INTEGER PRIMARY KEY AUTO_INCREMENT,
+	Nome_Dependencia VARCHAR(30) NOT NULL UNIQUE,
+	Clave_Servizo CHAR(9) NOT NULL,
+	Nome_Servizo VARCHAR(30) NOT NULL,
+	Funcion VARCHAR(30),
+	Localizacion VARCHAR(30),
+	FOREIGN KEY(Clave_Servizo, Nome_Servizo) REFERENCES Naves_Espaciais.Servizo(Clave_Servizo, Nome_Servizo)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+);
+
+CREATE TABLE Naves_Espaciais.Camara(
+	Codigo_Dependencia INTEGER PRIMARY KEY,
+	Categoria VARCHAR(30) NOT NULL,
+	Capacidade INTEGER NOT NULL,
+	CHECK(Capacidade > 0),
+	FOREIGN KEY(Codigo_Dependencia) REFERENCES Naves_Espaciais.Dependencia(Codigo_Dependencia)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
+);
+
+CREATE TABLE Naves_Espaciais.Raza(
+	Nome_Raza VARCHAR(30) PRIMARY KEY,
+	Altura DECIMAL NOT NULL,
+	Anchura DECIMAL  NOT NULL,
+	Peso DECIMAL NOT NULL,
+	Poboacion_Total BIGINT NOT NULL,
+	CHECK(Altura > 0 AND Anchura > 0 AND Peso > 0 AND Poboacion_Total >= 0)
+);
+
+CREATE TABLE Naves_Espaciais.Planeta(
+	Codigo_Planeta INTEGER PRIMARY KEY AUTO_INCREMENT,
+	Nome_Planeta VARCHAR(30) UNIQUE NOT NULL,
+	Galaxia VARCHAR(30) NOT NULL,
+	Coordenadas VARCHAR(15) UNIQUE NOT NULL
+);
+
+CREATE TABLE Naves_Espaciais.Habita(
+	Codigo_Planeta INTEGER,
+	Nome_Raza VARCHAR(30),
+	Poboacion_Parcial BIGINT NOT NULL,
+	CHECK (Poboacion_Parcial>=0),
+	PRIMARY KEY(Codigo_Planeta, Nome_Raza),
+	FOREIGN KEY(Codigo_Planeta) REFERENCES Naves_Espaciais.Planeta(Codigo_Planeta)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(Nome_Raza) REFERENCES Naves_Espaciais.Raza(Nome_Raza)
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Naves_Espaciais.Tripulacion(
+	Codigo_Tripulacion INTEGER PRIMARY KEY AUTO_INCREMENT,
+	Nome_Tripulacion VARCHAR(30) NOT NULL,
+	Codigo_Camara INTEGER NOT NULL,
+	Codigo_Dependencia INTEGER NOT NULL,
+	Categoria VARCHAR(30) NOT NULL,
+	Antiguedade INTEGER NOT NULL,
+	Procedencia VARCHAR(30) NOT NULL,
+	Administracion VARCHAR(30) NOT NULL,
+	CHECK(Antiguedade>=0),
+	CHECK(Administracion='En servicio' OR Administracion='De baja'),
+	FOREIGN KEY(Codigo_Camara) REFERENCES Naves_Espaciais.Camara(Codigo_Dependencia)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(Codigo_Dependencia) REFERENCES Naves_Espaciais.Dependencia(Codigo_Dependencia)
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Naves_Espaciais.Visita(
+	Codigo_Tripulacion INTEGER,
+	Codigo_Planeta INTEGER,
+	Data_Visita DATE,
+	Tempo INTEGER NOT NULL,
+	CHECK(Tempo>=0),
+	PRIMARY KEY(Codigo_Tripulacion,Codigo_Planeta,Data_Visita),
+	FOREIGN KEY(Codigo_Tripulacion) REFERENCES Naves_Espaciais.Tripulacion(Codigo_Tripulacion)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(Codigo_Planeta) REFERENCES Naves_Espaciais.Planeta(Codigo_Planeta)
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+```
