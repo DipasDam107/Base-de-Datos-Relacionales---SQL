@@ -1,7 +1,7 @@
 # Bases de Datos
 Apuntes de SQL Base de datos. DAM 2019/2020
 - [SQL DQL - SELECT](./sqldql.md)
-- [Sublenguajes SQL](./sublenguajes.md)
+- [Sublenguajes SQL (DDL y DML)](./sublenguajes.md)
 - [ELEPHANTSQL](./elephantsql)
 - [Ejercicios DDL y DML](./elephantsql/trabajando.md)
 - [MYSQL](./mysql)
