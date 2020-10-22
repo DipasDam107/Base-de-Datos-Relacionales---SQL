@@ -5,6 +5,7 @@ Apuntes de SQL Base de datos. DAM 2019/2020
 - [ELEPHANTSQL](./elephantsql)
 - [Ejercicios DDL y DML](./elephantsql/trabajando.md)
 - [MYSQL](./mysql)
+- [Algebra Relacional](./Algebra_Relacional)
 
 
 # Enlaces de interés
