@@ -1,3 +1,57 @@
+# Tipos de Operaciones
+## Operaciones básicas
+### Selección - restricción (σ)
+Selecciona las tuplas que cumplan con la condición especificada. Ejemplo:
+```
+σ Apellido=Gomez(Alumnos)
+```
+
+### Proyección (Π)
+Extrae las columnas especificadas de una relacion o resultado anterior. Ejemplo:
+```
+π Apellido, Semestre, NumeroControl (Alumnos)
+```
+
+### Producto cartesiano (x)
+El resultado del producto cartesiano es todas las combinaciones posibles entre las tuplas de dos tablas:
+```
+Alumnos X Maestros
+```
+Cabe destacar que se mostrarían primero los datos de la primera relación y a continuación todos los de la segunda.
+
+### Unión (∪)
+Retorna el conjunto de tuplas que están en ambas relaciones. Ambas relaciones deben ser compatibles (Mismo numero de campos y del mismo tipo):
+```
+R U S
+```
+
+### Diferencia (-)
+Quita de la primera relación todas las tuplas que existan en la segunda. Deben ser uniones compatibles:
+```
+R - S
+```
+
+## Operaciones Derivadas
+### Intersección (∩)
+Da como resultado el conjunto de tuplas que estan en ambas relaciones. Deben ser relaciones compatibles. Se puede expresar con diferencias:
+
+```
+R ∩ S = R - (R - S)
+```
+### Unión natural (⋈) (Natural Join)
+Combina proyección, selección y producto cartesiano en una sola operación, siendo la condición la igualdad entre clave primaria y clave foranea, y la proyección la eliminación de la columna duplicada.
+```
+R ⨝ S = π A1,A2,An (σ cond (R X S) )
+```
+
+### División (/) (Cociente)
+Supongamos que tenemos dos relaciones A(x, y) y B(y) donde el dominio de y en A y B, es el mismo.
+
+El operador división A / B retorna todos los valores de x tales que para todo valor y en B existe una tupla (x,y) en A.
+
+### Agrupación o Unión
+Permite agrupar conjuntos de valores en función de un campo determinado y hacer operaciones con otros campos.
+
 # Base de Datos VideoClub 
 ![image](../img/bd_algebra.jpg "Logo Title Text 1")
 
