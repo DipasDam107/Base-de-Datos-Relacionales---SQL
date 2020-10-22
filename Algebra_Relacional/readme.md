@@ -11,6 +11,8 @@ Asignacion_Ejemplo = Prestamos
 
 Para esta práctica he trabajado siguiendo esa filosofía. 
 
+# Ejercicios
+
 ## Obtener el listado de los socios que vivan en las direcciones correspondientes al código postal 15001. (SOCIO, NOMBRE, DIRECCIÓN)
 
 ```
