@@ -1,3 +1,6 @@
+# Base de Datos VideoClub 
+![image]("../img/bd algebra.jpg" "Logo Title Text 1")
+
 # Consideraciones 
 Según he comprobado en algunas documentaciones y ejemplos en internet, en las asignaciones se mantienen los nombres de los campos referenciando a la tabla original. Ejemplo: 
 ```
