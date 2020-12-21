@@ -1,3 +1,91 @@
+# Procedimientos Almacenados/Funciones
+Las funciones o procedimientos almacenados son programas almacenados en la base de datos y que ejecutan su código en el momento en el que son llamados. Para crear una función seguimos la siguiente estructura:
+
+```sql
+CREATE OR REPLACE FUNCTION <nombre de la función>( <parámetros> ) RETURNS <tipo que devuelve> AS 
+$$
+DECLARE
+   <declaramos variables locales>
+BEGIN
+   <cuerpo de la función>
+END;
+$$
+LANGUAGE plpgsql IMMUTABLE;
+```
+
+## Parametros
+Se especifican los parámetros que se pasan en la llamada al método. Ejemplo:
+
+```sql
+CREATE OR REPLACE FUNCTION springEquinox(tstz DATE, julian BOOLEAN)
+```
+
+## RETURNS
+Se especifica el tipo de parámetro que va a devolver la función:
+
+```sql
+CREATE OR REPLACE FUNCTION springEquinox(tstz DATE, julian BOOLEAN) RETURNS TIMESTAMP
+```
+
+## DECLARE
+Dentro del DECLARE van las variables que se van a declarar para usar dentro de la función. En la misma declaración pueden realizarse asignaciones y operaciones. La estructura es Nombre TipoDato:
+
+```sql
+DECLARE
+   v   DOUBLE PRECISION;
+   ve  DOUBLE PRECISION;
+   jdn INTEGER;
+   ut  DOUBLE PRECISION;
+   x   INTEGER;
+   z   INTEGER;
+   m   INTEGER;
+   d   INTEGER;
+   y   INTEGER;  
+   daysPer400Years        BIGINT = 146097;
+   fudgedDaysPer4000Years BIGINT = 1460970 + 31;
+```
+
+## Cuerpo (BEGIN y END)
+Es donde va el programa propiamente dicho. BEGIN marca el inicio del mismo y END su final. Dentro se pueden usar bucles, IFs, etc... Las asignaciones se hacen con := :
+```sql
+BEGIN
+   v   := (EXTRACT(YEAR FROM tstz)::DOUBLE PRECISION - 2000.0)/1000.0;
+   ve  := 2451623.80984 + 365242.37404 * v + 0.05169 * v * v - 0.00411 * v * v * v - 0.00057 * v * v * v * v;
+   ve  := ve + 0.5;
+   jdn := floor(ve);
+   ut  := ve - jdn;
+   x   := jdn + 68569;
+
+   IF julian THEN
+      x:=x+38;
+      daysPer400Years:=146100;
+      fudgedDaysPer4000Years:=1461000+1;
+   END IF;
+   
+   z := 4 * x / daysPer400Years;
+   x := x - (daysPer400Years * z + 3) / 4;
+   y := 4000 * (x + 1) / fudgedDaysPer4000Years;
+   x := x - 1461 * y / 4 + 31;
+   m := 80 * x / 2447;
+   d := x - (2447 * m / 80);
+   x := m / 11;
+   m := m + 2 - 12 * x;
+   y := 100 * (z - 49) + y + x ; 
+
+   IF y <= 0 THEN
+      y := y-1;
+   END IF;
+   
+   RETURN make_timestamp(y::SMALLINT,m::SMALLINT,d::SMALLINT,(ut*24)::SMALLINT,((ut*24-floor(ut*24))*60)::SMALLINT,0);
+END;
+```
+
+## Delimitadores
+Debe especificarse un delimitador de principio y fin de procedimiento, que puede ser variable. Debe elegirse caracteres que no se vayan a encontrar en el programa, como los dos simobolos de dolar ($$) en este caso.
+
+# Triggers
+
+## Ejemplo de Trigger
 Primero Cambio la tabla words y le añado una columna para contar los documentos:
 ```sql
 ALTER TABLE words
