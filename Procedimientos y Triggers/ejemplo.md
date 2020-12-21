@@ -101,28 +101,32 @@ Debe especificarse un delimitador de principio y fin de procedimiento, que puede
 Los triggers o disparadores son programas que se ejecutan cuando se produce un cambio en nuestra base de datos, como por ejemplo una inserción, borrado o modificacion en una tabla. Para crear un trigger seguimos la siguiente estructura:
 
 ```sql
-    CREATE TRIGGER check_update
+    CREATE TRIGGER <Nombre_Trigger>
     BEFORE|AFTER UPDATE|DELETE|INSERT ON <nombreTabla>
     FOR EACH ROW
     WHEN <condicion>
     EXECUTE FUNCTION <Nombre_Funcion_a_Ejecutar>
 ```
 
+## BEFORE y AFTER
+Indica si el trigger debe ejecutarse antes o después de la operación que esta controlando.
+
+## Operación a controlar
+Determina en que operación se va a ejecutar, sea antes o despues, el trigger. Puede ser en una inserción, borrado o modificación.
+
+## WHEN
+Condición en la cual se ejecutará el trigger, a mayores de la operación controlada.
+
+## EXECUTE FUNCTION
+La función que va a ejecutar para aquellas filas que cumplan la condición. La función debe crearse previamente.
+
 ## Ejemplo de Trigger
-Primero Cambio la tabla words y le añado una columna para contar los documentos:
-```sql
-ALTER TABLE words
-ADD documents INTEGER DEFAULT 0;
-```
-Reinicio los valores de los campos serial, para que empiecen desde 1 nuevamente:
+Supongamos tenemos una base de datos donde llevamos las palabras que aparecen en los documentos:
+	- Tabla documents: document, title, words
+	- Tabla words: word, term, documents
+	- Tabla documents_words (Tabla de la relación, determina en que documentos aparecen las palabras): word, document
 
-```sql
-SELECT SETVAL((SELECT pg_get_serial_sequence('documents', 'document')), 1, false);
-
-SELECT SETVAL((SELECT pg_get_serial_sequence('words', 'word')), 1, false);
-```
-
-Inserto valores en las tablas words y documents:
+Ahora queremos que la tabla words (en el campo documents), vaya actualizandose automáticamente con un trigger cada vez que se produce un cambio en la tabla. Para ello empezamos insertando valores en las tablas words y documents:
 
 ```sql
 INSERT INTO documents(title,words) VALUES('Harry Potter y la piedra filosofal',default);
@@ -137,6 +141,9 @@ INSERT INTO words(term,documents) VALUES('selva', default);
 INSERT INTO words(term,documents) VALUES('casa', default);
 
 ```
+
+Como se dijo antes, el trigger referencia a una función previamente existente, con lo cual hemos de crearla en primer lugar.
+
 ## Con Parametros
 
 Creo la función de trigger para borrado, inserción y modificación (Se pasa un parámetro al crear el trigger):
