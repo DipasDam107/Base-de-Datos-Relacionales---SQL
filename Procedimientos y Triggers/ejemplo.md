@@ -13,6 +13,20 @@ $$
 LANGUAGE plpgsql IMMUTABLE;
 ```
 
+La diferencia de las funciones con los procedimientos es que los segundos no devuelven un valor (Aunque se sigue podiendo utilizar RETURN para poner fin al programa):
+
+```sql
+CREATE OR REPLACE PROCEDURE <nombre del procedimiento>( <parámetros> ) AS 
+$$
+DECLARE
+   <declaramos variables locales>
+BEGIN
+   <cuerpo de la función>
+END;
+$$
+LANGUAGE plpgsql;
+```
+
 ## Parametros
 Se especifican los parámetros que se pasan en la llamada al método. Ejemplo:
 
@@ -84,6 +98,15 @@ END;
 Debe especificarse un delimitador de principio y fin de procedimiento, que puede ser variable. Debe elegirse caracteres que no se vayan a encontrar en el programa, como los dos simobolos de dolar ($$) en este caso.
 
 # Triggers
+Los triggers o disparadores son programas que se ejecutan cuando se produce un cambio en nuestra base de datos, como por ejemplo una inserción, borrado o modificacion en una tabla. Para crear un trigger seguimos la siguiente estructura:
+
+```sql
+    CREATE TRIGGER check_update
+    BEFORE|AFTER UPDATE|DELETE|INSERT ON <nombreTabla>
+    FOR EACH ROW
+    WHEN <condicion>
+    EXECUTE FUNCTION <Nombre_Funcion_a_Ejecutar>
+```
 
 ## Ejemplo de Trigger
 Primero Cambio la tabla words y le añado una columna para contar los documentos:
